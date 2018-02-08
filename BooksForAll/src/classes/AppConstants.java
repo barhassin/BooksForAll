@@ -19,7 +19,7 @@ public interface AppConstants {
 		
 		//sql statements
 		public final String CREATE_USERS_TABLE = "CREATE TABLE USERS(Username varchar(100),"
-				+ "Password varchar(100)" + "Type varchar(100)";
+				+ "Password varchar(100)," + "Type varchar(100))";
 		public final String INSERT_USER_STMT = "INSERT INTO USERS VALUES(?,?,?)";
 		public final String SELECT_ALL_USERS_STMT = "SELECT * FROM USERS";
 		public final String SELECT_USER_BY_USERNAME_STMT = "SELECT * FROM USERS "

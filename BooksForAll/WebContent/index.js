@@ -2,8 +2,8 @@
 and define some behavior.
 This module further depends on an helper module 'txtHighlight'.
 */
-angular.module('login')
-	.controller('loginController', ['$scope','$http', function($scope,$http) {
+var app = angular.module('login', []);
+	app.controller('loginController', function($scope,$http) {
 			
 	$scope.search = function(){
 		var usr = $scope.username;
@@ -16,5 +16,5 @@ angular.module('login')
 		      $scope.content = "Something went wrong";
 		});
 	};
-}]);
+});
 

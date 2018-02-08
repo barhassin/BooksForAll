@@ -49,66 +49,7 @@ public class loginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-try {
-        	//obtain CustomerDB data source from Tomcat's context
-    		Context context = new InitialContext();
-    		BasicDataSource ds = (BasicDataSource)context.lookup(
-    				getServletContext().getInitParameter(AppConstants.DB_DATASOURCE) + AppConstants.OPEN);
-    		Connection conn = ds.getConnection();
-
-    		Collection<User> usersResult = new ArrayList<User>(); 
-    		String uri = request.getRequestURI();
-    		if (uri.indexOf(AppConstants.USERNAME) != -1){//filter customer by specific name
-    			String name = uri.substring(uri.indexOf(AppConstants.USERNAME) + AppConstants.USERNAME.length() + 1);
-    			PreparedStatement stmt;
-    			try {
-    				stmt = conn.prepareStatement(AppConstants.SELECT_USER_BY_USERNAME_STMT);
-    				name = name.replaceAll("\\%20", " ");
-    				stmt.setString(1, name);
-    				ResultSet rs = stmt.executeQuery();
-    				while (rs.next()){
-    					usersResult.add(new User(rs.getString(1),rs.getString(2),rs.getString(3)));
-    				}
-    				rs.close();
-    				stmt.close();
-    			} catch (SQLException e) {
-    				getServletContext().log("Error while querying for customers", e);
-    	    		response.sendError(500);//internal server error
-    			}
-    		}else{
-    			Statement stmt;
-    			try {
-    				stmt = conn.createStatement();
-    				ResultSet rs = stmt.executeQuery(AppConstants.SELECT_ALL_USERS_STMT);
-    				while (rs.next()){
-    					usersResult.add(new User(rs.getString(1),rs.getString(2),rs.getString(3)));
-    				}
-    				rs.close();
-    				stmt.close();
-    			} catch (SQLException e) {
-    				getServletContext().log("Error while querying for customers", e);
-    	    		response.sendError(500);//internal server error
-    			}
-
-    		}
-
-    		conn.close();
-    		
-    		Gson gson = new Gson();
-        	//convert from customers collection to json
-        	String userJsonResult = gson.toJson(usersResult, AppConstants.USER_COLLECTION);
-        	response.addHeader("Content-Type", "application/json");
-        	PrintWriter writer = response.getWriter();
-        	writer.println(userJsonResult);
-        	writer.close();
-    	} catch (SQLException | NamingException e) {
-    		getServletContext().log("Error while closing connection", e);
-    		response.sendError(500);//internal server error
-    	}
-
-    	
-    }
-
+	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -125,10 +66,10 @@ try {
     		PreparedStatement stmt;
     			try {
     				stmt = conn.prepareStatement(AppConstants.SELECT_USER_BY_USERNAME_STMT);
-    				name = name.replaceAll("\\%20", " ");
     				stmt.setString(1, name);
     				ResultSet rs = stmt.executeQuery();
     				String dbPassword="";
+    				rs.next();
     				while (rs.next()){
     					dbPassword=rs.getString(2);
     				}
