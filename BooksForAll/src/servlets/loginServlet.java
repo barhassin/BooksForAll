@@ -60,21 +60,27 @@ public class loginServlet extends HttpServlet {
     			getServletContext().getInitParameter(AppConstants.DB_DATASOURCE) + AppConstants.OPEN);
     		Connection conn = ds.getConnection();
     		BufferedReader reader = request.getReader();
-    		Gson gson = new Gson();
-    		User user = gson.fromJson(reader, User.class);
-    		String name = user.getUsername();
+    	    StringBuilder sb = new StringBuilder();
+    	    String line = reader.readLine();
+    	    while (line != null) {
+    	      sb.append(line + "\n");
+    	      line = reader.readLine();
+    	    }
+    	    reader.close();
+    	    String params = sb.toString();
+    	    Gson gson = new Gson();
+    	    User user = gson.fromJson(params, User.class);
     		PreparedStatement stmt;
     			try {
     				stmt = conn.prepareStatement(AppConstants.SELECT_USER_BY_USERNAME_STMT);
-    				stmt.setString(1, name);
+    				stmt.setString(1, user.getUsername());
     				ResultSet rs = stmt.executeQuery();
     				String dbPassword="";
-    				rs.next();
     				while (rs.next()){
     					dbPassword=rs.getString(2);
     				}
-    				if(user.getPassword()!=dbPassword)
-    					response.sendError(500);
+    				if(!dbPassword.equals(user.getPassword()))
+    					response.sendError(400);
     				rs.close();
     				stmt.close();
     			} catch (SQLException e) {
