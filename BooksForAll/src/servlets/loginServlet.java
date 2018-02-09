@@ -76,11 +76,14 @@ public class loginServlet extends HttpServlet {
     				stmt.setString(1, user.getUsername());
     				ResultSet rs = stmt.executeQuery();
     				String dbPassword="";
-    				while (rs.next()){
+    				if(rs.next()) {
     					dbPassword=rs.getString(2);
+    					if(!dbPassword.equals(user.getPassword()))
+        					response.sendError(406);
+    				}	
+    				else {
+    					response.sendError(405);
     				}
-    				if(!dbPassword.equals(user.getPassword()))
-    					response.sendError(400);
     				rs.close();
     				stmt.close();
     			} catch (SQLException e) {
@@ -89,13 +92,13 @@ public class loginServlet extends HttpServlet {
     			}
     		conn.close();
     		
-    		/*Gson gson2 = new Gson();
+    		Gson gson2 = new Gson();
         	//convert from customers collection to json
-        	String userJsonResult = gson.toJson(usersResult, AppConstants.USER_COLLECTION);
+        	String userJsonResult = gson2.toJson(user);
         	response.addHeader("Content-Type", "application/json");
         	PrintWriter writer = response.getWriter();
         	writer.println(userJsonResult);
-        	writer.close();*/
+        	writer.close();
 		} catch (SQLException | NamingException e) {
     		getServletContext().log("Error while closing connection", e);
     		response.sendError(500);//internal server error
