@@ -8,7 +8,7 @@ var app = angular.module('login', []);
 	$scope.search = function(){
 		var usr = $scope.username;
 		var pwd = $scope.password;
-		var parameter = JSON.stringify({username:usr, password:pwd, type:""});
+		var parameter = JSON.stringify({Username:usr, Password:pwd, Type:""});
 		$http.post("http://localhost:8080/BooksForAll/login", parameter)
 		.then(function(response) {
 			$scope.content = "good";

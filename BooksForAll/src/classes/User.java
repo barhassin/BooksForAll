@@ -1,23 +1,23 @@
 package classes;
 
 public class User {
-	private String Username, Password, Type;
+	private String username, password, type;
 	
-	public User(String username, String password, String type) {
-		Username = username;
-		Password = password;
-		Type = type; 
+	public User(String _username, String _password, String _type) {
+		username = _username;
+		password = _password;
+		type = _type; 
 	}
 
 	public String getUsername() {
-		return Username;
+		return username;
 	}
 
 	public String getPassword() {
-		return Password;
+		return password;
 	}
 	
 	public String getType() {
-		return Type;
+		return type;
 	}
 }
