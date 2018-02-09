@@ -6,15 +6,15 @@
 <title>Login</title>
 <link rel="stylesheet" type="text/css"
 	href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="‪signUpCss.css‬">
 <script src="lib/jquery-3.2.1.js"></script>
 <script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <script src="lib/angular.min.js"></script>
 <script src="signupJs.js"></script>
 </head>
-<body>
+
+<body ng-app="signUpApp" ng-controller="signUpController">
 	<div class="container" >
-		<form ng-app="signUpApp" ng-controller="signUpController" name="myForm">
+		<form  name="myForm">
 		<div class="row">
 			<div class="main">
 				<div class="headline text-center">
@@ -25,24 +25,26 @@
 						<label for="name" class="cols-sm-2 control-label">Your User Name</label>
 						<div class="cols-sm-10">
 							<div class="input-group">
-								<span class="input-group-addon"><i
-									class="glyphicon glyphicon-user"></i></span> <input type="text" class="form-control" ng-model="userName" placeholder="Enter your User Name" required />
-									<span style="color:red" ng-show="myForm.userName.$dirty && myForm.userName.$invalid">
-									<span ng-show="myForm.userName.$error.required">Username is required.</span></span>
+								<span class="input-group-addon">
+								<i class="glyphicon glyphicon-user"></i></span> 
+									<input type="text" class="form-control" ng-model="userName" name="userName" placeholder="Enter your User Name" required>
 							</div>
+							<span style="color:red" ng-show="myForm.userName.$touched && myForm.userName.$invalid">The name is required.</span>
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="email" class="cols-sm-2 control-label">Your
-							Email</label>
+						<label for="email" class="cols-sm-2 control-label">Your Email</label>
 						<div class="cols-sm-10">
 							<div class="input-group">
-								<span class="input-group-addon"><i
-									class="glyphicon glyphicon-envelope"></i></span> <input type="text"
-									class="form-control" ng-model="email"
-									placeholder="Enter your Email" />
+								<span class="input-group-addon">
+									<i class="glyphicon glyphicon-envelope"></i></span> 
+									<input type="email" class="form-control" ng-model="email"  name="email" placeholder="Enter your Email" required>
 							</div>
+							<span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
+							<span ng-show="myForm.email.$error.email">Invalid email address.</span>
+							<span ng-show="myForm.email.$error.required">Email is required.</span>
+							</span>
 						</div>
 					</div>
 
@@ -50,35 +52,33 @@
 						<label for="password" class="cols-sm-2 control-label">Password</label>
 						<div class="cols-sm-10">
 							<div class="input-group">
-								<span class="input-group-addon"><i
-									class="glyphicon glyphicon-lock"></i></span> <input type="password"
-									class="form-control" ng-model="password"
-									placeholder="Enter your Password" />
+								<span class="input-group-addon">
+									<i class="glyphicon glyphicon-lock"></i></span> 
+									<input type="password" class="form-control" ng-model="password" ng-maxlength="8" name="password" placeholder="Enter your Password"  required>
 							</div>
+							<span style="color:red" ng-show="myForm.password.$maxlength">Sorry, your password length should be up to 8 characters</span>
+							      <span style="color:red" ng-show="myForm.password.$touched && myForm.password.$invalid"> password is required.</span> 
+							     
+						
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="Address" class="cols-sm-2 control-label">Address:</label>
-
 						<div class="input-group">
-							<span class="input-group-addon"><i
-								class="glyphicon glyphicon-home"></i></span>
+							<span class="input-group-addon">
+								<i class="glyphicon glyphicon-home"></i></span>
 							<div class="col-sm-2">
-								<input type="text" class="form-control" ng-model="Street"
-									placeholder="Street" />
+								<input type="text" class="form-control" ng-model="Street" placeholder="Street" />
 							</div>
 							<div class="col-sm-2">
-								<input type="number" class="form-control"
-									ng-model="StreetNumber" placeholder="Number" />
+								<input type="number" class="form-control" ng-model="StreetNumber" placeholder="Number" />
 							</div>
 							<div class="col-sm-2">
-								<input type="text" class="form-control" ng-model="City"
-									placeholder="City" />
+								<input type="text" class="form-control" ng-model="City" placeholder="City" />
 							</div>
 							<div class="col-sm-2">
-								<input type="number" class="form-control" ng-model="Zipcode"
-									placeholder="zipcode" />
+								<input type="number" class="form-control" ng-model="Zipcode" placeholder="zipcode" />
 							</div>
 						</div>
 					</div>
@@ -88,10 +88,9 @@
 							number</label>
 						<div class="cols-sm-10">
 							<div class="input-group">
-								<span class="input-group-addon"><i
-									class="glyphicon glyphicon-phone-alt"></i></span> <input type="text"
-									class="form-control" ng-model="Telephone"
-									placeholder="Enter your Telephone number" />
+								<span class="input-group-addon">
+									<i class="glyphicon glyphicon-phone-alt"></i></span> 
+									<input type="text" class="form-control" ng-model="Telephone" placeholder="Enter your Telephone number" />
 							</div>
 						</div>
 					</div>
@@ -100,10 +99,9 @@
 						<label for="text" class="cols-sm-2 control-label">Nickname</label>
 						<div class="cols-sm-10">
 							<div class="input-group">
-								<span class="input-group-addon"><i
-									class="glyphicon glyphicon-user"></i></span> <input type="text"
-									class="form-control" ng-model="Nickname"
-									placeholder="Enter your Nickname" />
+								<span class="input-group-addon">
+								<i class="glyphicon glyphicon-user"></i></span> 
+									<input type="text" class="form-control" ng-model="Nickname" placeholder="Enter your Nickname" />
 							</div>
 						</div>
 					</div>
@@ -111,18 +109,19 @@
 						<label for="text" class="cols-sm-2 control-label">Photo</label>
 						<div class="cols-sm-10">
 							<div class="input-group">
-								<span class="input-group-addon"><i
-									class="glyphicon glyphicon-picture"></i></span> <input type="file"
-									class="form-control" ng-model="photo"
-									placeholder="Upload your photo" />
+								<span class="input-group-addon">
+									<i class="glyphicon glyphicon-picture"></i></span>
+									 <input type="file" class="form-control" ng-model="photo" placeholder="Upload your photo" />
+									
 							</div>
 						</div>
 					</div>
 
 					<div class="form-group ">
-						<button type="button" id="button"
-							class="btn btn-primary btn-lg btn-block ">Sign Up</button>
+						<button type="button" id="button" class="btn btn-primary btn-lg btn-block ">Sign Up</button>
 					</div>
+						
+											
 				</div>
 			</div>
 		</div>
