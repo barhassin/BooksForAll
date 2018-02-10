@@ -56,7 +56,7 @@
 									<i class="glyphicon glyphicon-lock"></i></span> 
 									<input type="password" class="form-control" ng-model="password" ng-maxlength="8" name="password" placeholder="Enter your Password"  required>
 							</div>
-							<span style="color:red" ng-show="myForm.password.$maxlength">Sorry, your password length should be up to 8 characters</span>
+							<span style="color:red" ng-show="myForm.password.$error.maxlength">Sorry, your password length should be up to 8 characters</span>
 							      <span style="color:red" ng-show="myForm.password.$touched && myForm.password.$invalid"> password is required.</span> 
 							     
 						
@@ -69,28 +69,33 @@
 							<span class="input-group-addon">
 								<i class="glyphicon glyphicon-home"></i></span>
 							<div class="col-sm-2">
-								<input type="text" class="form-control" ng-model="Street" placeholder="Street" />
+								<input type="name" class="form-control" ng-model="Street" name="Street" ng-minlength="3" placeholder="Street" required>
+							</div>
+						 	<span style="color:red" ng-show="myForm.Street.$dirty && myForm.Street.$invalid">
+							<span ng-show="myForm.Street.$error.name">Invalid Street name.</span>
+							<span ng-show="myForm.Street.$error.required"> Street is required.</span>
+							</span>
+							<span ng-show="myForm.Street.$error.minlength">Street must have at least 3 letters </span>
+							 
+							<div class="col-sm-2">
+								<input type="number" class="form-control" ng-model="StreetNumber" name="StreetNumber" placeholder="Number" required>
 							</div>
 							<div class="col-sm-2">
-								<input type="number" class="form-control" ng-model="StreetNumber" placeholder="Number" />
+								<input type="name" class="form-control" ng-model="City" name="City" ng-minlength="3" placeholder="City"required>
 							</div>
 							<div class="col-sm-2">
-								<input type="text" class="form-control" ng-model="City" placeholder="City" />
-							</div>
-							<div class="col-sm-2">
-								<input type="number" class="form-control" ng-model="Zipcode" placeholder="zipcode" />
+								<input type="number" class="form-control" ng-model="Zipcode" name="Zipcode" ng-minlength="7" ng-maxlength="7" placeholder="zipcode"required>
 							</div>
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="text" class="cols-sm-2 control-label">Telephone
-							number</label>
+						<label for="text" class="cols-sm-2 control-label">Telephone number</label>
 						<div class="cols-sm-10">
 							<div class="input-group">
 								<span class="input-group-addon">
 									<i class="glyphicon glyphicon-phone-alt"></i></span> 
-									<input type="text" class="form-control" ng-model="Telephone" placeholder="Enter your Telephone number" />
+									<input type="text" class="form-control" ng-model="Telephone" name="Telephone" placeholder="Enter your Telephone number" required>
 							</div>
 						</div>
 					</div>
@@ -106,22 +111,31 @@
 						</div>
 					</div>
 					<div class="form-group">
+						<label for="text" class="cols-sm-2 control-label">Description</label>
+						<div class="cols-sm-10">
+							<div class="input-group">
+							<span class="input-group-addon">
+									<i class="glyphicon glyphicon-comment"></i></span>
+									<input type="text" class="form-control" ng-model="Description" name="Description" ng-maxlength="50" placeholder="Enter short description about yourself " />
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
 						<label for="text" class="cols-sm-2 control-label">Photo</label>
 						<div class="cols-sm-10">
 							<div class="input-group">
 								<span class="input-group-addon">
 									<i class="glyphicon glyphicon-picture"></i></span>
-									 <input type="file" class="form-control" ng-model="photo" placeholder="Upload your photo" />
+									 <input type="file" class="form-control" ng-model="photo" name="photo" placeholder="Upload your photo" />
 									
 							</div>
 						</div>
 					</div>
 
 					<div class="form-group ">
-						<button type="button" id="button" class="btn btn-primary btn-lg btn-block ">Sign Up</button>
-					</div>
+						<button type="submit" id="button" class="btn btn-primary btn-lg btn-block"ng-disabled="myForm.$invalid">Sign Up</button>
 						
-											
+					</div>							
 				</div>
 			</div>
 		</div>
