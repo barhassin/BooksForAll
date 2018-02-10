@@ -11,13 +11,13 @@
 <body>
 	<div class="form-row col-md-4 col-md-offset-4" ng-app="login" ng-controller="loginController">
 	<div class="form-group">
-	<img src="logo.jpg" class="img-responsive center-block">
+	<img src="logo.gif" class="img-responsive center-block">
     <input type="text" class="form-control" placeholder="Enter Username" ng-model="username" required>
     <br>
     <input type="password" class="form-control" placeholder="Enter Password" ng-model="password" required>
     <br>
     <button ng-click="login()" class="btn btn-primary">Sign In</button>
-    <button type="submit" class="btn btn-link">Sign Up</button>
+    <button ng-click="signup()" class="btn btn-link">Sign Up</button>
     <p>{{content}}</p>
     </div>
   	</div>
