@@ -3,15 +3,16 @@ and define some behavior.
 This module further depends on an helper module 'txtHighlight'.
 */
 var app = angular.module('login', []);
-	app.controller('loginController', function($scope,$http) {
-			
+	app.controller('loginController', function($rootScope,$scope,$http,$window) {	
 	$scope.login = function(){
 		var usr = $scope.username;
 		var pwd = $scope.password;
 		var parameter = JSON.stringify({username:usr, password:pwd, type:""});
 		$http.post("http://localhost:8080/BooksForAll/login", parameter)
 		.then(function(response) {
-			$scope.content=response.data.username;
+			//$rootScope.usern=response.data.username;
+			$rootScope.poop="boo";
+			$window.location.href = 'welcome.html';
 		}, function(response) {
 			var status = response.status;
 			if(status=="405")
@@ -21,5 +22,7 @@ var app = angular.module('login', []);
 		    	  
 		});
 	};
+	$scope.signup = function(){
+		$window.location.href = 'signUp.html';
+	}
 });
-
