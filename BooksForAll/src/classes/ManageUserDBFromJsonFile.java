@@ -88,6 +88,53 @@ public class ManageUserDBFromJsonFile implements ServletContextListener {
     			pstmt.close();
     		}
     		
+    		
+    		
+    		try{
+    			//create Customers table
+    			Statement stmt = conn.createStatement();
+    			stmt.executeUpdate(AppConstants.CREATE_USERINFO_TABLE);
+    			//commit update
+        		conn.commit();
+        		stmt.close();
+    		}catch (SQLException e){
+    			//check if exception thrown since table was already created (so we created the database already 
+    			//in the past
+    			created = tableAlreadyExists(e);
+    			if (!created){
+    				throw e;//re-throw the exception so it will be caught in the
+    				//external try..catch and recorded as error in the log
+    			}
+    		}
+    		
+    		//if no database exist in the past - further populate its records in the table
+    		if (!created){
+    			//populate customers table with customer data from json file
+    			Collection<UserInfo> users = loadUserInfo(cntx.getResourceAsStream(File.separator +
+    														   AppConstants.USERINFO_FILE));
+    			PreparedStatement pstmt = conn.prepareStatement(AppConstants.INSERT_USERINFO_STMT);
+    			for (UserInfo user : users){
+    				pstmt.setString(1,user.getUsername());
+    				pstmt.setString(2,user.getPassword());
+    				pstmt.setString(3,user.getType());
+    				pstmt.setString(4,user.getEmail());
+    				pstmt.setString(5,user.getStreet());
+    				pstmt.setString(6,user.getStreetNumber());
+    				pstmt.setString(7,user.getCity());
+    				pstmt.setString(8,user.getZipcode());
+    				pstmt.setString(9,user.getTelephone());
+    				pstmt.setString(10,user.getNickname());
+    				pstmt.setString(11,user.getDescription());
+    				
+    				pstmt.executeUpdate();
+    			}
+
+    			//commit update
+    			conn.commit();
+    			//close statements
+    			pstmt.close();
+    		}
+    		
 
     		//close connection
     		conn.close();
@@ -137,6 +184,7 @@ public class ManageUserDBFromJsonFile implements ServletContextListener {
 			jsonFileContent.append(nextLine);
 		}
 
+
 		Gson gson = new Gson();
 		//this is a require type definition by the Gson utility so Gson will 
 		//understand what kind of object representation should the json file match
@@ -147,5 +195,24 @@ public class ManageUserDBFromJsonFile implements ServletContextListener {
 		return users;
 
 	}
+	private Collection<UserInfo> loadUserInfo(InputStream is) throws IOException{
+		
+		//wrap input stream with a buffered reader to allow reading the file line by line
+		BufferedReader br = new BufferedReader(new InputStreamReader(is));
+		StringBuilder jsonFileContent = new StringBuilder();
+		//read line by line from file
+		String nextLine = null;
+		while ((nextLine = br.readLine()) != null){
+			jsonFileContent.append(nextLine);
+		}
+		Gson gson = new Gson();
+		//this is a require type definition by the Gson utility so Gson will 
+		//understand what kind of object representation should the json file match
+		Type type = new TypeToken<Collection<UserInfo>>(){}.getType();
+		Collection<UserInfo> users = gson.fromJson(jsonFileContent.toString(), type);
+		//close
+		br.close();	
+		return users;
 	
+}
 }
