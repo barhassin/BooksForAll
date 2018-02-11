@@ -3,6 +3,15 @@ and define some behavior.
 This module further depends on an helper module 'txtHighlight'.
 */
 var app = angular.module('login', []);
+	app.controller('bfaController', function($rootScope,$scope,$http,$window) {
+		$scope.next='html/login.html';
+		//$rootScope.page=true;
+		$rootScope.$watch(function() {
+			return $rootScope.page;
+		}, function() {
+			$rootScope.page=$rootScope.page;
+		}, true);
+		});
 	app.controller('loginController', function($rootScope,$scope,$http,$window) {	
 	$scope.login = function(){
 		var usr = $scope.username;
@@ -12,7 +21,7 @@ var app = angular.module('login', []);
 		.then(function(response) {
 			//$rootScope.usern=response.data.username;
 			$rootScope.poop="boo";
-			$window.location.href = 'welcome.html';
+			$window.location.href = 'html/welcome.html';
 		}, function(response) {
 			var status = response.status;
 			if(status=="405")
@@ -23,6 +32,14 @@ var app = angular.module('login', []);
 		});
 	};
 	$scope.signup = function(){
-		$window.location.href = 'signUp.html';
+		//$rootScope.snext='html/signUp.html';
+		$rootScope.page=false;
 	}
+});
+app.controller('welcomeController', function($rootScope,$scope,$http,$window) {
+	$scope.$watch(function() {
+		return $rootScope.poop;
+	}, function() {
+		$scope.content = $rootScope.poop;
+	}, true);
 });

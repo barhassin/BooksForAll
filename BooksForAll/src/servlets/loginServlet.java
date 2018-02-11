@@ -80,6 +80,7 @@ public class loginServlet extends HttpServlet {
     					dbPassword=rs.getString(2);
     					if(!dbPassword.equals(user.getPassword()))
         					response.sendError(406);
+    					user = new User(rs.getString(1), "", rs.getString(3));
     				}	
     				else {
     					response.sendError(405);
@@ -91,9 +92,7 @@ public class loginServlet extends HttpServlet {
     	    		response.sendError(500);//internal server error
     			}
     		conn.close();
-    		
     		Gson gson2 = new Gson();
-        	//convert from customers collection to json
         	String userJsonResult = gson2.toJson(user);
         	response.addHeader("Content-Type", "application/json");
         	PrintWriter writer = response.getWriter();
