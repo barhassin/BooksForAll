@@ -9,7 +9,7 @@
 <script src="lib/jquery-3.2.1.js"></script>
 <script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <script src="lib/angular.min.js"></script>
-<script src="signupJs.js"></script>
+
 </head>
 
 <body ng-app="signUpApp" ng-controller="signUpController">
@@ -30,6 +30,7 @@
 									<input type="text" class="form-control" ng-model="userName" name="userName" placeholder="Enter your User Name" required>
 							</div>
 							<span style="color:red" ng-show="myForm.userName.$touched && myForm.userName.$invalid">The name is required.</span>
+							 <p>{{content}}</p>
 						</div>
 					</div>
 
@@ -133,13 +134,14 @@
 					</div>
 
 					<div class="form-group ">
-						<button type="submit" id="button" class="btn btn-primary btn-lg btn-block"ng-disabled="myForm.$invalid">Sign Up</button>
-						
+						<button ng-click="signUpApp()" class="btn btn-primary btn-lg btn-block">Sign Up</button>
+						<!--"ng-disabled="myForm.$invalid"-->
 					</div>							
 				</div>
 			</div>
 		</div>
 		</form>
 	</div>
+	<script src="signupJs.js"></script>
 </body>
 </html>

@@ -28,6 +28,7 @@ import com.google.gson.Gson;
 import classes.loginValidator;
 import classes.AppConstants;
 import classes.User;
+import classes.UserInfo;
 
 /**
  * Servlet implementation class signUpServlet
@@ -55,6 +56,7 @@ public class signUpServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			System.out.println("kkaki");
 			Context context = new InitialContext();
     		BasicDataSource ds = (BasicDataSource)context.lookup(
     			getServletContext().getInitParameter(AppConstants.DB_DATASOURCE) + AppConstants.OPEN);
@@ -69,21 +71,21 @@ public class signUpServlet extends HttpServlet {
     	    reader.close();
     	    String params = sb.toString();
     	    Gson gson = new Gson();
-    	    User user = gson.fromJson(params, User.class);
-    		PreparedStatement stmt;
+    	    UserInfo user_info = gson.fromJson(params, UserInfo.class);
+    	   System.out.println(user_info.getUsername());
+    	    PreparedStatement stmt;
     			try {
     				stmt = conn.prepareStatement(AppConstants.SELECT_USER_BY_USERNAME_STMT);
-    				stmt.setString(1, user.getUsername());
+    				stmt.setString(1, user_info.getUsername());
     				ResultSet rs = stmt.executeQuery();
-    				String dbPassword="";
+    				
     				if(rs.next()) {
-    					dbPassword=rs.getString(2);
-    					if(!dbPassword.equals(user.getPassword()))
-        					response.sendError(406);
+    					System.out.println("kaki");
+    					if(rs.getString(1).equals(user_info.getUsername())) {
+        					response.sendError(407);
+        					System.out.println("kaki");
+    					}
     				}	
-    				else {
-    					response.sendError(405);
-    				}
     				rs.close();
     				stmt.close();
     			} catch (SQLException e) {
@@ -93,6 +95,7 @@ public class signUpServlet extends HttpServlet {
     		conn.close();
     		
     		Gson gson2 = new Gson();
+    		User user=new User(user_info.getUsername(),"", "user");
         	//convert from customers collection to json
         	String userJsonResult = gson2.toJson(user);
         	response.addHeader("Content-Type", "application/json");

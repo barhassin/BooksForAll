@@ -6,7 +6,7 @@ This module further depends on an helper module 'txtHighlight'.
 var app = angular.module('signUpApp', []);
 	app.controller('signUpController', function($scope,$http) {
 			
-	$scope.login = function(){
+	$scope.signUpApp = function(){
 		var usernamed = $scope.userName;
 		var passwordd = $scope.password;
 		var emaild = $scope.email;
@@ -19,16 +19,15 @@ var app = angular.module('signUpApp', []);
 		var Descriptiond=$scope.Description;
 		
 		
-		var parameter = JSON.stringify({username:usernamed, password:passwordd, email:emaild, Street:Streetd, StreetNumberd:StreetNumber, City:Cityd, Zipcode:Zipcoded, Telephone:Telephoned, Nickname:Nicknamed, Description,Descriptiond});
-		$http.post("http://localhost:8080/BooksForAll/login", parameter)
+		var parameter = JSON.stringify({username:usernamed, password:passwordd, type:"user", email:emaild, street:Streetd, streetNumber:StreetNumberd, city:Cityd, zipcode:Zipcoded, telephone:Telephoned, nickname:Nicknamed, description:Descriptiond});
+		$http.post("http://localhost:8080/BooksForAll/signUp",parameter)
 		.then(function(response) {
 			$scope.content=response.data.username;
 		}, function(response) {
+			//navigate to home page
 			var status = response.status;
-			if(status=="405")
-				$scope.content="There is no such user in our system. you can try again or sign up and \"book\" yourself a seat in the spectacular ride that is our application!";
-			else if(status=="406")	  
-				$scope.content="The password is incorrect";
+			if(status=="407")
+				$scope.content="There is already a user with that username  in our system. please try again with Other user name ";
 		    	  
 		});
 	};

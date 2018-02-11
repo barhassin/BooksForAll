@@ -93,6 +93,7 @@ public class loginServlet extends HttpServlet {
     		conn.close();
     		
     		Gson gson2 = new Gson();
+    		
         	//convert from customers collection to json
         	String userJsonResult = gson2.toJson(user);
         	response.addHeader("Content-Type", "application/json");
