@@ -4,9 +4,15 @@ and define some behavior.
 This module further depends on an helper module 'txtHighlight'.
 */
 var app = angular.module('signUpApp', []);
+	
+
+	
 	app.controller('signUpController', function($scope,$http) {
-			
-	$scope.signUpApp = function(){
+	 //input validation//
+		$scope.sevenNumbers = /^[0-9]{1,7}$/;
+		$scope.lettersOnly =/^[a-zA-Z ]{1,100}$/;
+		$scope.onlyNumbers = /^[1-9][0-9]*$/;
+		$scope.signUpApp = function(){
 		var usernamed = $scope.userName;
 		var passwordd = $scope.password;
 		var emaild = $scope.email;
@@ -26,7 +32,7 @@ var app = angular.module('signUpApp', []);
 		}, function(response) {
 			//navigate to home page
 			var status = response.status;
-			if(status=="407")
+			if(status=="410")
 				$scope.content="There is already a user with that username  in our system. please try again with Other user name ";
 		    	  
 		});

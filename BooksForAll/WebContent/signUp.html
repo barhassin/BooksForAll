@@ -13,10 +13,11 @@
 </head>
 
 <body ng-app="signUpApp" ng-controller="signUpController">
+<img src="logo.jpg" class="img-responsive block">
 	<div class="container" >
-		<form  name="myForm">
+		<form name="myForm">
 		<div class="row">
-			<div class="main">
+			<div class="main-responsive">
 				<div class="headline text-center">
 					<H2>SIGN UP</H2>
 				</div>
@@ -27,9 +28,10 @@
 							<div class="input-group">
 								<span class="input-group-addon">
 								<i class="glyphicon glyphicon-user"></i></span> 
-									<input type="text" class="form-control" ng-model="userName" name="userName" placeholder="Enter your User Name" required>
+									<input type="text" class="form-control" ng-model="userName" name="userName" ng-maxlength="10" placeholder="Enter your User Name" required>
 							</div>
 							<span style="color:red" ng-show="myForm.userName.$touched && myForm.userName.$invalid">The name is required.</span>
+							 <span style="color:red" ng-show="myForm.userName.$error.maxlength">Sorry, your username length should be up to 10 characters</span>
 							 <p>{{content}}</p>
 						</div>
 					</div>
@@ -69,46 +71,86 @@
 						<div class="input-group">
 							<span class="input-group-addon">
 								<i class="glyphicon glyphicon-home"></i></span>
-							<div class="col-sm-2">
-								<input type="name" class="form-control" ng-model="Street" name="Street" ng-minlength="3" placeholder="Street" required>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" ng-model="Street" name="Street" ng-minlength="3" ng-pattern="lettersOnly" placeholder="Street" required>
+							 </div>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" ng-model="StreetNumber" name="StreetNumber" ng-pattern="onlyNumbers" placeholder="Number" required>
 							</div>
-						 	<span style="color:red" ng-show="myForm.Street.$dirty && myForm.Street.$invalid">
-							<span ng-show="myForm.Street.$error.name">Invalid Street name.</span>
-							<span ng-show="myForm.Street.$error.required"> Street is required.</span>
-							</span>
-							<span ng-show="myForm.Street.$error.minlength">Street must have at least 3 letters </span>
-							 
-							<div class="col-sm-2">
-								<input type="number" class="form-control" ng-model="StreetNumber" name="StreetNumber" placeholder="Number" required>
+							<div class="col-sm-4">
+								<input type="name" class="form-control" ng-model="City" name="City" ng-minlength="3" ng-pattern="lettersOnly" placeholder="City"required>
+								
 							</div>
-							<div class="col-sm-2">
-								<input type="name" class="form-control" ng-model="City" name="City" ng-minlength="3" placeholder="City"required>
-							</div>
-							<div class="col-sm-2">
-								<input type="number" class="form-control" ng-model="Zipcode" name="Zipcode" ng-minlength="7" ng-maxlength="7" placeholder="zipcode"required>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" ng-model="Zipcode" name="Zipcode" ng-pattern="sevenNumbers" placeholder="zipcode"required>
+								
 							</div>
 						</div>
+						<!-- Street validation  -->
+						<span style="color:red" ng-show="myForm.Street.$error.pattern && myForm.Street.$touched">Street name contain only letters.<br></span>
+						<span style="color:red" ng-show="myForm.Street.$error.minlength && myForm.Street.$touched">Street name must have at least 3 letters.<br></span>
+						<span style="color:red" ng-show="myForm.Street.$error.required && myForm.Street.$touched">  Street is required.<br></span>
+						<!-- StreetNumber validation  -->
+						<span style="color:red" ng-show="myForm.StreetNumber.$error.pattern && myForm.StreetNumber.$touched">  Street Number contain only digits.<br></span>
+						<span style="color:red" ng-show="myForm.StreetNumber.$error.required && myForm.StreetNumber.$touched">  Street Number is required.<br></span>
+						<!-- City validation  -->
+						<span style="color:red" ng-show="myForm.City.$error.pattern && myForm.City.$touched">City name contain only letters.<br></span>
+						<span style="color:red" ng-show="myForm.City.$error.required && myForm.City.$touched">  City name is required.<br></span>
+						<span style="color:red" ng-show="myForm.City.$error.minlength && myForm.City.$touched">City name must have at least 3 letters.<br></span>
+						<!-- Zipcode validation  -->
+						<span style="color:red" ng-show="myForm.Zipcode.$error.pattern">Zipcode contain 7 digits<br></span>
+						<span style="color:red" ng-show="myForm.Zipcode.$error.required && myForm.Zipcode.$touched">  Zipcode is required.<br></span>
+					
 					</div>
 
-					<div class="form-group">
+					<div class="form-inline">
 						<label for="text" class="cols-sm-2 control-label">Telephone number</label>
-						<div class="cols-sm-10">
+						<div class="cols-sm-4">	
+						<label class="sr-only" for="inlineFormInput">Prefix</label>
 							<div class="input-group">
 								<span class="input-group-addon">
-									<i class="glyphicon glyphicon-phone-alt"></i></span> 
-									<input type="text" class="form-control" ng-model="Telephone" name="Telephone" placeholder="Enter your Telephone number" required>
+									<i class="glyphicon glyphicon-phone-alt"></i></span>
+									 <label class="sr-only" for="inlineFormInputGroup">telephone</label>
+ 												 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+									        <select class="form-control" id="sel1">
+        									<option>02</option>
+       									    <option>03</option>
+   									        <option>04</option>
+      							 			<option>08</option>
+      							 			<option>09</option>
+       									    <option>050</option>
+   									        <option>051</option>
+      							 			<option>052</option>
+      							 			<option>053</option>
+       									    <option>054</option>
+   									        <option>055</option>
+      							 			<option>056</option>
+      							 			<option>057</option>
+   									        <option>058</option>
+      							 			<option>059</option>
+    									    </select>
+     										 <br> 
+     										 </div>
+     										   <label class="sr-only" for="inlineFormInputGroup">telephone</label>
+ 												 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+									<input type="text" class="form-control" ng-model="Telephone" name="Telephone" ng-pattern="sevenNumbers" placeholder="Enter your Telephone number" required>
+									
 							</div>
+							</div>
+							</div>
+							<span style="color:red" ng-show="myForm.Telephone.$touched && myForm.Telephone.$error.pattern ">
+								Sorry,Invaild telephone number</span>
 						</div>
-					</div>
-
 					<div class="form-group">
 						<label for="text" class="cols-sm-2 control-label">Nickname</label>
 						<div class="cols-sm-10">
 							<div class="input-group">
 								<span class="input-group-addon">
 								<i class="glyphicon glyphicon-user"></i></span> 
-									<input type="text" class="form-control" ng-model="Nickname" placeholder="Enter your Nickname" />
+									<input type="text" class="form-control" ng-model="Nickname" name="Nickname" ng-maxlength="20" placeholder="Enter your Nickname" required>
 							</div>
+								<span style="color:red" ng-show="myForm.Nickname.$dirty && myForm.Nickname.$error.maxlength">
+								Sorry, your nickname length should be up to 20 characters</span>
 						</div>
 					</div>
 					<div class="form-group">
@@ -119,6 +161,8 @@
 									<i class="glyphicon glyphicon-comment"></i></span>
 									<input type="text" class="form-control" ng-model="Description" name="Description" ng-maxlength="50" placeholder="Enter short description about yourself " />
 							</div>
+								<span style="color:red" ng-show="myForm.Description.$dirty && myForm.Description.$error.maxlength">
+								Sorry, your Description length should be up to 50 characters</span>
 						</div>
 					</div>
 					<div class="form-group">
@@ -134,8 +178,7 @@
 					</div>
 
 					<div class="form-group ">
-						<button ng-click="signUpApp()" class="btn btn-primary btn-lg btn-block">Sign Up</button>
-						<!--"ng-disabled="myForm.$invalid"-->
+						<button ng-click="signUpApp()" class="btn btn-primary btn-lg btn-block "ng-disabled="myForm.$invalid"">Sign Up</button>
 					</div>							
 				</div>
 			</div>

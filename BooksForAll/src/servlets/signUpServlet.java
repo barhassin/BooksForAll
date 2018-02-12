@@ -56,7 +56,6 @@ public class signUpServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			System.out.println("kkaki");
 			Context context = new InitialContext();
     		BasicDataSource ds = (BasicDataSource)context.lookup(
     			getServletContext().getInitParameter(AppConstants.DB_DATASOURCE) + AppConstants.OPEN);
@@ -72,7 +71,6 @@ public class signUpServlet extends HttpServlet {
     	    String params = sb.toString();
     	    Gson gson = new Gson();
     	    UserInfo user_info = gson.fromJson(params, UserInfo.class);
-    	   System.out.println(user_info.getUsername());
     	    PreparedStatement stmt;
     			try {
     				stmt = conn.prepareStatement(AppConstants.SELECT_USER_BY_USERNAME_STMT);
@@ -80,10 +78,10 @@ public class signUpServlet extends HttpServlet {
     				ResultSet rs = stmt.executeQuery();
     				
     				if(rs.next()) {
-    					System.out.println("kaki");
+    					
     					if(rs.getString(1).equals(user_info.getUsername())) {
-        					response.sendError(407);
-        					System.out.println("kaki");
+        					response.sendError(410);
+        					
     					}
     				}	
     				rs.close();
