@@ -47,7 +47,6 @@ public class UserInfo {
 		return description;
 	}
 	public String getPassword() {
-		
-		return null;
+		return password;
 	}
 }
