@@ -83,6 +83,7 @@ public class loginServlet extends HttpServlet {
     					user = new User(rs.getString(1), "", rs.getString(3));
     				}	
     				else {
+    					System.out.println("kaki2");
     					response.sendError(405);
     				}
     				rs.close();

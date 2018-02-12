@@ -9,17 +9,47 @@
 <script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<div class="form-row col-md-4 col-md-offset-4" ng-app="login" ng-controller="loginController">
-	<div class="form-group">
+	<div ng-app="login" ng-controller="loginController">
+	<div ng-model="changeLogin" ng-init="changeLogin = true">
+	<div ng-if="changeLogin">
+	<div class="form-group form-row col-md-4 col-md-offset-4">
 	<img src="logo.gif" class="img-responsive center-block">
-    <input type="text" class="form-control" placeholder="Enter Username" ng-model="username" required>
+    <input type="text" class="form-control" placeholder="Enter Username" ng-model="$parent.username" required>
     <br>
-    <input type="password" class="form-control" placeholder="Enter Password" ng-model="password" required>
+    <input type="password" class="form-control" placeholder="Enter Password" ng-model="$parent.password" required>
     <br>
     <button ng-click="login()" class="btn btn-primary">Sign In</button>
     <button ng-click="signup()" class="btn btn-link">Sign Up</button>
-    <p>{{content}}</p>
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Error!</h4>
+                </div>
+                <div class="modal-body">
+                    <p>{{content}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div ng-model="changeSignup" ng-init="changeSignup = false">
+    	<div ng-if="changeSignup">
+    		<div ng-include="'html/signUp.html'"></div>
+    	</div>
+  	</div>
+  	<div ng-model="changeNavbar" ng-init="changeNavbar = false">
+	<div ng-if="changeNavbar">
+	<div ng-include="'html/navbar.html'"></div>
+  	</div>
+  	</div>
   	</div>
   	<script src="js/index.js"></script>
 </body>
