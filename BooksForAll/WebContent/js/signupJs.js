@@ -5,8 +5,6 @@ This module further depends on an helper module 'txtHighlight'.
 */
 var app = angular.module('signUpApp', []);
 	
-
-	
 	app.controller('signUpController', function($scope,$http) {
 	 //input validation//
 		$scope.sevenNumbers = /^[0-9]{1,7}$/;
