@@ -36,8 +36,8 @@ var app = angular.module('login', []);
 app.controller('welcomeController', function($rootScope,$scope,$http,$window) {
 	$scope.content=$rootScope.user;
 });
-app.controller('navbarController', function($rootScope,$scope,$http,$window) {
+app.controller('navbarController', function($scope) {
 	$scope.func = function(){
-		$scope.content="boo"
+		$scope.content="boo";
 	}
 });
