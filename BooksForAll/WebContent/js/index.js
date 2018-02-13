@@ -37,7 +37,32 @@ app.controller('welcomeController', function($rootScope,$scope,$http,$window) {
 	$scope.content=$rootScope.user;
 });
 app.controller('navbarController', function($rootScope,$scope,$http,$window) {
-	$scope.func = function(){
-		$scope.content="boo"
+	$scope.content=$rootScope.user;
+	$scope.welcome = function(){
+		$scope.changeWelcome=true;
+		$scope.changeMyBooks=false;
+		$scope.changeBrowseBooks=false;
+		$('li.active').removeClass('active');
+		$('a[ng-click="welcome()"]').closest('li').addClass('active');
 	}
+	$scope.myBooks = function(){
+		$scope.changeWelcome=false;
+		$scope.changeMyBooks=true;
+		$scope.changeBrowseBooks=false;
+		$('li.active').removeClass('active');
+		$('a[ng-click="myBooks()"]').closest('li').addClass('active');
+	}
+	$scope.browseBooks = function(){
+		$scope.changeWelcome=false;
+		$scope.changeMyBooks=false;
+		$scope.changeBrowseBooks=true;
+		$('li.active').removeClass('active');
+		$('a[ng-click="browseBooks()"]').closest('li').addClass('active');
+	}
+});
+app.controller('browseBooksController', function($rootScope,$scope,$http,$window) {
+	$scope.content=$rootScope.user;
+});
+app.controller('myBooksController', function($rootScope,$scope,$http,$window) {
+	$scope.content=$rootScope.user;
 });
