@@ -2,8 +2,8 @@ package classes;
 
 public class UserInfo {
 
-	private String username, password, type, email, street, streetNumber,  city, zipcode, telephone, nickname, description;
-	public UserInfo(String _username, String _password, String _type, String _email, String _street, String _streetNumber,String _city,String _zipcode,String _telephone, String _nickname, String _description){
+	private String username, password, type, email, street, streetNumber,  city, zipcode, telephone, nickname, description, photo;
+	public UserInfo(String _username, String _password, String _type, String _email, String _street, String _streetNumber,String _city,String _zipcode,String _telephone, String _nickname, String _description,String _photo){
 	username = _username;
 	password = _password;
 	type = _type; 
@@ -15,6 +15,7 @@ public class UserInfo {
 	telephone=_telephone;
 	nickname=_nickname;
 	description=_description;
+	photo=_photo;
 	}
 	public String getUsername() {
 		return username;
@@ -48,5 +49,8 @@ public class UserInfo {
 	}
 	public String getPassword() {
 		return password;
+	}
+	public String getPhoto() {
+		return photo;
 	}
 }

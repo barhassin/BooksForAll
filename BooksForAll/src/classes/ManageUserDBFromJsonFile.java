@@ -114,19 +114,17 @@ public class ManageUserDBFromJsonFile implements ServletContextListener {
     														   AppConstants.USERINFO_FILE));
     			PreparedStatement pstmt = conn.prepareStatement(AppConstants.INSERT_USERINFO_STMT);
     			for (UserInfo user : users){
-    				pstmt.setString(1,user.getUsername());
-    				pstmt.setString(2,user.getPassword());
-    				pstmt.setString(3,user.getType());
-    				pstmt.setString(4,user.getEmail());
-    				pstmt.setString(5,user.getStreet());
-    				pstmt.setString(6,user.getStreetNumber());
-    				pstmt.setString(7,user.getCity());
-    				pstmt.setString(8,user.getZipcode());
-    				pstmt.setString(9,user.getTelephone());
-    				pstmt.setString(10,user.getNickname());
-    				pstmt.setString(11,user.getDescription());
-    				
-    				pstmt.executeUpdate();
+	    				pstmt.setString(1,user.getUsername());
+	    				pstmt.setString(2,user.getEmail());
+	    				pstmt.setString(3,user.getStreet());
+	    				pstmt.setString(4,user.getStreetNumber());
+	    				pstmt.setString(5,user.getCity());
+	    				pstmt.setString(6,user.getZipcode());
+	    				pstmt.setString(7,user.getTelephone());
+	    				pstmt.setString(8,user.getNickname());
+	    				pstmt.setString(9,user.getDescription());
+	    				pstmt.setString(10, user.getPhoto());
+	    				pstmt.executeUpdate();
     			}
 
     			//commit update

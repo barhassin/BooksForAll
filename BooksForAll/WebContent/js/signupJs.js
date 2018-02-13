@@ -3,15 +3,16 @@
 and define some behavior.
 This module further depends on an helper module 'txtHighlight'.
 */
+
 var app = angular.module('signUpApp', []);
-	
+
 	app.controller('signUpController', function($scope,$http) {
 	 //input validation//
 		$scope.sevenNumbers = /^[0-9]{1,7}$/;
 		$scope.lettersOnly =/^[a-zA-Z ]{1,100}$/;
 		$scope.onlyNumbers = /^[1-9][0-9]*$/;
-		$scope.signUpApp = function(){
 		
+		$scope.signUpApp = function(){
 		var usernamed = $scope.userName;
 		var passwordd = $scope.password;
 		var emaild = $scope.email;
