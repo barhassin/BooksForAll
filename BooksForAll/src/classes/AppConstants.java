@@ -23,7 +23,7 @@ public interface AppConstants {
 		public final String CREATE_USERS_TABLE = "CREATE TABLE USERS(Username varchar(100),"
 				+ "Password varchar(100)," + "Type varchar(100))";
 		public final String CREATE_USERINFO_TABLE = "CREATE TABLE USERINFO(Username varchar(100),"
-				+ "Email varchar(100)," + "Street varchar(100),"+ "streetNumber varchar(100)," + "City varchar(100),"+ "Zipcode varchar(100)," + "Telephone varchar(100),"+ "Nickname varchar(100)," + "Description varchar(100))";
+				+ "Email varchar(100)," + "Street varchar(100),"+ "streetNumber varchar(100)," + "City varchar(100),"+ "Zipcode varchar(100)," + "Telephone varchar(100),"+ "Nickname varchar(100)," + "Description varchar(100)," + "Photo varchar(100))";
 		public final String INSERT_USER_STMT = "INSERT INTO USERS VALUES(?,?,?)";
 		public final String INSERT_USERINFO_STMT = "INSERT INTO USERINFO VALUES(?,?,?,?,?,?,?,?,?,?)";
 		public final String SELECT_ALL_USERS_STMT = "SELECT * FROM USERS";

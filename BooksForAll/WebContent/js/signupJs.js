@@ -3,6 +3,7 @@
 and define some behavior.
 This module further depends on an helper module 'txtHighlight'.
 */
+
 var app = angular.module('signUpApp', []);
 	
 
