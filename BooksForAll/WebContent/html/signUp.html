@@ -9,8 +9,7 @@
 <script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <script src="lib/angular.min.js"></script>
 </head>
-<body>
-<div ng-app="login" ng-controller="signUpController">
+<body ng-app="signUpApp" ng-controller="signUpController">
 <img src="logo.gif" class="img-responsive block">
 	<div class="container" >
 		<form name="myForm">
@@ -108,7 +107,7 @@
 									<i class="glyphicon glyphicon-phone-alt"></i></span>
 									 <label class="sr-only" for="inlineFormInputGroup">telephone</label>
  												 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-									        <select class="form-control" ng-model="selected" id="sel1">
+									        <select class="form-control" id="sel1">
         									<option>02</option>
        									    <option>03</option>
    									        <option>04</option>
@@ -126,7 +125,6 @@
       							 			<option>059</option>
     									    </select>
      										 <br> 
-     									
      										 </div>
      										   <label class="sr-only" for="inlineFormInputGroup">telephone</label>
  												 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
@@ -182,7 +180,6 @@
 		</div>
 		</form>
 	</div>
-	</div>
-	<script src="js/index.js"></script>
+	<script src="js/signupJs.js"></script>
 </body>
 </html>

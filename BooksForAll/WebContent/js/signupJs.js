@@ -5,13 +5,14 @@ This module further depends on an helper module 'txtHighlight'.
 */
 
 var app = angular.module('signUpApp', []);
+	
 
+	
 	app.controller('signUpController', function($scope,$http) {
 	 //input validation//
 		$scope.sevenNumbers = /^[0-9]{1,7}$/;
 		$scope.lettersOnly =/^[a-zA-Z ]{1,100}$/;
 		$scope.onlyNumbers = /^[1-9][0-9]*$/;
-		
 		$scope.signUpApp = function(){
 		var usernamed = $scope.userName;
 		var passwordd = $scope.password;
@@ -23,6 +24,7 @@ var app = angular.module('signUpApp', []);
 		var Telephoned =$scope.Telephone;
 		var Nicknamed =$scope.Nickname;
 		var Descriptiond=$scope.Description;
+		
 		
 		var parameter = JSON.stringify({username:usernamed, password:passwordd, type:"user", email:emaild, street:Streetd, streetNumber:StreetNumberd, city:Cityd, zipcode:Zipcoded, telephone:Telephoned, nickname:Nicknamed, description:Descriptiond});
 		$http.post("http://localhost:8080/BooksForAll/signUp",parameter)
