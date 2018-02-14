@@ -99,3 +99,4 @@ app.controller('signUpController', function($scope,$http) {
 		});
 	};
 });
+

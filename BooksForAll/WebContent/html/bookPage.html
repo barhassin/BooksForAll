@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+<title>Book page</title>
+<link rel="stylesheet" type="text/css" href="../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<script src="../lib/jquery-3.2.1.js"></script>
+<script src="../lib/angular.min.js"></script>
+<script src="../lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+</head>
+ <body>
+ <div ng-app="books" ng-controller="book">
+	<h1> {{bookName}}</h1>
+	<br>
+	<h2>{{bookAuthor}}</h2>
+	<!-- לשים תמונה של הספר בתוך מסגרת של IPAD -->
+	<p>{{price}}<p>
+	<h2> Description: </h2>
+	{{description}}
+	
+	
+</div>
+
+<script src="../js/temp.js"></script>
+</body>
+</html>
