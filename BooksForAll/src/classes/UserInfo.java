@@ -2,14 +2,14 @@ package classes;
 
 public class UserInfo {
 
-	private String username, password, type, email, street, streetNumber,  city, zipcode, telephone, nickname, description, photo;
+	private String username, password, type, email, street, streetnumber, city, zipcode, telephone, nickname, description, photo;
 	public UserInfo(String _username, String _password, String _type, String _email, String _street, String _streetNumber,String _city,String _zipcode,String _telephone, String _nickname, String _description,String _photo){
 	username = _username;
 	password = _password;
 	type = _type; 
 	email = _email;
 	street=_street;
-	streetNumber=_streetNumber;
+	streetnumber=_streetNumber;
 	city=_city;
 	zipcode=_zipcode;
 	telephone=_telephone;
@@ -30,7 +30,7 @@ public class UserInfo {
 		return street;
 	}
 	public String getStreetNumber() {
-		return streetNumber;
+		return streetnumber;
 	}
 	public String getCity() {
 		return city;

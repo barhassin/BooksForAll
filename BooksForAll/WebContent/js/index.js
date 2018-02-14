@@ -59,14 +59,46 @@ app.controller('navbarController', function($rootScope,$scope,$http,$window) {
 		$('li.active').removeClass('active');
 		$('a[ng-click="browseBooks()"]').closest('li').addClass('active');
 	}
+	$scope.logout = function(){
+		$scope.changeNavbar=false;
+		$scope.changeWelcome=false;
+		$scope.changeMyBooks=false;
+		$scope.changeBrowseBooks=false;
+		$scope.changeLogout=true;
+		$rootScope.user="";
+	}
 });
 app.controller('browseBooksController', function($rootScope,$scope,$http,$window) {
-	$scope.content=$rootScope.user;
+	$scope.content="boo";
+	$scope.toBook = function(){
+		$scope.content="book";
+	};
+	$http.post("http://localhost:8080/BooksForAll/browseBooksServlet")
+	.then(function(response) {
+		$scope.bookslist = response.data;
+		for(x in $scope.bookslist){
+			var bookpath = "books/" + $scope.bookslist[x].name + "_files/" + $scope.bookslist[x].image + "";
+			var i = x++;
+			$('<div class="item text-center"><img src="'+bookpath+'" alt="image" style="width:100%;"><div class="carousel-caption"><h3>'+i+'</h3></div>   </div>').appendTo('.carousel-inner');
+			$('<li data-target="#carousel-example-generic" data-slide-to="' + x + '"></li>').appendTo('.carousel-indicators')
+			
+			$('.item').first().addClass('active');
+			  $('.carousel-indicators > li').first().addClass('active');
+			  $('#carousel-example-generic').carousel();
+		}
+	}, function(){});
 });
 app.controller('myBooksController', function($rootScope,$scope,$http,$window) {
-	$scope.content=$rootScope.user;
+	  $('<div class="item"><img src="images/male.jpg"><div class="carousel-caption"></div>   </div>').appendTo('.carousel-inner');
+	  $('<li data-target="#" data-slide-to="0"></li>').appendTo('.carousel-indicators')
+	  $('<div class="item"><img src="images/female.jpg"><div class="carousel-caption"></div>   </div>').appendTo('.carousel-inner');
+	  $('<li data-target="#" data-slide-to="1"></li>').appendTo('.carousel-indicators')
+
+	  $('.item').first().addClass('active');
+	  $('.carousel-indicators > li').first().addClass('active');
+	  $('#carousel-example-generic').carousel();
 });
-app.controller('signUpController', function($scope,$http) {
+app.controller('signUpController', function($rootScope,$scope,$http,$window) {
 	 //input validation//
 		$scope.sevenNumbers = /^[0-9]{7}$/;
 		$scope.lettersOnly =/^[a-zA-Z ]{1,100}$/;
@@ -74,7 +106,7 @@ app.controller('signUpController', function($scope,$http) {
 		
 		$scope.signUpApp = function(){
 		var usernamed = $scope.userName;
-		var passwordd = $scope.password;
+		var passwordd = $scope.Pass;
 		var emaild = $scope.email;
 		var Streetd =$scope.Street;
 		var StreetNumberd =$scope.StreetNumber;
@@ -83,19 +115,16 @@ app.controller('signUpController', function($scope,$http) {
 		var Telephoned =$scope.selected + "-" + $scope.Telephone;
 		var Nicknamed =$scope.Nickname;
 		var Descriptiond=$scope.Description;
-		console.log(Telephoned);
-		var parameter = JSON.stringify({username:usernamed, password:passwordd, type:"user", email:emaild, street:Streetd, streetNumber:StreetNumberd, city:Cityd, zipcode:Zipcoded, telephone:Telephoned, nickname:Nicknamed, description:Descriptiond});
+		var parameter = JSON.stringify({username:usernamed, password:passwordd, type:"user", email:emaild, street:Streetd, streetnumber:StreetNumberd, city:Cityd, zipcode:Zipcoded, telephone:Telephoned, nickname:Nicknamed, description:Descriptiond});
 		$http.post("http://localhost:8080/BooksForAll/signUp",parameter)
 		.then(function(response) {
-			$scope.content=response.data.username;
+			$rootScope.user=response.data.username;
+			$scope.changeSignup = false;
+			$scope.changeNavbar = true;
 		}, function(response) {
 			var status = response.status;
-			if(status=="411")
-				$scope.content=Telephoned;
-			//navigate to home page
 			if(status=="410")
-				$scope.content="There is already a user with that username  in our system. please try again with Other user name ";
-		    	  
+				$scope.content="There is already a user with that username in our system. please try again with a different user name";	    	  
 		});
 	};
 });

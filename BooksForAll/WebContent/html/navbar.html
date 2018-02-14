@@ -10,6 +10,8 @@
 </head>
 <body>
 <div ng-app="login" ng-controller="navbarController">
+<div ng-model="changeNavbar" ng-init="changeNavbar = true">
+	<div ng-if="changeNavbar">
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -22,10 +24,12 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a><span class="glyphicon glyphicon-user"></span> {{content}}</a></li>
-      <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+      <li><a href="#" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
     </ul>
   </div>
 </nav>
+</div>
+</div>
 <div ng-model="changeWelcome" ng-init="changeWelcome = true">
 	<div ng-if="changeWelcome">
 	<div ng-include="'html/welcome.html'"></div>
@@ -39,6 +43,11 @@
 <div ng-model="changeBrowseBooks" ng-init="changeBrowseBooks = false">
 	<div ng-if="changeBrowseBooks">
 	<div ng-include="'html/browseBooks.html'"></div>
+	</div>
+</div>
+<div ng-model="changeLogout" ng-init="changeLogout = false">
+	<div ng-if="changeLogout">
+	<div ng-include="'html/login.html'"></div>
 	</div>
 </div>
 </div>
