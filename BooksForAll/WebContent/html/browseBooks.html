@@ -9,22 +9,32 @@
 <script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div ng-app="login" ng-controller="browseBooksController">
-<p>{{content}}</p><button ng-click="toBook()" type="button" class="btn btn-default">Read More</button>
-<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-  <!-- Indicators -->
-  <ol class="carousel-indicators"></ol>
-  <!-- Wrapper for slides -->
-  <div class="carousel-inner"></div>
-  <!-- Controls -->
-  <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left"></span>
-  </a>
-  <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right"></span>
-  </a>
-</div>
-</div>
+	<div ng-app="login" ng-controller="browseBooksController">
+	<div ng-model="changeBrowse" ng-init="changeBrowse = true">
+	<div ng-if="changeBrowse">
+		<div ng-repeat="x in bookslist">
+		<div class="panel panel-default">
+  			<div class="panel-heading">{{x.name}}</div>
+  			<div class="row">
+  			<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+  			<div class="panel-body">	
+  			<img src="books/{{x.name}}_files/{{x.image}}" alt="" class="img-responsive center-block" /> 
+  			<p>Description: {{x.description}}</p>
+  			<p>Price: {{x.price}}$</p>
+  			<button ng-click="toBook(x.name)" class="btn btn-primary pull-right">more</button>
+  			</div>
+  			</div>
+  			</div>
+		</div>
+		</div>
+		</div>
+		</div>
+	<div ng-model="changeBook" ng-init="changeBook = false">
+	<div ng-if="changeBook">
+	<div ng-include="'html/welcome.html'"></div>
+	</div>
+	</div>
+	</div>
 <script src="js/index.js"></script>
 </body>
 </html>

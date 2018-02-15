@@ -14,7 +14,10 @@ var app = angular.module('login', []);
 		.then(function(response) {
 			$rootScope.user=usr;
 			$scope.changeLogin=false;
-			$scope.$parent.changeNavbar=true;
+			if(response.data.type=="user")
+				$scope.$parent.changeNavbar=true;
+			else
+				$scope.$parent.changeNavbarAdmin=true;
 		}, function(response) {
 			var status = response.status;
 			if(status=="405"){
@@ -23,7 +26,7 @@ var app = angular.module('login', []);
 		}
 			else if(status=="406"){ 
 				$("#myModal").modal('show');
-				$scope.content="The password is incorrect";
+				$scope.content="The password is incorrect, please try again";
 		}
 		    	  
 		});
@@ -69,34 +72,18 @@ app.controller('navbarController', function($rootScope,$scope,$http,$window) {
 	}
 });
 app.controller('browseBooksController', function($rootScope,$scope,$http,$window) {
-	$scope.content="boo";
-	$scope.toBook = function(){
-		$scope.content="book";
+	$scope.toBook = function(param){
+		$rootScope.chosenBook=param;
+		$scope.changeBrowse=false;
+		$scope.changeBook=true;
 	};
 	$http.post("http://localhost:8080/BooksForAll/browseBooksServlet")
 	.then(function(response) {
 		$scope.bookslist = response.data;
-		for(x in $scope.bookslist){
-			var bookpath = "books/" + $scope.bookslist[x].name + "_files/" + $scope.bookslist[x].image + "";
-			var i = x++;
-			$('<div class="item text-center"><img src="'+bookpath+'" alt="image" style="width:100%;"><div class="carousel-caption"><h3>'+i+'</h3></div>   </div>').appendTo('.carousel-inner');
-			$('<li data-target="#carousel-example-generic" data-slide-to="' + x + '"></li>').appendTo('.carousel-indicators')
-			
-			$('.item').first().addClass('active');
-			  $('.carousel-indicators > li').first().addClass('active');
-			  $('#carousel-example-generic').carousel();
-		}
 	}, function(){});
 });
 app.controller('myBooksController', function($rootScope,$scope,$http,$window) {
-	  $('<div class="item"><img src="images/male.jpg"><div class="carousel-caption"></div>   </div>').appendTo('.carousel-inner');
-	  $('<li data-target="#" data-slide-to="0"></li>').appendTo('.carousel-indicators')
-	  $('<div class="item"><img src="images/female.jpg"><div class="carousel-caption"></div>   </div>').appendTo('.carousel-inner');
-	  $('<li data-target="#" data-slide-to="1"></li>').appendTo('.carousel-indicators')
-
-	  $('.item').first().addClass('active');
-	  $('.carousel-indicators > li').first().addClass('active');
-	  $('#carousel-example-generic').carousel();
+	 
 });
 app.controller('signUpController', function($rootScope,$scope,$http,$window) {
 	 //input validation//
@@ -127,4 +114,68 @@ app.controller('signUpController', function($rootScope,$scope,$http,$window) {
 				$scope.content="There is already a user with that username in our system. please try again with a different user name";	    	  
 		});
 	};
+});
+app.controller('navbarAdminController', function($rootScope,$scope,$http,$window) {
+	$scope.content=$rootScope.user;
+	$scope.welcome = function(){
+		$scope.changeWelcomeAd=true;
+		$scope.changeViewUsersAd=false;
+		$scope.changeBrowseBooksAd=false;
+		$scope.changeViewPurchasesAd=false;
+		$scope.changeViewReviewsAd=false;
+		$scope.changeLogoutAd=false;
+		$('li.active').removeClass('active');
+		$('a[ng-click="welcome()"]').closest('li').addClass('active');
+	}
+	$scope.viewUsers = function(){
+		$scope.changeWelcomeAd=false;
+		$scope.changeViewUsersAd=true;
+		$scope.changeBrowseBooksAd=false;
+		$scope.changeViewPurchasesAd=false;
+		$scope.changeLogoutAd=false;
+		$scope.changeLogoutAd=false;
+		$('li.active').removeClass('active');
+		$('a[ng-click="viewUsers()"]').closest('li').addClass('active');
+	}
+	$scope.browseBooks = function(){
+		$scope.changeWelcomeAd=false;
+		$scope.changeViewUsersAd=false;
+		$scope.changeBrowseBooksAd=true;
+		$scope.changeViewPurchasesAd=false;
+		$scope.changeLogoutAd=false;
+		$scope.changeLogoutAd=false;
+		$('li.active').removeClass('active');
+		$('a[ng-click="browseBooks()"]').closest('li').addClass('active');
+	}
+	$scope.viewPurchases = function(){
+		$scope.changeWelcomeAd=false;
+		$scope.changeViewUsersAd=false;
+		$scope.changeBrowseBooksAd=false;
+		$scope.changeViewPurchasesAd=true;
+		$scope.changeViewReviewsAd=false;
+		$scope.changeLogoutAd=false;
+		$('li.active').removeClass('active');
+		$('a[ng-click="viewPurchases()"]').closest('li').addClass('active');
+	}
+	$scope.viewReviews = function(){
+		$scope.changeWelcomeAd=false;
+		$scope.changeViewUsersAd=false;
+		$scope.changeBrowseBooksAd=false;
+		$scope.changeViewPurchasesAd=false;
+		$scope.changeViewReviewsAd=true;
+		$scope.changeLogoutAd=false;
+		$('li.active').removeClass('active');
+		$('a[ng-click="viewReviews()"]').closest('li').addClass('active');
+	}
+	$scope.logout = function(){
+		$scope.changeNavbarAd=false;
+		$scope.changeWelcomeAd=false;
+		$scope.changeViewUsersAd=false;
+		$scope.changeMyBooksAd=false;
+		$scope.changeBrowseBooksAd=false;
+		$scope.changeViewPurchasesAd=false;
+		$scope.changeViewReviewsAd=false;
+		$scope.changeLogoutAd=true;
+		$rootScope.user="";
+	}
 });
