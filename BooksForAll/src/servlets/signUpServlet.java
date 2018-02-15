@@ -86,7 +86,6 @@ public class signUpServlet extends HttpServlet {
     					}
     				}
     				else {
-    					
     		   			PreparedStatement pstmt = conn.prepareStatement(AppConstants.INSERT_USERINFO_STMT);
     		   			pstmt.setString(1,user_info.getUsername());
    		    			pstmt.setString(2,user_info.getEmail());
@@ -102,15 +101,13 @@ public class signUpServlet extends HttpServlet {
     	   				PreparedStatement ustmt = conn.prepareStatement(AppConstants.INSERT_USER_STMT);
     	   				ustmt.setString(1,user_info.getUsername());
    		    			ustmt.setString(2,user_info.getPassword());
-   		    			ustmt.setString(3,"type");
+   		    			ustmt.setString(3,"user");
    		    			ustmt.executeUpdate();
     	    			//commit update
    		    			conn.commit();
    		    			//close statements
    		    			pstmt.close();
-   		    			ustmt.close();
-   		    			System.out.println(user_info.getUsername()+" is in the sysytem");
-    		    		response.sendError(411);	
+   		    			ustmt.close();	
     				rs.close();
     				stmt.close();
     				}
