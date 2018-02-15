@@ -169,6 +169,77 @@ public class ManageUserDBFromJsonFile implements ServletContextListener {
     			//close statements
     			pstmt.close();
     		}
+    		
+    		boolean created4 = false;
+    		try{
+    			//create Users table
+    			Statement stmt = conn.createStatement();
+    			stmt.executeUpdate(AppConstants.CREATE_LIKES_TABLE);
+    			//commit update
+        		conn.commit();
+        		stmt.close();
+    		}catch (SQLException e){
+    			//check if exception thrown since table was already created (so we created the database already 
+    			//in the past
+    			created4 = tableAlreadyExists(e);
+    			if (!created4){
+    				throw e;//re-throw the exception so it will be caught in the
+    				//external try..catch and recorded as error in the log
+    			}
+    		}
+    		//if no database exist in the past - further populate its records in the table
+    		if (!created4){
+    			//populate customers table with customer data from json file
+    			Collection<Like> likes = loadLike(cntx.getResourceAsStream(File.separator +
+    														   AppConstants.LIKES_FILE));
+    			PreparedStatement pstmt = conn.prepareStatement(AppConstants.INSERT_LIKES_STMT);
+    			for (Like like : likes){
+    				pstmt.setString(1, like.getBookname());
+    				pstmt.setString(2,like.getUsername());
+    				pstmt.executeUpdate();
+    			}
+
+    			//commit update
+    			conn.commit();
+    			//close statements
+    			pstmt.close();
+    		}
+    		boolean created5 = false;
+    		try{
+    			//create Users table
+    			Statement stmt = conn.createStatement();
+    			stmt.executeUpdate(AppConstants.CREATE_REVIEWS_TABLE);
+    			//commit update
+        		conn.commit();
+        		stmt.close();
+    		}catch (SQLException e){
+    			//check if exception thrown since table was already created (so we created the database already 
+    			//in the past
+    			created5 = tableAlreadyExists(e);
+    			if (!created5){
+    				throw e;//re-throw the exception so it will be caught in the
+    				//external try..catch and recorded as error in the log
+    			}
+    		}
+    		//if no database exist in the past - further populate its records in the table
+    		if (!created5){
+    			//populate customers table with customer data from json file
+    			Collection<Review> reviews = loadreview(cntx.getResourceAsStream(File.separator +
+    														   AppConstants.REVIEWS_FILE));
+    			PreparedStatement pstmt = conn.prepareStatement(AppConstants.INSERT_REVIEWS_STMT);
+    			for (Review review : reviews){
+    				pstmt.setString(1,review.getBookname());
+    				pstmt.setString(2,review.getNickname());
+    				pstmt.setString(3,review.getReview());
+    				pstmt.setString(4,review.getApproved());
+    				pstmt.executeUpdate();
+    			}
+
+    			//commit update
+    			conn.commit();
+    			//close statements
+    			pstmt.close();
+    		}
 
     		//close connection
     		conn.close();
@@ -269,6 +340,50 @@ public class ManageUserDBFromJsonFile implements ServletContextListener {
 		//close
 		br.close();	
 		return books;
+
+	}
+	private Collection<Like> loadLike(InputStream is) throws IOException{
+		
+		//wrap input stream with a buffered reader to allow reading the file line by line
+		BufferedReader br = new BufferedReader(new InputStreamReader(is));
+		StringBuilder jsonFileContent = new StringBuilder();
+		//read line by line from file
+		String nextLine = null;
+		while ((nextLine = br.readLine()) != null){
+			jsonFileContent.append(nextLine);
+		}
+
+
+		Gson gson = new Gson();
+		//this is a require type definition by the Gson utility so Gson will 
+		//understand what kind of object representation should the json file match
+		Type type = new TypeToken<Collection<Like>>(){}.getType();
+		Collection<Like> likes = gson.fromJson(jsonFileContent.toString(), type);
+		//close
+		br.close();	
+		return likes;
+
+	}
+	private Collection<Review> loadreview(InputStream is) throws IOException{
+		
+		//wrap input stream with a buffered reader to allow reading the file line by line
+		BufferedReader br = new BufferedReader(new InputStreamReader(is));
+		StringBuilder jsonFileContent = new StringBuilder();
+		//read line by line from file
+		String nextLine = null;
+		while ((nextLine = br.readLine()) != null){
+			jsonFileContent.append(nextLine);
+		}
+
+
+		Gson gson = new Gson();
+		//this is a require type definition by the Gson utility so Gson will 
+		//understand what kind of object representation should the json file match
+		Type type = new TypeToken<Collection<Review>>(){}.getType();
+		Collection<Review> likes = gson.fromJson(jsonFileContent.toString(), type);
+		//close
+		br.close();	
+		return likes;
 
 	}
 }

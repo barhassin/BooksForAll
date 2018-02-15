@@ -9,18 +9,33 @@
 <script src="../lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </head>
  <body>
- <div ng-app="books" ng-controller="book">
-	<h1> {{bookName}}</h1>
-	<br>
-	<h2>{{bookAuthor}}</h2>
-	<!-- לשים תמונה של הספר בתוך מסגרת של IPAD -->
-	<p>{{price}}<p>
-	<h2> Description: </h2>
-	{{description}}
-	
-	
-</div>
+ 	<div ng-app="books" ng-controller="book">
+		<img src="../logo.gif" class="img-responsive block">
+			<div class="container" >
+				
+					<div class="row">
+					<h1> {{contnent}}{{bookName}}</h1>
+					<br>
+					<p>price: {{price}}<p>
+					<h2> Description: </h2>
+					<p>	{{description}}</p>
+					<img ng-src ={{image}} alt="image">
+					<p>{{numberOfLIKes}}</p>
+					<button ng-click="buy()" class="btn btn-success" ng-hide="PurchasedOrNot()">Buy me</button>		
 
-<script src="../js/temp.js"></script>
+					<button data-toggle="tooltip" data-placement="right"  title="{{likes}}" ng-click="like()"  class="btn btn-default"  ng-show="PurchasedOrNot()"  tooltip >
+					 <i style="color:blue"> {{numberOfLIKes}} </i> 
+					 <img ng-src= "{{likeimg}}" width="70" >
+					   </button>
+					  <!-- REVIEWS -->
+	
+   					 </div>
+    <!-- Populate Grid using ng repeat-->
+						</div>
+					   </div>
+					</div>
+					</div>
+		<script src="../js/temp.js"></script>
+	</div>
 </body>
 </html>
