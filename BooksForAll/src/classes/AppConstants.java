@@ -11,12 +11,14 @@ public interface AppConstants {
 		public final String BOOKS = "books";
 		public final String LIKES = "likes";
 		public final String REVIEWS = "reviews";
+		public final String PURCHASES = "purchases";
 		
 		public final String USERS_FILE = USERS + ".json";
 		public final String USERINFO_FILE = USERINFO + ".json";
 		public final String BOOKS_FILE = BOOKS + ".json";
 		public final String LIKES_FILE = LIKES + ".json";
 		public final String REVIEWS_FILE = REVIEWS + ".json";
+		public final String PURCHASES_FILE = PURCHASES + ".json";
 		
 		public final String USERNAME = "username";
 		public final Type BOOK_COLLECTION = new TypeToken<Collection<Book>>() {}.getType();
@@ -56,4 +58,8 @@ public interface AppConstants {
 				+ "nickname varchar(100), review varchar(100), approved varchar(100))";
 		public final String SELECT_REVIEWS_BY_BOOKNAME_STMT = "SELECT * FROM REVIEWS WHERE bookname=? AND approved=?";
 		public final String INSERT_REVIEWS_STMT = "INSERT INTO REVIEWS VALUES(?,?,?,?)";
+		public final String CREATE_PURCHASES_TABLE = "CREATE TABLE PURCHASES(username varchar(100),"
+				+ "bookname varchar(100), price varchar(100))";
+		public final String INSERT_PURCHASES_STMT = "INSERT INTO PURCHASES VALUES(?,?,?)";
+		public final String SELECT_PURCHASES_BY_USERNAME_STMT = "SELECT * FROM PURCHASES WHERE username=?";
 }

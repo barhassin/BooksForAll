@@ -183,7 +183,7 @@ app.controller('navbarAdminController', function($rootScope,$scope,$http,$window
 		$scope.changeViewPurchasesAd=false;
 		$scope.changeViewReviewsAd=false;
 		$rootScope.user="";
-		$scope.$parent.$parent.$parent.changeNavbar=false;
+		$scope.$parent.$parent.$parent.changeNavbarAdmin=false;
 		$scope.$parent.$parent.$parent.changeLogin=true;
 	}
 });

@@ -240,6 +240,42 @@ public class ManageUserDBFromJsonFile implements ServletContextListener {
     			//close statements
     			pstmt.close();
     		}
+    		
+    		boolean created6 = false;
+    		try{
+    			//create Users table
+    			Statement stmt = conn.createStatement();
+    			stmt.executeUpdate(AppConstants.CREATE_PURCHASES_TABLE);
+    			//commit update
+        		conn.commit();
+        		stmt.close();
+    		}catch (SQLException e){
+    			//check if exception thrown since table was already created (so we created the database already 
+    			//in the past
+    			created6 = tableAlreadyExists(e);
+    			if (!created6){
+    				throw e;//re-throw the exception so it will be caught in the
+    				//external try..catch and recorded as error in the log
+    			}
+    		}
+    		//if no database exist in the past - further populate its records in the table
+    		if (!created6){
+    			//populate customers table with customer data from json file
+    			Collection<Purchase> purchases = loadpurchase(cntx.getResourceAsStream(File.separator +
+    														   AppConstants.PURCHASES_FILE));
+    			PreparedStatement pstmt = conn.prepareStatement(AppConstants.INSERT_PURCHASES_STMT);
+    			for (Purchase purchase : purchases){
+    				pstmt.setString(1,purchase.getUsername());
+    				pstmt.setString(2,purchase.getBookname());
+    				pstmt.setString(3,purchase.getPrice());
+    				pstmt.executeUpdate();
+    			}
+
+    			//commit update
+    			conn.commit();
+    			//close statements
+    			pstmt.close();
+    		}
 
     		//close connection
     		conn.close();
@@ -380,10 +416,32 @@ public class ManageUserDBFromJsonFile implements ServletContextListener {
 		//this is a require type definition by the Gson utility so Gson will 
 		//understand what kind of object representation should the json file match
 		Type type = new TypeToken<Collection<Review>>(){}.getType();
-		Collection<Review> likes = gson.fromJson(jsonFileContent.toString(), type);
+		Collection<Review> reviews = gson.fromJson(jsonFileContent.toString(), type);
 		//close
 		br.close();	
-		return likes;
+		return reviews;
+
+	}
+private Collection<Purchase> loadpurchase(InputStream is) throws IOException{
+		
+		//wrap input stream with a buffered reader to allow reading the file line by line
+		BufferedReader br = new BufferedReader(new InputStreamReader(is));
+		StringBuilder jsonFileContent = new StringBuilder();
+		//read line by line from file
+		String nextLine = null;
+		while ((nextLine = br.readLine()) != null){
+			jsonFileContent.append(nextLine);
+		}
+
+
+		Gson gson = new Gson();
+		//this is a require type definition by the Gson utility so Gson will 
+		//understand what kind of object representation should the json file match
+		Type type = new TypeToken<Collection<Purchase>>(){}.getType();
+		Collection<Purchase> purchases = gson.fromJson(jsonFileContent.toString(), type);
+		//close
+		br.close();	
+		return purchases;
 
 	}
 }
