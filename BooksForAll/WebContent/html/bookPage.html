@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" name="viewport"
+	content="width=device-width, initial-scale=1">
+<title>Book page</title>
+<link rel="stylesheet" type="text/css"
+	href="../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<script src="../lib/jquery-3.2.1.js"></script>
+<script src="../lib/angular.min.js"></script>
+<script src="../lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div ng-app="books" ng-controller="book">
+		<img src="../logo.gif" class="img-responsive block">
+		<div class="container">
+			<div class="row">
+				<h1>{{contnent}}{{bookName}}</h1>
+				<br>
+				<p>price: {{price}}
+				<p>
+				<h2>Description:</h2>
+				<p>{{description}}</p>
+				<img ng-src={{image}} alt="image">
+				<button ng-click="buy()" class="btn btn-success"
+					ng-hide="PurchasedOrNot()">Buy me</button>
+				<button class="btn btn-default" ng-click="readBook()"
+									ng-show=PurchasedOrNot()>READ BOOK</button>
+				<button data-toggle="tooltip" data-placement="right"
+					title="{{likes}}" ng-click="like()" class="btn btn-default"
+					ng-show="PurchasedOrNot()" tooltip>
+					<i style="color: blue"> {{numberOfLIKes}} </i> <img
+						ng-src="{{likeimg}}" width="70">
+				</button>
+				<a>{{responseWait}}</a>
+				<div class="pre-scrollable">
+					<div class="panel-group">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+
+									<a data-toggle="collapse" href="#collapseReview"> SHOW
+										REVIEWS</a>
+								</h4>
+								<button class="btn btn-default" ng-click="ifButtonClicked()"
+									ng-disabled="!PurchasedOrNot()">ADD Review</button>
+								<button class="btn btn-default" ng-click="addReview()"
+									ng-show={{send}}>SEND</button>
+
+								<div class="form-group">
+									<label for="comment" ng-show={{send}}>Comment:</label>
+									<textarea class="form-control" rows="5" ng-show={{send}}
+										ng-model="$userEnterReview" id="comment"></textarea>
+								</div>
+								<div id="collapseReview" class="panel-collapse collapse">
+									<div ng-repeat="review in reviewsList ">
+										<div class="panel-group">
+											<div class="panel panel-default">
+												<div class="panel-heading">
+													<h4 class="panel-title">
+														<a data-toggle="collapse" href="#myButton{{$index}}">{{review.nickname}}</a>
+													</h4>
+												</div>
+												<div id="myButton{{$index}}" class="panel-collapse collapse">
+													{{review.nickame}}
+													<div class="panel-body">
+														<div class="col-xs-12">{{ review.review}}</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="../js/temp.js"></script>
+
+</body>
+</html>

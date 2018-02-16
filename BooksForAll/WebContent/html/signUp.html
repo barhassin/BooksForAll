@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" name="viewport"
 	content="width=device-width, initial-scale=1">
-<title>Login</title>
+<title>Sign Up</title>
 <link rel="stylesheet" type="text/css"href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 <script src="lib/jquery-3.2.1.js"></script>
 <script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
@@ -11,6 +11,8 @@
 </head>
 <body>
 <div ng-app="login" ng-controller="signUpController">
+<div ng-model="changeSignup" ng-init="changeSignup = true">
+	<div ng-if="changeSignup">
 <img src="logo.gif" class="img-responsive block">
 	<div class="container" >
 		<form name="myForm">
@@ -26,11 +28,10 @@
 							<div class="input-group">
 								<span class="input-group-addon">
 								<i class="glyphicon glyphicon-user"></i></span> 
-									<input type="text" class="form-control" ng-model="userName" name="userName" ng-maxlength="10" placeholder="Enter your User Name" required>
+									<input type="text" class="form-control" ng-model="$parent.userName" name="userName" ng-maxlength="10" placeholder="Enter your User Name" required>
 							</div>
 							<span style="color:red" ng-show="myForm.userName.$touched && myForm.userName.$invalid">The name is required.</span>
 							 <span style="color:red" ng-show="myForm.userName.$error.maxlength">Sorry, your username length should be up to 10 characters</span>
-							 <p>{{content}}</p>
 						</div>
 					</div>
 
@@ -40,7 +41,7 @@
 							<div class="input-group">
 								<span class="input-group-addon">
 									<i class="glyphicon glyphicon-envelope"></i></span> 
-									<input type="email" class="form-control" ng-model="email"  name="email" placeholder="Enter your Email" required>
+									<input type="email" class="form-control" ng-model="$parent.email"  name="email" placeholder="Enter your Email" required>
 							</div>
 							<span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
 							<span ng-show="myForm.email.$error.email">Invalid email address.</span>
@@ -55,7 +56,7 @@
 							<div class="input-group">
 								<span class="input-group-addon">
 									<i class="glyphicon glyphicon-lock"></i></span> 
-									<input type="password" class="form-control" ng-model="password" ng-maxlength="8" name="password" placeholder="Enter your Password"  required>
+									<input type="password" class="form-control" ng-model="$parent.Pass" ng-maxlength="8" name="password" placeholder="Enter your Password"  required>
 							</div>
 							<span style="color:red" ng-show="myForm.password.$error.maxlength">Sorry, your password length should be up to 8 characters</span>
 							      <span style="color:red" ng-show="myForm.password.$touched && myForm.password.$invalid"> password is required.</span> 
@@ -70,17 +71,17 @@
 							<span class="input-group-addon">
 								<i class="glyphicon glyphicon-home"></i></span>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" ng-model="Street" name="Street" ng-minlength="3" ng-pattern="lettersOnly" placeholder="Street" required>
+								<input type="text" class="form-control" ng-model="$parent.Street" name="Street" ng-minlength="3" ng-pattern="lettersOnly" placeholder="Street" required>
 							 </div>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" ng-model="StreetNumber" name="StreetNumber" ng-pattern="onlyNumbers" placeholder="Number" required>
+								<input type="text" class="form-control" ng-model="$parent.StreetNumber" name="StreetNumber" ng-pattern="onlyNumbers" placeholder="Number" required>
 							</div>
 							<div class="col-sm-4">
-								<input type="name" class="form-control" ng-model="City" name="City" ng-minlength="3" ng-pattern="lettersOnly" placeholder="City"required>
+								<input type="name" class="form-control" ng-model="$parent.City" name="City" ng-minlength="3" ng-pattern="lettersOnly" placeholder="City"required>
 								
 							</div>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" ng-model="Zipcode" name="Zipcode" ng-pattern="sevenNumbers" placeholder="zipcode"required>
+								<input type="text" class="form-control" ng-model="$parent.Zipcode" name="Zipcode" ng-pattern="sevenNumbers" placeholder="zipcode"required>
 								
 							</div>
 						</div>
@@ -108,7 +109,7 @@
 									<i class="glyphicon glyphicon-phone-alt"></i></span>
 									 <label class="sr-only" for="inlineFormInputGroup">telephone</label>
  												 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-									        <select class="form-control" ng-model="selected" id="sel1">
+									        <select class="form-control" ng-model="$parent.selected" id="sel1">
         									<option>02</option>
        									    <option>03</option>
    									        <option>04</option>
@@ -130,7 +131,7 @@
      										 </div>
      										   <label class="sr-only" for="inlineFormInputGroup">telephone</label>
  												 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-									<input type="text" class="form-control" ng-model="Telephone" name="Telephone" ng-pattern="sevenNumbers" placeholder="Enter your Telephone number" required>
+									<input type="text" class="form-control" ng-model="$parent.Telephone" name="Telephone" ng-pattern="sevenNumbers" placeholder="Enter your Telephone number" required>
 									
 							</div>
 							</div>
@@ -144,7 +145,7 @@
 							<div class="input-group">
 								<span class="input-group-addon">
 								<i class="glyphicon glyphicon-user"></i></span> 
-									<input type="text" class="form-control" ng-model="Nickname" name="Nickname" ng-maxlength="20" placeholder="Enter your Nickname" required>
+									<input type="text" class="form-control" ng-model="$parent.Nickname" name="Nickname" ng-maxlength="20" placeholder="Enter your Nickname" required>
 							</div>
 								<span style="color:red" ng-show="myForm.Nickname.$dirty && myForm.Nickname.$error.maxlength">
 								Sorry, your nickname length should be up to 20 characters</span>
@@ -156,7 +157,7 @@
 							<div class="input-group">
 							<span class="input-group-addon">
 									<i class="glyphicon glyphicon-comment"></i></span>
-									<input type="text" class="form-control" ng-model="Description" name="Description" ng-maxlength="50" placeholder="Enter short description about yourself " />
+									<input type="text" class="form-control" ng-model="$parent.Description" name="Description" ng-maxlength="50" placeholder="Enter short description about yourself " />
 							</div>
 								<span style="color:red" ng-show="myForm.Description.$dirty && myForm.Description.$error.maxlength">
 								Sorry, your Description length should be up to 50 characters</span>
@@ -168,7 +169,7 @@
 							<div class="input-group">
 								<span class="input-group-addon">
 									<i class="glyphicon glyphicon-picture"></i></span>
-									 <input type="file" class="form-control" ng-model="photo" name="photo" placeholder="Upload your photo" />
+									 <input type="text" class="form-control" ng-model="$parent.photo" name="photo" placeholder="Upload your photo" />
 									
 							</div>
 						</div>
@@ -181,6 +182,13 @@
 			</div>
 		</div>
 		</form>
+	</div>
+	</div>
+	</div>
+	<div ng-model="changeNavbar" ng-init="changeNavbar = false">
+	<div ng-if="changeNavbar">
+	<div ng-include="'html/navbar.html'"></div>
+	</div>
 	</div>
 	</div>
 	<script src="js/index.js"></script>

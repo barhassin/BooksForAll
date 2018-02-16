@@ -7,11 +7,19 @@ import com.google.gson.reflect.TypeToken;
 
 public interface AppConstants {
 		public final String USERS = "users";
-		public final String USERINFO = "users";
+		public final String USERINFO = "userinfo";
+		public final String BOOKS = "books";
+		public final String LIKES = "likes";
+		public final String REVIEWS = "reviews";
+		
 		public final String USERS_FILE = USERS + ".json";
 		public final String USERINFO_FILE = USERINFO + ".json";
+		public final String BOOKS_FILE = BOOKS + ".json";
+		public final String LIKES_FILE = LIKES + ".json";
+		public final String REVIEWS_FILE = REVIEWS + ".json";
+		
 		public final String USERNAME = "username";
-		public final Type USER_COLLECTION = new TypeToken<Collection<User>>() {}.getType();
+		public final Type BOOK_COLLECTION = new TypeToken<Collection<Book>>() {}.getType();
 		//derby constants
 		public final String DB_NAME = "DB_NAME";
 		public final String DB_DATASOURCE = "DB_DATASOURCE";
@@ -20,13 +28,33 @@ public interface AppConstants {
 		public final String SHUTDOWN = "Shutdown";
 		
 		//sql statements
-		public final String CREATE_USERS_TABLE = "CREATE TABLE USERS(Username varchar(100),"
-				+ "Password varchar(100)," + "Type varchar(100))";
-		public final String CREATE_USERINFO_TABLE = "CREATE TABLE USERINFO(Username varchar(100),"
-				+ "Email varchar(100)," + "Street varchar(100),"+ "streetNumber varchar(100)," + "City varchar(100),"+ "Zipcode varchar(100)," + "Telephone varchar(100),"+ "Nickname varchar(100)," + "Description varchar(100)," + "Photo varchar(100))";
+		public final String CREATE_USERS_TABLE = "CREATE TABLE USERS(username varchar(100),"
+				+ "password varchar(100)," + "type varchar(100))";
+		public final String CREATE_USERINFO_TABLE = "CREATE TABLE USERINFO(username varchar(100),"
+				+ "email varchar(100)," + "street varchar(100),"+ "streetnumber varchar(100)," + "city varchar(100),"+ "zipcode varchar(100)," + "telephone varchar(100),"+ "nickname varchar(100)," + "description varchar(100)," + "photo varchar(100))";
 		public final String INSERT_USER_STMT = "INSERT INTO USERS VALUES(?,?,?)";
 		public final String INSERT_USERINFO_STMT = "INSERT INTO USERINFO VALUES(?,?,?,?,?,?,?,?,?,?)";
 		public final String SELECT_ALL_USERS_STMT = "SELECT * FROM USERS";
 		public final String SELECT_USER_BY_USERNAME_STMT = "SELECT * FROM USERS "
-				+ "WHERE Username=?";
+				+ "WHERE username=?";
+		public final String SELECT_USERINFO_BY_USERNAME_STMT = "SELECT * FROM USERINFO "
+				+ "WHERE username=?";
+		public final String CREATE_BOOKS_TABLE = "CREATE TABLE BOOKS(name varchar(100),"
+				+ "image varchar(100), description varchar(100), price varchar(100))";
+		public final String SELECT_ALL_BOOKS_STMT = "SELECT * FROM BOOKS";
+		public final String INSERT_BOOK_STMT = "INSERT INTO BOOKS VALUES(?,?,?,?)";
+		public final String SELECT_BOOKS_BY_USERNAME_STMT = "SELECT * FROM USERS "
+				+ "WHERE username=?";
+		public final String SELECT_BOOKS_BY_BOOKNAME_STMT = "SELECT * FROM BOOKS WHERE name=?";
+		public final String CREATE_LIKES_TABLE = "CREATE TABLE LIKES(bookname varchar(100),"
+				+ "username varchar(100))";
+		public final String SELECT_ALL_LIKES_STMT = "SELECT * FROM LIKES";
+		public final String INSERT_LIKES_STMT = "INSERT INTO LIKES VALUES(?,?)";
+		public final String SELECT_LIKES_BY_BOOKNAME_STMT = "SELECT * FROM LIKES WHERE bookname=?";
+		public final String DELETE_LIKES_BY_BOOKNAME_AND_USERNAME_STMT = "DELETE * FROM LIKES "
+				+ "WHERE bookname=?" + "WHERE username=?";
+		public final String CREATE_REVIEWS_TABLE = "CREATE TABLE REVIEWS(bookname varchar(100),"
+				+ "nickname varchar(100), review varchar(100), approved varchar(100))";
+		public final String SELECT_REVIEWS_BY_BOOKNAME_STMT = "SELECT * FROM REVIEWS WHERE bookname=? AND approved=?";
+		public final String INSERT_REVIEWS_STMT = "INSERT INTO REVIEWS VALUES(?,?,?,?)";
 }
