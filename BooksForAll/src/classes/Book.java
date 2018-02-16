@@ -9,7 +9,6 @@ public class Book {
 		description = _description; 
 		price = _price;
 	}
-
 	public String getName() {
 		return name;
 	}
