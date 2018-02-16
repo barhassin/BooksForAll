@@ -11,8 +11,6 @@
 </head>
 <body>
 <div ng-app="login" ng-controller="signUpController">
-<div ng-model="changeSignup" ng-init="changeSignup = true">
-	<div ng-if="changeSignup">
 <img src="logo.gif" class="img-responsive block">
 	<div class="container" >
 		<form name="myForm">
@@ -182,13 +180,6 @@
 			</div>
 		</div>
 		</form>
-	</div>
-	</div>
-	</div>
-	<div ng-model="changeNavbar" ng-init="changeNavbar = false">
-	<div ng-if="changeNavbar">
-	<div ng-include="'html/navbar.html'"></div>
-	</div>
 	</div>
 	</div>
 	<script src="js/index.js"></script>

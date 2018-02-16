@@ -13,11 +13,13 @@ var app = angular.module('login', []);
 		$http.post("http://localhost:8080/BooksForAll/login", parameter)
 		.then(function(response) {
 			$rootScope.user=usr;
+			$scope.username="";
+			$scope.password="";
 			$scope.changeLogin=false;
 			if(response.data.type=="user")
-				$scope.$parent.changeNavbar=true;
+				$scope.changeNavbar=true;
 			else
-				$scope.$parent.changeNavbarAdmin=true;
+				$scope.changeNavbarAdmin=true;
 		}, function(response) {
 			var status = response.status;
 			if(status=="405"){
@@ -33,7 +35,7 @@ var app = angular.module('login', []);
 	};
 	$scope.signup = function(){
 		$scope.changeLogin=false;
-		$scope.$parent.changeSignup=true;
+		$scope.changeSignup=true;
 	}
 });
 app.controller('welcomeController', function($rootScope,$scope,$http,$window) {
@@ -63,12 +65,12 @@ app.controller('navbarController', function($rootScope,$scope,$http,$window) {
 		$('a[ng-click="browseBooks()"]').closest('li').addClass('active');
 	}
 	$scope.logout = function(){
-		$scope.changeNavbar=false;
 		$scope.changeWelcome=false;
 		$scope.changeMyBooks=false;
 		$scope.changeBrowseBooks=false;
-		$scope.changeLogout=true;
 		$rootScope.user="";
+		$scope.$parent.$parent.$parent.changeNavbar=false;
+		$scope.$parent.$parent.$parent.changeLogin=true;
 	}
 });
 app.controller('browseBooksController', function($rootScope,$scope,$http,$window) {
@@ -106,8 +108,19 @@ app.controller('signUpController', function($rootScope,$scope,$http,$window) {
 		$http.post("http://localhost:8080/BooksForAll/signUp",parameter)
 		.then(function(response) {
 			$rootScope.user=response.data.username;
-			$scope.changeSignup = false;
-			$scope.changeNavbar = true;
+			$scope.userName="";
+			$scope.Pass="";
+			$scope.email="";
+			$scope.Street="";
+			$scope.StreetNumber="";
+			$scope.City="";
+			$scope.Zipcode="";
+			$scope.selected="";
+			$scope.Telephone="";
+			$scope.Nickname="";
+			$scope.Description="";
+			$scope.$parent.changeSignup = false;
+			$scope.$parent.changeNavbar = true;
 		}, function(response) {
 			var status = response.status;
 			if(status=="410")
@@ -123,7 +136,6 @@ app.controller('navbarAdminController', function($rootScope,$scope,$http,$window
 		$scope.changeBrowseBooksAd=false;
 		$scope.changeViewPurchasesAd=false;
 		$scope.changeViewReviewsAd=false;
-		$scope.changeLogoutAd=false;
 		$('li.active').removeClass('active');
 		$('a[ng-click="welcome()"]').closest('li').addClass('active');
 	}
@@ -132,8 +144,7 @@ app.controller('navbarAdminController', function($rootScope,$scope,$http,$window
 		$scope.changeViewUsersAd=true;
 		$scope.changeBrowseBooksAd=false;
 		$scope.changeViewPurchasesAd=false;
-		$scope.changeLogoutAd=false;
-		$scope.changeLogoutAd=false;
+		$scope.changeViewReviewsAd=false;
 		$('li.active').removeClass('active');
 		$('a[ng-click="viewUsers()"]').closest('li').addClass('active');
 	}
@@ -142,8 +153,7 @@ app.controller('navbarAdminController', function($rootScope,$scope,$http,$window
 		$scope.changeViewUsersAd=false;
 		$scope.changeBrowseBooksAd=true;
 		$scope.changeViewPurchasesAd=false;
-		$scope.changeLogoutAd=false;
-		$scope.changeLogoutAd=false;
+		$scope.changeViewReviewsAd=false;
 		$('li.active').removeClass('active');
 		$('a[ng-click="browseBooks()"]').closest('li').addClass('active');
 	}
@@ -153,7 +163,6 @@ app.controller('navbarAdminController', function($rootScope,$scope,$http,$window
 		$scope.changeBrowseBooksAd=false;
 		$scope.changeViewPurchasesAd=true;
 		$scope.changeViewReviewsAd=false;
-		$scope.changeLogoutAd=false;
 		$('li.active').removeClass('active');
 		$('a[ng-click="viewPurchases()"]').closest('li').addClass('active');
 	}
@@ -163,19 +172,18 @@ app.controller('navbarAdminController', function($rootScope,$scope,$http,$window
 		$scope.changeBrowseBooksAd=false;
 		$scope.changeViewPurchasesAd=false;
 		$scope.changeViewReviewsAd=true;
-		$scope.changeLogoutAd=false;
 		$('li.active').removeClass('active');
 		$('a[ng-click="viewReviews()"]').closest('li').addClass('active');
 	}
 	$scope.logout = function(){
-		$scope.changeNavbarAd=false;
 		$scope.changeWelcomeAd=false;
 		$scope.changeViewUsersAd=false;
 		$scope.changeMyBooksAd=false;
 		$scope.changeBrowseBooksAd=false;
 		$scope.changeViewPurchasesAd=false;
 		$scope.changeViewReviewsAd=false;
-		$scope.changeLogoutAd=true;
 		$rootScope.user="";
+		$scope.$parent.$parent.$parent.changeNavbar=false;
+		$scope.$parent.$parent.$parent.changeLogin=true;
 	}
 });
