@@ -55,6 +55,6 @@ public interface AppConstants {
 				+ "WHERE bookname=?" + "WHERE username=?";
 		public final String CREATE_REVIEWS_TABLE = "CREATE TABLE REVIEWS(bookname varchar(100),"
 				+ "nickname varchar(100), review varchar(100), approved varchar(100))";
-		public final String SELECT_REVIEWS_BY_BOOKNAME_STMT = "SELECT * FROM REVIEWS WHERE bookname=? WHERE approved=?";
+		public final String SELECT_REVIEWS_BY_BOOKNAME_STMT = "SELECT * FROM REVIEWS WHERE bookname=? AND approved=?";
 		public final String INSERT_REVIEWS_STMT = "INSERT INTO REVIEWS VALUES(?,?,?,?)";
 }

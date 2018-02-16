@@ -1,3 +1,5 @@
 [ { "bookname" : "Peter Poodle, by William Henry Bradley, A Project Gutenberg eBook", "nickname" : "user the man", "review" : "Book", "approved" : "yes"},
-  { "bookname" : "The Project Gutenberg eBook of Patty’s Pleasure Trip, by Carolyn Wells", "nickname" : "user the man", "review" : "Book", "approved" : "yes"}
-]
+  { "bookname" : "Peter Poodle, by William Henry Bradley, A Project Gutenberg eBook", "nickname" : "user the king", "review" : "very nice book", "approved" : "yes"}, { "bookname" : "Peter Poodle, by William Henry Bradley, A Project Gutenberg eBook", "nickname" : "user the man", "review" : "Book", "approved" : "yes"},
+  { "bookname" : "Peter Poodle, by William Henry Bradley, A Project Gutenberg eBook", "nickname" : "user the king", "review" : "very nice book", "approved" : "yes"}, { "bookname" : "Peter Poodle, by William Henry Bradley, A Project Gutenberg eBook", "nickname" : "user the man", "review" : "Book", "approved" : "yes"},
+  { "bookname" : "Peter Poodle, by William Henry Bradley, A Project Gutenberg eBook", "nickname" : "user the king", "review" : "very nice book", "approved" : "yes"}, { "bookname" : "Peter Poodle, by William Henry Bradley, A Project Gutenberg eBook", "nickname" : "user the man", "review" : "Book", "approved" : "yes"},
+  { "bookname" : "Peter Poodle, by William Henry Bradley, A Project Gutenberg eBook", "nickname" : "user the king", "review" : "very nice book", "approved" : "yes"}]

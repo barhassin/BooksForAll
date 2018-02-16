@@ -16,6 +16,7 @@ app.directive('tooltip', function(){
 app.controller('book', function($rootScope,$scope,$http,$window){
 	$scope.numberOfLIKes=0;
 	$scope.likeimg="../images/like.png";
+	$scope.send=false;
 	//$scope.bookname = $rootScope.bookname;
 	//$scope.username = $rootScope.username;
 	//var usr=$scope.username;
@@ -43,20 +44,25 @@ app.controller('book', function($rootScope,$scope,$http,$window){
 		$scope.likes=nickNames;
 		$scope.numberOfLIKes=$scope.userInfolist.length;
 	}, function(){});
-
+//-----------------Browse book details-----------------------
 	$http.post("http://localhost:8080/BooksForAll/BrowseBookByNameServlet",boookoko)
 	.then(function(response) {
 		$scope.price = response.data.price;
 		$scope.description = response.data.description;
 		$scope.image= "../books/" + response.data.name + "_files/" + response.data.image + "";
 	}, function(){});
-
+	//-----------------Browse reviews -----------------------
+	$http.post("http://localhost:8080/BooksForAll/BrowseReviewsByBookServlet",boookoko)
+	.then(function(response) {
+		$scope.reviewsList = response.data;
+	}, function(){});
+	
+	
 	$scope.buy = function(){
 		
 	}
-	//var like=false;
+	//-----------------Add like-----------------------
 	$scope.like = function(){
-		//if(!like){
 			$http.post("http://localhost:8080/BooksForAll/addLikeServlet",parameter)
 			.then(function(response) {
 				$scope.userInfolist = response.data;
@@ -71,8 +77,22 @@ app.controller('book', function($rootScope,$scope,$http,$window){
 				$scope.likes=nickNames;
 				$scope.numberOfLIKes=$scope.userInfolist.length;
 			},function(){});
-		//}
-		//else{
-		//}
+	}
+//-------------------Add review----------------------
+	$scope.ifButtonClicked = function(){
+		$scope.send=!$scope.send;
+	}
+	$scope.addReview = function(){
+		var userReview=$scope.$userEnterReview;
+		var reviewJson = JSON.stringify({bookname:bookname, nickname:"", review:userReview, approved:"no"});
+		$http.post("http://localhost:8080/BooksForAll/AddReviewsServlet",reviewJson)
+		.then(function(response) {
+			$scope.responseWait = "Thanks for your response, your response is awaiting for approval";},
+			function(){});
+	}
+//-----------------Read book-------------------------
+	$scope.readBook = function(){
+	
 	}
 });
+
