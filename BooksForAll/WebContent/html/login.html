@@ -39,7 +39,6 @@
     </div>
     </div>
     </div>
-    </div>
     <div ng-model="changeSignup" ng-init="changeSignup = false">
     	<div ng-if="changeSignup">
     		<div ng-include="'html/signUp.html'"></div>
@@ -48,6 +47,11 @@
   	<div ng-model="changeNavbar" ng-init="changeNavbar = false">
 		<div ng-if="changeNavbar">
 			<div ng-include="'html/navbar.html'"></div>
+  		</div>
+  	</div>
+  	<div ng-model="changeNavbarAdmin" ng-init="changeNavbarAdmin = false">
+		<div ng-if="changeNavbarAdmin">
+			<div ng-include="'html/navbarAdmin.html'"></div>
   		</div>
   	</div>
   	</div>

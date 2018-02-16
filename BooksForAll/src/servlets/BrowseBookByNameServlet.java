@@ -73,7 +73,7 @@ public class BrowseBookByNameServlet extends HttpServlet {
     		PreparedStatement stmt;
     		
     			try {
-    				stmt = conn.prepareStatement(AppConstants.SELECT_BOOKS_BY_BOOKNAME_STMT);
+    				stmt = conn.prepareStatement(AppConstants.SELECT_BOOKS_BY_NAME_STMT);
     				stmt.setString(1, book.getName());
     				ResultSet rs = stmt.executeQuery();
     				if(rs.next()) {

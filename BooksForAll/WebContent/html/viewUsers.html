@@ -9,9 +9,9 @@
 <script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<div ng-app="login" ng-controller="browseBooksController">
-	<div ng-model="changeBrowse" ng-init="changeBrowse = true">
-	<div ng-if="changeBrowse">
+	<div ng-app="login" ng-controller="viewUsersController">
+	<div ng-model="viewUsers" ng-init="viewUsers = true">
+	<div ng-if="viewUsers">
 		<div ng-repeat="x in bookslist">
 		<div class="panel panel-default">
   			<div class="panel-heading">{{x.name}}</div>

@@ -10,8 +10,6 @@
 </head>
 <body>
 <div ng-app="login" ng-controller="navbarController">
-<div ng-model="changeNavbar" ng-init="changeNavbar = true">
-	<div ng-if="changeNavbar">
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -28,8 +26,6 @@
     </ul>
   </div>
 </nav>
-</div>
-</div>
 <div ng-model="changeWelcome" ng-init="changeWelcome = true">
 	<div ng-if="changeWelcome">
 	<div ng-include="'html/welcome.html'"></div>
@@ -43,11 +39,6 @@
 <div ng-model="changeBrowseBooks" ng-init="changeBrowseBooks = false">
 	<div ng-if="changeBrowseBooks">
 	<div ng-include="'html/browseBooks.html'"></div>
-	</div>
-</div>
-<div ng-model="changeLogout" ng-init="changeLogout = false">
-	<div ng-if="changeLogout">
-	<div ng-include="'html/login.html'"></div>
 	</div>
 </div>
 </div>

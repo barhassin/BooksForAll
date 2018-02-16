@@ -43,9 +43,8 @@ public interface AppConstants {
 				+ "image varchar(100), description varchar(100), price varchar(100))";
 		public final String SELECT_ALL_BOOKS_STMT = "SELECT * FROM BOOKS";
 		public final String INSERT_BOOK_STMT = "INSERT INTO BOOKS VALUES(?,?,?,?)";
-		public final String SELECT_BOOKS_BY_USERNAME_STMT = "SELECT * FROM USERS "
-				+ "WHERE username=?";
-		public final String SELECT_BOOKS_BY_BOOKNAME_STMT = "SELECT * FROM BOOKS WHERE name=?";
+		public final String SELECT_BOOKS_BY_NAME_STMT = "SELECT * FROM BOOKS "
+				+ "WHERE name=?";
 		public final String CREATE_LIKES_TABLE = "CREATE TABLE LIKES(bookname varchar(100),"
 				+ "username varchar(100))";
 		public final String SELECT_ALL_LIKES_STMT = "SELECT * FROM LIKES";
