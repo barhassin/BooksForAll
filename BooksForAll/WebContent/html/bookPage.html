@@ -5,17 +5,18 @@
 	content="width=device-width, initial-scale=1">
 <title>Book page</title>
 <link rel="stylesheet" type="text/css"
-	href="../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
-<script src="../lib/jquery-3.2.1.js"></script>
-<script src="../lib/angular.min.js"></script>
-<script src="../lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+	href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<script src="lib/jquery-3.2.1.js"></script>
+<script src="lib/angular.min.js"></script>
+<script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<div ng-app="books" ng-controller="book">
-		<img src="../logo.gif" class="img-responsive block">
+	<div ng-app="login" ng-controller="book">
+	<div ng-model="changeBookPage" ng-init="changeBookPage = true">
+	<div ng-if="changeBookPage">
 		<div class="container">
 			<div class="row">
-				<h1>{{contnent}}{{bookName}}</h1>
+				<h1>{{bookName}}</h1>
 				<br>
 				<p>price: {{price}}
 				<p>
@@ -25,7 +26,7 @@
 				<button ng-click="buy()" class="btn btn-success"
 					ng-hide="PurchasedOrNot()">Buy me</button>
 				<button class="btn btn-default" ng-click="readBook()"
-									ng-show=PurchasedOrNot()>READ BOOK</button>
+									ng-show=PurchasedOrNot()>Read Book</button>
 				<button data-toggle="tooltip" data-placement="right"
 					title="{{likes}}" ng-click="like()" class="btn btn-default"
 					ng-show="PurchasedOrNot()" tooltip>
@@ -39,13 +40,13 @@
 							<div class="panel-heading">
 								<h4 class="panel-title">
 
-									<a data-toggle="collapse" href="#collapseReview"> SHOW
-										REVIEWS</a>
+									<a data-toggle="collapse" href="#collapseReview"> Show
+										Reviews</a>
 								</h4>
 								<button class="btn btn-default" ng-click="ifButtonClicked()"
-									ng-disabled="!PurchasedOrNot()">ADD Review</button>
+									ng-disabled="!PurchasedOrNot()">Add Review</button>
 								<button class="btn btn-default" ng-click="addReview()"
-									ng-show={{send}}>SEND</button>
+									ng-show={{send}}>Send</button>
 
 								<div class="form-group">
 									<label for="comment" ng-show={{send}}>Comment:</label>
@@ -64,7 +65,7 @@
 												<div id="myButton{{$index}}" class="panel-collapse collapse">
 													{{review.nickame}}
 													<div class="panel-body">
-														<div class="col-xs-12">{{ review.review}}</div>
+														<div class="col-xs-12">{{review.review}}</div>
 													</div>
 												</div>
 											</div>
@@ -77,8 +78,15 @@
 				</div>
 			</div>
 		</div>
+		</div>
+		</div>
+		<div ng-model="changeBuyBook" ng-init="changeBuyBook = false">
+		<div ng-if="changeBuyBook">
+		<div ng-include="'html/buyBook.html'"></div>
 	</div>
-	<script src="../js/temp.js"></script>
+	</div>	
+	</div>
+	<script src="js/index.js"></script>
 
 </body>
 </html>
