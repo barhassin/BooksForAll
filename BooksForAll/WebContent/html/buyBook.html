@@ -1,10 +1,95 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="windows-1255">
-<title>Insert title here</title>
+<meta charset="utf-8" name="viewport"
+	content="width=device-width, initial-scale=1">
+<title>payment</title>
+<link rel="stylesheet" type="text/css" href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<script src="lib/jquery-3.2.1.js"></script>
+<script src="lib/angular.min.js"></script>
+<script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </head>
 <body>
+	<div ng-app="login" ng-controller="payment">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-md-4">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Payment Details</h3>
+						</div>
+						<div class="panel-body">
+							<form name="myForm">
+								<div class="form-group">
+									<label >Credit card</label>
+									<div class="credit_card">
+											<input type="radio" ng-model="card" name="creditcard" value="amex">  <img src="images/Amex.png">
+											<br>
+											<br>
+											<input type="radio" ng-model="card" name="creditcard" value="visa">  <img src="images/visa.jpg">
+										
+									</div>
+									<br>
+									<div class="row">
+										<div class="col-xs-7 col-md-7">
+											<div class="form-group">
+												<label for="cardNumber"> CARD NUMBER</label> <input
+													type="text" class="form-control" id="cardNumber"
+													placeholder="Valid Card Number" required>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xs-7 col-md-7">
+										<div class="form-group">
+											<label for="expityMonth"> EXPIRY DATE</label>
+											<div class="col-xs-6 col-lg-6 pl-ziro">
+												<input type="text" class="form-control" id="Month"
+													placeholder="MM" required>
+											</div>
+											<div class="col-xs-6 col-lg-6 pl-ziro">
+												<input type="text" class="form-control" id="Year"
+													placeholder="YY" required>
+											</div>
+										</div>
+									</div>
+									<div class="col-xs-5 col-md-5 pull-right">
+										<div class="form-group">
+											<label for="cvc"> CVV</label> <input type="password"
+												class="form-control" id="cvv" name="cvv" ng-pattern="threeNumbers" placeholder="CVV" required>
+												<!-- CCV validation  -->
+												
+													<span style="color:red" ng-show="myForm.cvv.$error.pattern && myForm.cvv.$touched">cvv contain 3 digits.<br></span>
+													<span style="color:red" ng-show="myForm.cvv.$error.required && myForm.cvv.$touched">  cvv is required.<br></span>
+										</div>
+									</div>
+								</div>
+								<br>
+							<label>   PRICE: {{price}}$</label>
+							</form>
+						</div>
+					</div>
+					 <button class="btn btn-success btn-lg btn-block" ng-click="submitPaymet">Pay</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="js/index.js"></script>
+	<script >
+	app.controller('payment', function($rootScope,$scope,$http,$window) {
+		//$scope.price = $rootscope.bookPrice;
+		$scope.threeNumbers = /^[0-9]{3}$/;
+		$scope.twoNumbers = /^[0-9][0-9]$/;
+		$scope.lettersOnly =/^[a-zA-Z ]{1,100}$/;
+		$scope.amexValidation = /^[3][4][0-9]{13}$/;
+		$scope.amexValidation = /^[4][0-9]{15}$/;
 
+		$scope.submitPaymet=function(){
+			
+		}
+	});
+	</script>
+	
 </body>
 </html>
