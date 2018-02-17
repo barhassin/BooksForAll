@@ -1,5 +1,8 @@
 [ { "bookname" : "Peter Poodle, by William Henry Bradley, A Project Gutenberg eBook", "nickname" : "user the man", "review" : "Book", "approved" : "yes"},
-  { "bookname" : "Peter Poodle, by William Henry Bradley, A Project Gutenberg eBook", "nickname" : "user the king", "review" : "very nice book", "approved" : "yes"}, { "bookname" : "Peter Poodle, by William Henry Bradley, A Project Gutenberg eBook", "nickname" : "user the man", "review" : "Book", "approved" : "yes"},
-  { "bookname" : "Peter Poodle, by William Henry Bradley, A Project Gutenberg eBook", "nickname" : "user the king", "review" : "very nice book", "approved" : "yes"}, { "bookname" : "Peter Poodle, by William Henry Bradley, A Project Gutenberg eBook", "nickname" : "user the man", "review" : "Book", "approved" : "yes"},
-  { "bookname" : "Peter Poodle, by William Henry Bradley, A Project Gutenberg eBook", "nickname" : "user the king", "review" : "very nice book", "approved" : "yes"}, { "bookname" : "Peter Poodle, by William Henry Bradley, A Project Gutenberg eBook", "nickname" : "user the man", "review" : "Book", "approved" : "yes"},
+  { "bookname" : "Peter Poodle, by William Henry Bradley, A Project Gutenberg eBook", "nickname" : "user the king", "review" : "very nice book", "approved" : "yes"},
+  { "bookname" : "Peter Poodle, by William Henry Bradley, A Project Gutenberg eBook", "nickname" : "user the man", "review" : "Book", "approved" : "yes"},
+  { "bookname" : "Peter Poodle, by William Henry Bradley, A Project Gutenberg eBook", "nickname" : "user the king", "review" : "very nice book", "approved" : "yes"},
+  { "bookname" : "Peter Poodle, by William Henry Bradley, A Project Gutenberg eBook", "nickname" : "user the man", "review" : "Book", "approved" : "yes"},
+  { "bookname" : "Peter Poodle, by William Henry Bradley, A Project Gutenberg eBook", "nickname" : "user the king", "review" : "very nice book", "approved" : "yes"},
+  { "bookname" : "Peter Poodle, by William Henry Bradley, A Project Gutenberg eBook", "nickname" : "user the man", "review" : "Book", "approved" : "yes"},
   { "bookname" : "Peter Poodle, by William Henry Bradley, A Project Gutenberg eBook", "nickname" : "user the king", "review" : "very nice book", "approved" : "yes"}]

@@ -25,7 +25,6 @@ import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
 import com.google.gson.Gson;
 
-import classes.loginValidator;
 import classes.AppConstants;
 import classes.User;
 

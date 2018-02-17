@@ -1,40 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8" name="viewport"
+	content="width=device-width, initial-scale=1">
 <title>Browse Books</title>
-<link rel="stylesheet" type="text/css" href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 <script src="lib/jquery-3.2.1.js"></script>
 <script src="lib/angular.min.js"></script>
 <script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<div ng-app="login" ng-controller="viewUsersController">
-	<div ng-model="viewUsers" ng-init="viewUsers = true">
-	<div ng-if="viewUsers">
-		<div ng-repeat="x in bookslist">
-		<div class="panel panel-default">
-  			<div class="panel-heading">{{x.name}}</div>
-  			<div class="row">
-  			<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-  			<div class="panel-body">	
-  			<img src="books/{{x.name}}_files/{{x.image}}" alt="" class="img-responsive center-block" /> 
-  			<p>Description: {{x.description}}</p>
-  			<p>Price: {{x.price}}$</p>
-  			<button ng-click="toBook(x.name)" class="btn btn-primary pull-right">more</button>
-  			</div>
-  			</div>
-  			</div>
+		<div ng-model="changeViewUsers" ng-init="changeViewUsers = true">
+			<div ng-if="changeViewUsers">
+				<div class="container">
+					<input class="form-control" id="myInput" type="text"
+						placeholder="Search.."> <br>
+					<ul class="list-group" id="myList">
+						<li ng-repeat="x in userlist" class="list-group-item"><button
+								ng-click="viewUser(x.username)" class="btn btn-link">{{x.username}}</button></li>
+					</ul>
+				</div>
+			</div>
 		</div>
+		<div ng-model="changeUserPage" ng-init="changeUserPage = false">
+			<div ng-if="changeUserPage">
+				<div ng-include="'html/userPage.html'"></div>
+			</div>
 		</div>
-		</div>
-		</div>
-	<div ng-model="changeBook" ng-init="changeBook = false">
-	<div ng-if="changeBook">
-	<div ng-include="'html/welcome.html'"></div>
 	</div>
-	</div>
-	</div>
-<script src="js/index.js"></script>
+	<script src="js/index.js"></script>
 </body>
 </html>
