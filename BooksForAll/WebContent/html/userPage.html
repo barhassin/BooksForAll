@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+<title>userPage</title>
+<link rel="stylesheet" type="text/css" href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<script src="lib/jquery-3.2.1.js"></script>
+<script src="lib/angular.min.js"></script>
+<script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div ng-app="login" ng-controller="userPageController">
+<hr>
+  <div class="media">
+    <div class="media-left media-middle">
+      <img ng-src="images/{{userDetails.image}}" class="media-object" style="width:80px">
+    </div>
+    <div class="media-body">
+      <h2 class="media-heading">{{userDetails.username}}</h2>
+      <h4>Nickname: {{userDetails.nickname}}</h4>
+      <h4>Address: {{userDetails.street}} {{userDetails.streetnumber}}, {{userDetails.city}}</h4>
+      <h4>Zipcode: {{userDetails.zipcode}}</h4>
+      <h4>Telephone: {{userDetails.telephone}}</h4>
+      <h4>Email: {{userDetails.email}}</h4>
+      <h4>Description: {{userDetails.description}}</h4>
+      <button ng-click="removeUser()" class="btn btn-primary pull-right">Delete User</button>
+    </div>
+  </div>
+</div>
+<script src="js/index.js"></script>
+</body>
+</html>

@@ -85,7 +85,17 @@ app.controller('browseBooksController', function($rootScope,$scope,$http,$window
 	}, function(){});
 });
 app.controller('myBooksController', function($rootScope,$scope,$http,$window) {
-	 
+	$scope.toMyBook = function(param){
+		$rootScope.chosenBook=param;
+		$scope.changeMyBooks=false;
+		$scope.changeBook=true;
+	};
+	var usr = $rootScope.user;
+	var parameter = JSON.stringify({username:usr, password:"", type:""});
+	$http.post("http://localhost:8080/BooksForAll/myBooksServlet", parameter)
+	.then(function(response) {
+		$scope.mybookslist = response.data;
+	}, function(){});
 });
 app.controller('signUpController', function($rootScope,$scope,$http,$window) {
 	 //input validation//
@@ -119,8 +129,8 @@ app.controller('signUpController', function($rootScope,$scope,$http,$window) {
 			$scope.Telephone="";
 			$scope.Nickname="";
 			$scope.Description="";
-			$scope.$parent.changeSignup = false;
-			$scope.$parent.changeNavbar = true;
+			$scope.$parent.$parent.$parent.changeSignup = false;
+			$scope.$parent.$parent.$parent.changeNavbar = true;
 		}, function(response) {
 			var status = response.status;
 			if(status=="410")
@@ -183,7 +193,7 @@ app.controller('navbarAdminController', function($rootScope,$scope,$http,$window
 		$scope.changeViewPurchasesAd=false;
 		$scope.changeViewReviewsAd=false;
 		$rootScope.user="";
-		$scope.$parent.$parent.$parent.changeNavbar=false;
+		$scope.$parent.$parent.$parent.changeNavbarAdmin=false;
 		$scope.$parent.$parent.$parent.changeLogin=true;
 	}
 });
@@ -209,7 +219,7 @@ app.controller('book', function($rootScope,$scope,$http,$window){
 	var bookname = $scope.bookname;
 	var parameter = JSON.stringify({username:usr,bookname:bookname});
 	$scope.PurchasedOrNot=function(){
-		return false;
+		return true;
 	}
 	var bookparameter = JSON.stringify({name:bookname, image:"", description:"",price:""});
 	$http.post("http://localhost:8080/BooksForAll/browseBooksLikesServlet",bookparameter)
@@ -241,6 +251,7 @@ app.controller('book', function($rootScope,$scope,$http,$window){
 	
 	
 	$scope.buy = function(){
+		$rootScope.bookPrice = $scope.price;
 		$scope.changeBookPage=false
 		$scope.changeBuyBook=true
 	}
@@ -275,6 +286,78 @@ app.controller('book', function($rootScope,$scope,$http,$window){
 	}
 //-----------------Read book-------------------------
 	$scope.readBook = function(){
+		var path= "books/" + $scope.bookname + ".html";
+		var res = encodeURI(path);
+		$('.modal-body').load(res,function(){
+	        $('#myModal').modal({show:true});
+	    });
+		//$scope.changeBookPage=false
+		//$scope.changeReadBook=true;
+	}
+});
+app.controller('viewUsersController', function($rootScope,$scope,$http,$window) {
+	$http.post("http://localhost:8080/BooksForAll/ViewUsersServlet")
+	.then(function(response) {
+		$scope.userlist=response.data;	
+	},function(){});
+	$(document).ready(function(){
+		  $("#myInput").on("keyup", function() {
+		    var value = $(this).val().toLowerCase();
+		    $("#myList li").filter(function() {
+		      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		    });
+		  });
+		});
+	$scope.viewUser = function(param){
+		$rootScope.userPageView=param;
+		$scope.changeViewUsers = false;
+		$scope.changeUserPage = true;
+	}
+});
+app.controller('userPageController', function($rootScope,$scope,$http,$window) {
+	var usr = $rootScope.userPageView;
+	var parameter = JSON.stringify({username:usr, password:"", type:"user"});
+	$http.post("http://localhost:8080/BooksForAll/UserPageServlet",parameter)
+	.then(function(response) {
+		$scope.userDetails=response.data;	
+	},function(){});
+	$scope.removeUser = function(){
+		var usr = $rootScope.userPageView;
+		var parameter = JSON.stringify({username:usr, password:"", type:"user"});
+		$http.post("http://localhost:8080/BooksForAll/RemoveUserServlet",parameter)
+		.then(function(response) {
+			$rootScope.userPageView="";
+			$scope.$parent.changeUserPage=false;
+			$scope.$parent.changeViewUsers=true;
+		},function(){});
+	}
+});
+app.controller('viewPurchasesController', function($rootScope,$scope,$http,$window) {
+	$(document).ready(function(){
+		  $("#myInput").on("keyup", function() {
+		    var value = $(this).val().toLowerCase();
+		    $("#myTable tr").filter(function() {
+		      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		    });
+		  });
+		});
+	$http.post("http://localhost:8080/BooksForAll/ViewPurchasesServlet")
+	.then(function(response) {
+		$scope.purchaseList=response.data;	
+	},function(){});
+});
+app.controller('viewReviewsController', function($rootScope,$scope,$http,$window) {
 	
+});
+app.controller('payment', function($rootScope,$scope,$http,$window) {
+	//$scope.price = $rootscope.bookPrice;
+	$scope.threeNumbers = /^[0-9]{3}$/;
+	$scope.twoNumbers = /^[0-9][0-9]$/;
+	$scope.lettersOnly =/^[a-zA-Z ]{1,100}$/;
+	$scope.amexValidation = /^[3][4][0-9]{13}$/;
+	$scope.amexValidation = /^[4][0-9]{15}$/;
+
+	$scope.submitPaymet=function(){
+		
 	}
 });

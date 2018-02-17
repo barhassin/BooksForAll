@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -22,6 +24,8 @@ import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 import com.google.gson.Gson;
 
 import classes.AppConstants;
+import classes.Book;
+import classes.Purchase;
 import classes.User;
 
 /**
@@ -66,31 +70,42 @@ public class myBooksServlet extends HttpServlet {
     	    String params = sb.toString();
     	    Gson gson = new Gson();
     	    User user = gson.fromJson(params, User.class);
+    	    Collection<Purchase> purchasesList = new ArrayList<Purchase>();
+    	    Collection<Book> bookList = new ArrayList<Book>();
     		PreparedStatement stmt;
     			try {
-    				stmt = conn.prepareStatement(AppConstants.SELECT_ALL_BOOKS_STMT);
+    				stmt = conn.prepareStatement(AppConstants.SELECT_PURCHASES_BY_USERNAME_STMT);
     				stmt.setString(1, user.getUsername());
+    	    	    System.out.println(user.getUsername());
     				ResultSet rs = stmt.executeQuery();
-    				String dbPassword="";
-    				if(rs.next()) {
-    					dbPassword=rs.getString(2);
-    					if(!dbPassword.equals(user.getPassword()))
-        					response.sendError(406);
-    					user = new User(rs.getString(1), "", rs.getString(3));
+    				while(rs.next()) {
+    					purchasesList.add(new Purchase(rs.getString(1), rs.getString(2), rs.getString(3)));
     				}	
-    				else {
-    					System.out.println("kaki2");
-    					response.sendError(405);
-    				}
     				rs.close();
     				stmt.close();
     			} catch (SQLException e) {
     				getServletContext().log("Error while querying for customers", e);
     	    		response.sendError(500);//internal server error
     			}
+    			for(Purchase purchase: purchasesList) {
+    				try {
+        				stmt = conn.prepareStatement(AppConstants.SELECT_BOOKS_BY_NAME_STMT);
+        				stmt.setString(1, purchase.getBookname());
+        				System.out.println(purchase.getBookname());
+        				ResultSet rs = stmt.executeQuery();
+        				if(rs.next()) {
+        					bookList.add(new Book(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4)));
+        				}	
+        				rs.close();
+        				stmt.close();
+        			} catch (SQLException e) {
+        				getServletContext().log("Error while querying for customers", e);
+        	    		response.sendError(500);//internal server error
+        			}
+    			}	
     		conn.close();
     		Gson gson2 = new Gson();
-        	String userJsonResult = gson2.toJson(user);
+        	String userJsonResult = gson2.toJson(bookList, AppConstants.BOOK_COLLECTION);
         	response.addHeader("Content-Type", "application/json");
         	PrintWriter writer = response.getWriter();
         	writer.println(userJsonResult);

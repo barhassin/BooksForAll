@@ -11,15 +11,19 @@ public interface AppConstants {
 		public final String BOOKS = "books";
 		public final String LIKES = "likes";
 		public final String REVIEWS = "reviews";
+		public final String PURCHASES = "purchases";
 		
 		public final String USERS_FILE = USERS + ".json";
 		public final String USERINFO_FILE = USERINFO + ".json";
 		public final String BOOKS_FILE = BOOKS + ".json";
 		public final String LIKES_FILE = LIKES + ".json";
 		public final String REVIEWS_FILE = REVIEWS + ".json";
+		public final String PURCHASES_FILE = PURCHASES + ".json";
 		
 		public final String USERNAME = "username";
 		public final Type BOOK_COLLECTION = new TypeToken<Collection<Book>>() {}.getType();
+		public final Type PURCHASE_COLLECTION = new TypeToken<Collection<Purchase>>() {}.getType();
+		public final Type USERINFO_COLLECTION = new TypeToken<Collection<UserInfo>>() {}.getType();
 		//derby constants
 		public final String DB_NAME = "DB_NAME";
 		public final String DB_DATASOURCE = "DB_DATASOURCE";
@@ -56,4 +60,14 @@ public interface AppConstants {
 				+ "nickname varchar(100), review varchar(100), approved varchar(100))";
 		public final String SELECT_REVIEWS_BY_BOOKNAME_STMT = "SELECT * FROM REVIEWS WHERE bookname=? AND approved=?";
 		public final String INSERT_REVIEWS_STMT = "INSERT INTO REVIEWS VALUES(?,?,?,?)";
+		public final String CREATE_PURCHASES_TABLE = "CREATE TABLE PURCHASES(username varchar(100),"
+				+ "bookname varchar(100), price varchar(100))";
+		public final String INSERT_PURCHASES_STMT = "INSERT INTO PURCHASES VALUES(?,?,?)";
+		public final String SELECT_PURCHASES_BY_USERNAME_STMT = "SELECT * FROM PURCHASES WHERE username=?";
+		public final String SELECT_ALL_USERINFO_STMT = "SELECT * FROM USERINFO";
+		public final String SELECT_ALL_PURCHASES_STMT = "SELECT * FROM PURCHASES";
+		public final String DELETE_USER_BY_USERNAME_STMT = "DELETE FROM USERS WHERE username=?";
+		public final String DELETE_USERINFO_BY_USERNAME_STMT = "DELETE FROM USERINFO WHERE username=?";
+		public final String DELETE_LIKES_BY_USERNAME_STMT = "DELETE FROM LIKES WHERE username=?";
+		public final String DELETE_REVIEWS_BY_NICKNAME_STMT = "DELETE FROM REVIEWS WHERE nickname=?";
 }
