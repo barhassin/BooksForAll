@@ -22,56 +22,131 @@
 						<div class="panel-body">
 							<form name="myForm">
 								<div class="form-group">
-									<label >Credit card</label>
+									<label>Credit card</label>
 									<div class="credit_card">
-											<input type="radio" ng-model="card" name="creditcard" value="amex">  <img src="images/Amex.png">
-											<br>
-											<br>
-											<input type="radio" ng-model="card" name="creditcard" value="visa">  <img src="images/visa.jpg">
-										
+										<input type="radio" ng-model="creditcard" name="creditcard"
+											value="amex"> <img src="images/Amex.png"> <br>
+										<br> <input type="radio" ng-model="creditcard"
+											name="creditcard" value="visa"> <img
+											src="images/visa.jpg">
+
 									</div>
 									<br>
 									<div class="row">
 										<div class="col-xs-7 col-md-7">
 											<div class="form-group">
-												<label for="cardNumber"> CARD NUMBER</label> <input
-													type="text" class="form-control" id="cardNumber"
-													placeholder="Valid Card Number" required>
+												<label for="cardNumber"> CARD NUMBER</label>
+												<div ng-if="creditcard=='amex'">
+													<input type="text" class="form-control"
+														ng-model="cardNumber" name="cardNumber"
+														ng-pattern="amexValidation"
+														placeholder="Valid Card Number" required> <span
+														style="color: red"
+														ng-show="myForm.cardNumber.$error.pattern && myForm.cardNumber.$touched">non
+														valid amex card.<br>
+													</span> <span style="color: red"
+														ng-show="myForm.cardNumber.$error.required && myForm.cardNumber.$touched">
+														card number is required.<br>
+													</span>
+												</div>
+												<div ng-if="creditcard=='visa'">
+													<input type="text" class="form-control"
+														ng-model="cardNumber" name="cardNumber"
+														ng-pattern="visaValidation"
+														placeholder="Valid Card Number" required> <span
+														style="color: red"
+														ng-show="myForm.cardNumber.$error.pattern && myForm.cardNumber.$touched">non
+														valid visa card.<br>
+													</span> <span style="color: red"
+														ng-show="myForm.cardNumber.$error.required && myForm.cardNumber.$touched">
+														card number is required.<br>
+													</span>
+												</div>
+												<br> <label for="cardHolder"> CARD HOLDER</label> <input
+													type="text" class="form-control" ng-model="cardHolder"
+													name="cardHolder" ng-pattern="lettersOnly"
+													placeholder="Full name " required> <span
+													style="color: red"
+													ng-show="myForm.cardHolder.$error.pattern && myForm.cardHolder.$touched">non
+													valid name.<br>
+												</span> <span style="color: red"
+													ng-show="myForm.cardHolder.$error.required && myForm.cardHolder.$touched">
+													card holder is required.<br>
+												</span>
 											</div>
 										</div>
 									</div>
-								</div>
-								<div class="row">
-									<div class="col-xs-7 col-md-7">
-										<div class="form-group">
-											<label for="expityMonth"> EXPIRY DATE</label>
-											<div class="col-xs-6 col-lg-6 pl-ziro">
-												<input type="text" class="form-control" id="Month"
-													placeholder="MM" required>
+									<div class="row">
+										<div class="col-xs-7 col-md-7">
+											<div class="form-group">
+												<label for="date"> EXPIRY DATE</label>
+												<div name="date">
+													<div class="col-xs-6 col-lg-6 pl-ziro">
+														<input type="number" class="form-control" ng-model="Month"
+															min="{{currentMonth}}" max="12" name="Month"
+															placeholder="MM" required>
+													</div>
+													<div class="col-xs-6 col-lg-6 pl-ziro">
+														<input type="number" class="form-control" ng-model="Year"
+															min="{{currentYear}}" max="{{maxYear}}" name="Year"
+															placeholder="YY" required>
+													</div>
+													<span style="color: red"
+														ng-show="myForm.Month.$invalid && myForm.Month.$touched">non
+														valid month.<br>
+													</span> <span style="color: red"
+														ng-show="myForm.Month.$error.required && myForm.Month.$touched">
+														month is required.<br>
+													</span> <span style="color: red"
+														ng-show="myForm.Year.$invalid && myForm.Year.$touched">
+														year is required.<br>
+													</span> <span style="color: red"
+														ng-show="myForm.Year.$error.required && myForm.Year.$touched">
+														year is required.<br>
+													</span>
+												</div>
 											</div>
-											<div class="col-xs-6 col-lg-6 pl-ziro">
-												<input type="text" class="form-control" id="Year"
-													placeholder="YY" required>
+										</div>
+										<div class="col-xs-5 col-md-5 pull-right">
+											<div class="form-group">
+												<label for="cvc"> CVV</label> <input type="text"
+													class="form-control" ng-model="Cvv" name="Cvv"
+													ng-pattern="threeNumbers" placeholder="CVV" required>
+												<span style="color: red"
+													ng-show="myForm.Cvv.$error.pattern && myForm.Cvv.$touched">cvv
+													contain 3 digits.<br>
+												</span> <span style="color: red"
+													ng-show="myForm.Cvv.$error.required && myForm.Cvv.$touched">
+													cvv is required.<br>
+												</span>
 											</div>
 										</div>
 									</div>
-									<div class="col-xs-5 col-md-5 pull-right">
-										<div class="form-group">
-											<label for="cvc"> CVV</label> <input type="password"
-												class="form-control" id="cvv" name="cvv" ng-pattern="threeNumbers" placeholder="CVV" required>
-												<!-- CCV validation  -->
-												
-													<span style="color:red" ng-show="myForm.cvv.$error.pattern && myForm.cvv.$touched">cvv contain 3 digits.<br></span>
-													<span style="color:red" ng-show="myForm.cvv.$error.required && myForm.cvv.$touched">  cvv is required.<br></span>
-										</div>
-									</div>
-								</div>
-								<br>
-							<label>   PRICE: {{price}}$</label>
+									<br> <label> PRICE: {{price}}$</label>
 							</form>
 						</div>
 					</div>
-					 <button class="btn btn-success btn-lg btn-block" ng-click="submitPaymet">Pay</button>
+					<button class="btn btn-success btn-lg btn-block"
+						ng-click="submitPayment()" ng-disabled="myForm.$invalid">Pay</button>
+
+				</div>
+			</div>
+		</div>
+
+		<div id="myModaltwo" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title">congratulations!</h4>
+					</div>
+					<div class="modal-body">
+						<p>{{content}}</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
 				</div>
 			</div>
 		</div>

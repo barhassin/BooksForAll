@@ -249,7 +249,6 @@ app.controller('book', function($rootScope,$scope,$http,$window){
 		$scope.reviewsList = response.data;
 	}, function(){});
 	
-	
 	$scope.buy = function(){
 		$rootScope.bookPrice = $scope.price;
 		$scope.changeBookPage=false
