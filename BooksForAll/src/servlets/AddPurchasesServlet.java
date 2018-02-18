@@ -71,9 +71,6 @@ public class AddPurchasesServlet extends HttpServlet {
     		PreparedStatement stmt;
     		Gson gson = new Gson();
     		Purchase purchase = gson.fromJson(params, Purchase.class);
-    		System.out.println(purchase.getUsername());
-    		System.out.println(purchase.getBookname());
-    		System.out.println(purchase.getPrice());
     			try {
     				stmt = conn.prepareStatement(AppConstants.INSERT_PURCHASES_STMT);
     				stmt.setString(1, purchase.getUsername());
@@ -86,11 +83,6 @@ public class AddPurchasesServlet extends HttpServlet {
     	    		response.sendError(500);//internal server error
     			}
     		conn.close();
-
-        	response.addHeader("Content-Type", "application/json");
-        	PrintWriter writer = response.getWriter();
-        	writer.println(purchase.getUsername()+" purchase "+purchase.getBookname());
-        	writer.close();
 		} catch (SQLException | NamingException e) {
     		getServletContext().log("Error while closing connection", e);
     		response.sendError(500);//internal server error

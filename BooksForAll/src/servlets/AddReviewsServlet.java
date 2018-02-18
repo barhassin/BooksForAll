@@ -78,8 +78,6 @@ public class AddReviewsServlet extends HttpServlet {
     				getServletContext().log("Error while querying for insert review", e);
     	    		response.sendError(500);//internal server error
     			}
-
-    			
     		conn.close();
         	response.addHeader("Content-Type", "application/json");
         	PrintWriter writer = response.getWriter();
