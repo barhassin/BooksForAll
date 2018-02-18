@@ -22,25 +22,23 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import classes.AppConstants;
 import classes.Book;
-import classes.Like;
-import classes.User;
-import classes.UserInfo;
+import classes.Purchase;
+import classes.Review;
 
 /**
- * Servlet implementation class browseBooksServlet
+ * Servlet implementation class ViewPurchasesServlet
  */
-@WebServlet("/removeLikeServlet")
-public class removeLikeServlet extends HttpServlet {
+@WebServlet("/FindPurchasesByNameAndBookServlet")
+public class FindPurchasesByNameAndBookServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public removeLikeServlet() {
+    public FindPurchasesByNameAndBookServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -50,13 +48,13 @@ public class removeLikeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		try {
 			Context context = new InitialContext();
     		BasicDataSource ds = (BasicDataSource)context.lookup(
@@ -70,28 +68,33 @@ public class removeLikeServlet extends HttpServlet {
     	      line = reader.readLine();
     	    }
     	    reader.close();
-    	    String params = sb.toString();//book name + user name
+    	    String params = sb.toString();//obj purchase 
     		PreparedStatement stmt;
     		Gson gson = new Gson();
-    		Like like = gson.fromJson(params, Like.class);
+    		Purchase purchase = gson.fromJson(params,Purchase.class);
     			try {
-    				stmt = conn.prepareStatement(AppConstants.DELETE_LIKES_BY_BOOKNAME_AND_USERNAME_STMT);
-    				stmt.setString(1,like.getBookname());
-    				stmt.setString(2, like.getUsername());
-    				stmt.executeUpdate();
-    				stmt.close();	
+    				stmt = conn.prepareStatement(AppConstants.SELECT_PURCHASES_BY_USERNAME_AND_BOOK_STMT);
+    				stmt.setString(1,purchase.getUsername());
+    				stmt.setString(2,purchase.getBookname());
+    				ResultSet rs = stmt.executeQuery();
+    				if(rs.next()) {
+    					
+    				}
+    				else {
+    					response.sendError(420);
+    				}
+    				rs.close();
+    				stmt.close();
     			} catch (SQLException e) {
-    				getServletContext().log("Error while querying for delete like", e);
+    				getServletContext().log("Error while querying for purchases", e);
     	    		response.sendError(500);//internal server error
     			}
-
-    			
+    		
     		conn.close();
 		} catch (SQLException | NamingException e) {
     		getServletContext().log("Error while closing connection", e);
     		response.sendError(500);//internal server error
     	}
 	}
-	
 
 }

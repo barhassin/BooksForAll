@@ -65,6 +65,7 @@ public interface AppConstants {
 				+ "bookname varchar(100), price varchar(100))";
 		public final String INSERT_PURCHASES_STMT = "INSERT INTO PURCHASES VALUES(?,?,?)";
 		public final String SELECT_PURCHASES_BY_USERNAME_STMT = "SELECT * FROM PURCHASES WHERE username=?";
+		public final String SELECT_PURCHASES_BY_USERNAME_AND_BOOK_STMT = "SELECT * FROM PURCHASES WHERE username=? AND bookname=? ";
 		public final String SELECT_ALL_USERINFO_STMT = "SELECT * FROM USERINFO";
 		public final String SELECT_ALL_PURCHASES_STMT = "SELECT * FROM PURCHASES";
 		public final String DELETE_USER_BY_USERNAME_STMT = "DELETE FROM USERS WHERE username=?";

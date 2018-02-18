@@ -79,10 +79,6 @@ public class addLikeServlet extends HttpServlet {
 
     			
     		conn.close();
-        	response.addHeader("Content-Type", "application/json");
-        	PrintWriter writer = response.getWriter();
-        	writer.println(like.getUsername()+"do like to"+like.getBookname());
-        	writer.close();
 		} catch (SQLException | NamingException e) {
     		getServletContext().log("Error while closing connection", e);
     		response.sendError(500);//internal server error

@@ -81,10 +81,6 @@ public class AddReviewsServlet extends HttpServlet {
 
     			
     		conn.close();
-        	response.addHeader("Content-Type", "application/json");
-        	PrintWriter writer = response.getWriter();
-        	writer.println(review.getNickname()+"write review to"+review.getBookname());
-        	writer.close();
 		} catch (SQLException | NamingException e) {
     		getServletContext().log("Error while closing connection", e);
     		response.sendError(500);//internal server error
