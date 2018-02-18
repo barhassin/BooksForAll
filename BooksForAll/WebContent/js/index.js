@@ -219,7 +219,7 @@ app.controller('book', function($rootScope,$scope,$http,$window){
 	var bookname = $scope.bookname;
 	var parameter = JSON.stringify({username:usr,bookname:bookname});
 	$scope.PurchasedOrNot=function(){
-		return true;
+		return false;
 	}
 	var bookparameter = JSON.stringify({name:bookname, image:"", description:"",price:""});
 	$http.post("http://localhost:8080/BooksForAll/browseBooksLikesServlet",bookparameter)
@@ -347,17 +347,39 @@ app.controller('viewPurchasesController', function($rootScope,$scope,$http,$wind
 	},function(){});
 });
 app.controller('viewReviewsController', function($rootScope,$scope,$http,$window) {
-	
+	$http.post("http://localhost:8080/BooksForAll/ViewReviewsServlet")
+	.then(function(response) {
+		$scope.reviewList=response.data;	
+	},function(){});
+	$scope.approveReview = function(bname,nname,rev){
+		var parameter = JSON.stringify({bookname:bname, nickname:nname, review:rev, approved:"no"});
+		$http.post("http://localhost:8080/BooksForAll/ApproveReviewServlet", parameter)
+		.then(function(response) {	
+		},function(){});
+	}
 });
 app.controller('payment', function($rootScope,$scope,$http,$window) {
-	//$scope.price = $rootscope.bookPrice;
+	$scope.price = $rootScope.bookPrice;
 	$scope.threeNumbers = /^[0-9]{3}$/;
 	$scope.twoNumbers = /^[0-9][0-9]$/;
 	$scope.lettersOnly =/^[a-zA-Z ]{1,100}$/;
 	$scope.amexValidation = /^[3][4][0-9]{13}$/;
-	$scope.amexValidation = /^[4][0-9]{15}$/;
-
-	$scope.submitPaymet=function(){
-		
+	$scope.visaValidation = /^[4][0-9]{15}$/;
+	var date = new Date();
+    var month = date.getMonth()+1;
+	var year =date.getYear()-100;
+	$scope.currentYear=year;
+	$scope.maxYear=year+6;
+	$scope.currentMonth=month;
+	$scope.submitPayment=function(){
+		var price = $scope.price;
+		var bookname = $rootScope.chosenBook;
+		var usr=$rootScope.user;
+		var purchaseJson = JSON.stringify({username:usr, bookname:bookname, price:price });
+		$http.post("http://localhost:8080/BooksForAll/AddPurchasesServlet",purchaseJson)
+		.then(function(response) {
+			$("#myModaltwo").modal('show');
+			$scope.content="Thank you for your purchase, a pleasant day";
+		},function(){});				
 	}
 });
