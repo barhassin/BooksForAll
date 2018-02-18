@@ -83,11 +83,6 @@ public class AddPurchasesServlet extends HttpServlet {
     	    		response.sendError(500);//internal server error
     			}
     		conn.close();
-
-        	response.addHeader("Content-Type", "application/json");
-        	PrintWriter writer = response.getWriter();
-        	writer.println(purchase.getUsername()+" purchase "+purchase.getBookname());
-        	writer.close();
 		} catch (SQLException | NamingException e) {
     		getServletContext().log("Error while closing connection", e);
     		response.sendError(500);//internal server error
