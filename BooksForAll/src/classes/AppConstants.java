@@ -24,6 +24,7 @@ public interface AppConstants {
 		public final Type BOOK_COLLECTION = new TypeToken<Collection<Book>>() {}.getType();
 		public final Type PURCHASE_COLLECTION = new TypeToken<Collection<Purchase>>() {}.getType();
 		public final Type USERINFO_COLLECTION = new TypeToken<Collection<UserInfo>>() {}.getType();
+		public final Type REVIEW_COLLECTION = new TypeToken<Collection<Review>>() {}.getType();
 		//derby constants
 		public final String DB_NAME = "DB_NAME";
 		public final String DB_DATASOURCE = "DB_DATASOURCE";
@@ -70,4 +71,6 @@ public interface AppConstants {
 		public final String DELETE_USERINFO_BY_USERNAME_STMT = "DELETE FROM USERINFO WHERE username=?";
 		public final String DELETE_LIKES_BY_USERNAME_STMT = "DELETE FROM LIKES WHERE username=?";
 		public final String DELETE_REVIEWS_BY_NICKNAME_STMT = "DELETE FROM REVIEWS WHERE nickname=?";
+		public final String SELECT_REVIEWS_BY_APPROVE_STMT = "SELECT * FROM REVIEWS WHERE approved=?";
+		public final String UPDATE_REVIEWS_STMT = "UPDATE REVIEWS SET approved=? WHERE bookname=? AND nickname=? AND review=?";
 }
