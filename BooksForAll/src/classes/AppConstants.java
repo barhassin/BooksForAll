@@ -58,7 +58,7 @@ public interface AppConstants {
 		public final String DELETE_LIKES_BY_BOOKNAME_AND_USERNAME_STMT = "DELETE * FROM LIKES "
 				+ "WHERE bookname=?" + "WHERE username=?";
 		public final String CREATE_REVIEWS_TABLE = "CREATE TABLE REVIEWS(bookname varchar(100),"
-				+ "nickname varchar(100), review varchar(100), approved varchar(100))";
+				+ "nickname varchar(100), review varchar(5000), approved varchar(100))";
 		public final String SELECT_REVIEWS_BY_BOOKNAME_STMT = "SELECT * FROM REVIEWS WHERE bookname=? AND approved=?";
 		public final String INSERT_REVIEWS_STMT = "INSERT INTO REVIEWS VALUES(?,?,?,?)";
 		public final String CREATE_PURCHASES_TABLE = "CREATE TABLE PURCHASES(username varchar(100),"
@@ -74,4 +74,6 @@ public interface AppConstants {
 		public final String DELETE_REVIEWS_BY_NICKNAME_STMT = "DELETE FROM REVIEWS WHERE nickname=?";
 		public final String SELECT_REVIEWS_BY_APPROVE_STMT = "SELECT * FROM REVIEWS WHERE approved=?";
 		public final String UPDATE_REVIEWS_STMT = "UPDATE REVIEWS SET approved=? WHERE bookname=? AND nickname=? AND review=?";
+		public final String SELECT_USERINFO_BY_NICKNAME_STMT = "SELECT * FROM USERINFO "
+				+ "WHERE nickname=?";
 }

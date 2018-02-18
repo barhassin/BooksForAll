@@ -74,17 +74,24 @@ public class signUpServlet extends HttpServlet {
     	    UserInfo user_info = gson.fromJson(params, UserInfo.class);
     	    PreparedStatement stmt;
     			try {
-    				stmt = conn.prepareStatement(AppConstants.SELECT_USER_BY_USERNAME_STMT);
+    				stmt = conn.prepareStatement(AppConstants.SELECT_USERINFO_BY_USERNAME_STMT);
     				stmt.setString(1, user_info.getUsername());
     				ResultSet rs = stmt.executeQuery();
-    				
     				if(rs.next()) {
-    					
     					if(rs.getString(1).equals(user_info.getUsername())) {
         					response.sendError(410);
     					}
     				}
     				else {
+    					PreparedStatement xstmt = conn.prepareStatement(AppConstants.SELECT_USERINFO_BY_NICKNAME_STMT);
+        				xstmt.setString(1, user_info.getNickname());
+        				ResultSet xrs = xstmt.executeQuery();
+        				if(xrs.next()) {
+        					if(xrs.getString(8).equals(user_info.getNickname())) {
+    						response.sendError(411);
+        					}
+    					}
+    					else {
     		   			PreparedStatement pstmt = conn.prepareStatement(AppConstants.INSERT_USERINFO_STMT);
     		   			pstmt.setString(1,user_info.getUsername());
    		    			pstmt.setString(2,user_info.getEmail());
@@ -106,10 +113,12 @@ public class signUpServlet extends HttpServlet {
    		    			conn.commit();
    		    			//close statements
    		    			pstmt.close();
-   		    			ustmt.close();	
+   		    			ustmt.close();
+    					}
+    					
+    				}
     				rs.close();
     				stmt.close();
-    				}
     			}
     				catch (SQLException e) {
     				getServletContext().log("Error while querying for customers", e);

@@ -102,7 +102,6 @@ app.controller('signUpController', function($rootScope,$scope,$http,$window) {
 		$scope.sevenNumbers = /^[0-9]{7}$/;
 		$scope.lettersOnly =/^[a-zA-Z ]{1,100}$/;
 		$scope.onlyNumbers = /^[1-9][0-9]*$/;
-		
 		$scope.signUpApp = function(){
 		var usernamed = $scope.userName;
 		var passwordd = $scope.Pass;
@@ -113,8 +112,15 @@ app.controller('signUpController', function($rootScope,$scope,$http,$window) {
 		var Zipcoded =$scope.Zipcode;
 		var Telephoned =$scope.selected + "-" + $scope.Telephone;
 		var Nicknamed =$scope.Nickname;
-		var Descriptiond=$scope.Description;
-		var parameter = JSON.stringify({username:usernamed, password:passwordd, type:"user", email:emaild, street:Streetd, streetnumber:StreetNumberd, city:Cityd, zipcode:Zipcoded, telephone:Telephoned, nickname:Nicknamed, description:Descriptiond});
+		if($scope.Description)
+			var Descriptiond=$scope.Description;
+		else
+			var Descriptiond="No description";
+		if($scope.photo)
+			var Photod=$scope.photo;
+		else
+			var Photod="male.jpg";
+		var parameter = JSON.stringify({username:usernamed, password:passwordd, type:"user", email:emaild, street:Streetd, streetnumber:StreetNumberd, city:Cityd, zipcode:Zipcoded, telephone:Telephoned, nickname:Nicknamed, description:Descriptiond, photo:Photod});
 		$http.post("http://localhost:8080/BooksForAll/signUp",parameter)
 		.then(function(response) {
 			$rootScope.user=response.data.username;
@@ -129,12 +135,19 @@ app.controller('signUpController', function($rootScope,$scope,$http,$window) {
 			$scope.Telephone="";
 			$scope.Nickname="";
 			$scope.Description="";
+			$scope.photo="";
 			$scope.$parent.$parent.$parent.changeSignup = false;
 			$scope.$parent.$parent.$parent.changeNavbar = true;
 		}, function(response) {
 			var status = response.status;
-			if(status=="410")
-				$scope.content="There is already a user with that username in our system. please try again with a different user name";	    	  
+			if(status=="410"){
+				$("#myModalSignUp").modal('show');
+				$scope.content="There is already a user with that user name in our system. please try again with a different user name";
+			}
+			else if(status=="411"){
+				$("#myModalSignUp").modal('show');
+				$scope.content="There is already a user with that nickname in our system. please try again with a different nickname";
+			}
 		});
 	};
 });
@@ -222,13 +235,12 @@ app.controller('book', function($rootScope,$scope,$http,$window){
 	
 	$http.post("http://localhost:8080/BooksForAll/FindPurchasesByNameAndBookServlet",purchaseParameter)
 	.then(function(response) {
-		$scope.PurchasedOrNot="true";	
+		$scope.PurchasedOrNot=true;	
 	},function(response){
 		var status = response.status;
 		if(status=="420")
 			$scope.PurchasedOrNot=false;
 	});
-
 	var bookparameter = JSON.stringify({name:bookname, image:"", description:"",price:""});
 	$http.post("http://localhost:8080/BooksForAll/browseBooksLikesServlet",bookparameter)
 	.then(function(response) {
@@ -386,7 +398,7 @@ app.controller('payment', function($rootScope,$scope,$http,$window) {
 		$http.post("http://localhost:8080/BooksForAll/AddPurchasesServlet",purchaseJson)
 		.then(function(response) {
 			$("#myModaltwo").modal('show');
-			$scope.content="Thank you for your purchase, a pleasant day";
+			$scope.content="Thank you for your purchase, have a good day";
 		},function(){});				
 	}
 });
