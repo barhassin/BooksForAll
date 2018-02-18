@@ -219,7 +219,7 @@ app.controller('book', function($rootScope,$scope,$http,$window){
 	var bookname = $scope.bookname;
 	var parameter = JSON.stringify({username:usr,bookname:bookname});
 	$scope.PurchasedOrNot=function(){
-		return true;
+		return false;
 	}
 	var bookparameter = JSON.stringify({name:bookname, image:"", description:"",price:""});
 	$http.post("http://localhost:8080/BooksForAll/browseBooksLikesServlet",bookparameter)
@@ -248,7 +248,6 @@ app.controller('book', function($rootScope,$scope,$http,$window){
 	.then(function(response) {
 		$scope.reviewsList = response.data;
 	}, function(){});
-	
 	
 	$scope.buy = function(){
 		$rootScope.bookPrice = $scope.price;
@@ -348,16 +347,4 @@ app.controller('viewPurchasesController', function($rootScope,$scope,$http,$wind
 });
 app.controller('viewReviewsController', function($rootScope,$scope,$http,$window) {
 	
-});
-app.controller('payment', function($rootScope,$scope,$http,$window) {
-	//$scope.price = $rootscope.bookPrice;
-	$scope.threeNumbers = /^[0-9]{3}$/;
-	$scope.twoNumbers = /^[0-9][0-9]$/;
-	$scope.lettersOnly =/^[a-zA-Z ]{1,100}$/;
-	$scope.amexValidation = /^[3][4][0-9]{13}$/;
-	$scope.amexValidation = /^[4][0-9]{15}$/;
-
-	$scope.submitPaymet=function(){
-		
-	}
 });
