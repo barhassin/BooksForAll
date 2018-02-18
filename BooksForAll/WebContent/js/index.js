@@ -348,3 +348,4 @@ app.controller('viewPurchasesController', function($rootScope,$scope,$http,$wind
 app.controller('viewReviewsController', function($rootScope,$scope,$http,$window) {
 	
 });
+
