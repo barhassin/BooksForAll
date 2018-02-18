@@ -218,9 +218,17 @@ app.controller('book', function($rootScope,$scope,$http,$window){
 	var usr=$scope.username;
 	var bookname = $scope.bookname;
 	var parameter = JSON.stringify({username:usr,bookname:bookname});
-	$scope.PurchasedOrNot=function(){
-		return false;
-	}
+	var purchaseParameter = JSON.stringify({username:usr,bookname:bookname,price:""});
+	
+	$http.post("http://localhost:8080/BooksForAll/FindPurchasesByNameAndBookServlet",purchaseParameter)
+	.then(function(response) {
+		$scope.PurchasedOrNot="true";	
+	},function(response){
+		var status = response.status;
+		if(status=="420")
+			$scope.PurchasedOrNot=false;
+	});
+
 	var bookparameter = JSON.stringify({name:bookname, image:"", description:"",price:""});
 	$http.post("http://localhost:8080/BooksForAll/browseBooksLikesServlet",bookparameter)
 	.then(function(response) {

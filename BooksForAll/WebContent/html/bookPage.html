@@ -34,19 +34,20 @@
 				<p>{{description}}</p>
 				<img ng-src={{image}} alt="image">
 				<button ng-click="buy()" class="btn btn-success"
-					ng-hide="PurchasedOrNot()">Buy me</button>
+					ng-hide="PurchasedOrNot">Buy me</button>
 				<button class="btn btn-default" ng-click="readBook()"
-									ng-show=PurchasedOrNot()>Read Book</button>
+									ng-show="PurchasedOrNot">Read Book</button>
+				
 				<button data-toggle="tooltip" data-placement="right"
 					title="{{likes}}" ng-click="like()" class="btn btn-default"
-					ng-show="PurchasedOrNot()" tooltip>
+					ng-if="({{PurchasedOrNot}}==true")" tooltip>
 					<i style="color: blue"> {{numberOfLIKes}} </i> <img
 						ng-src="{{likeimg}}" width="70">
 				</button>
 				<button class="btn btn-default" ng-click="ifButtonClicked()"
-									ng-disabled="!PurchasedOrNot()">Add Review</button>
+									ng-disabled="!PurchasedOrNot">Add Review</button>
 								<button class="btn btn-default" ng-click="addReview()"
-									ng-show={{send}}>Send</button>
+									ng-show="send">Send</button>
 				<a>{{responseWait}}</a>
 				<div class="pre-scrollable">
 					<div class="panel-group">
@@ -57,8 +58,8 @@
 										Reviews</button>
 								</h4>								
 								<div class="form-group">
-									<label for="comment" ng-show={{send}}>Comment:</label>
-									<textarea class="form-control" rows="5" ng-show={{send}}
+									<label for="comment" ng-show="send">Comment:</label>
+									<textarea class="form-control" rows="5" ng-show="send"
 										ng-model="$userEnterReview" id="comment"></textarea>
 								</div>
 								<div id="collapseReview" class="panel-collapse collapse">
