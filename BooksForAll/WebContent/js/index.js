@@ -235,7 +235,7 @@ app.controller('book', function($rootScope,$scope,$http,$window){
 	
 	$http.post("http://localhost:8080/BooksForAll/FindPurchasesByNameAndBookServlet",purchaseParameter)
 	.then(function(response) {
-		$scope.PurchasedOrNot="true";	
+		$scope.PurchasedOrNot=true;	
 	},function(response){
 		var status = response.status;
 		if(status=="420")
