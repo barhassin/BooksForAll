@@ -241,7 +241,6 @@ app.controller('book', function($rootScope,$scope,$http,$window){
 		if(status=="420")
 			$scope.PurchasedOrNot=false;
 	});
-
 	var bookparameter = JSON.stringify({name:bookname, image:"", description:"",price:""});
 	$http.post("http://localhost:8080/BooksForAll/browseBooksLikesServlet",bookparameter)
 	.then(function(response) {
