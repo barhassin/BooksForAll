@@ -13,9 +13,18 @@
 <body>
 	<div ng-app="login" ng-controller="viewReviewsController">
 		<div ng-repeat="x in reviewList">
-		<h3>{{x.bookname}}</h3>
-		<h4>{{x.nickname}}: "{{x.review}}"</h4>
+		<br>
+		<p id="fantasy">{{x.bookname}}</p>
+		<div class="row">
+  			<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+		<h4><i>Nickname: </i> </h4>{{x.nickname}}
+		<h4><i>Review: </i> </h4>"{{x.review}}"
+		</div>
+		<br>
+		<br>
 		<button ng-click="approveReview(x.bookname, x.nickname, x.review)" class="btn btn-success">Approve Review</button>
+		</div>
+		<hr>
 		</div>
 	</div>
 	<script src="js/index.js"></script>
