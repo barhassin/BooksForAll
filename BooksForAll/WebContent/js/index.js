@@ -363,6 +363,17 @@ app.controller('viewUsersController', function($rootScope,$scope,$http,$window) 
 		$scope.changeViewUsers = false;
 		$scope.changeUserPage = true;
 	}
+	
+	$scope.sure=function(param){
+		$('#myModalUser').modal({show:true});
+		$scope.removeUser = function(){
+			var parameter = JSON.stringify({username:param, password:"", type:"user"});
+			$http.post("http://localhost:8080/BooksForAll/RemoveUserServlet",parameter)
+			.then(function(response) {
+				$rootScope.userPageView="";
+			},function(){});
+		}
+	}
 });
 app.controller('userPageController', function($rootScope,$scope,$http,$window) {
 	var usr = $rootScope.userPageView;
@@ -371,19 +382,6 @@ app.controller('userPageController', function($rootScope,$scope,$http,$window) {
 	.then(function(response) {
 		$scope.userDetails=response.data;	
 	},function(){});
-	$scope.sure=function(){
-		$('#myModalUser').modal({show:true})
-	}
-	$scope.removeUser = function(){
-		var usr = $rootScope.userPageView;
-		var parameter = JSON.stringify({username:usr, password:"", type:"user"});
-		$http.post("http://localhost:8080/BooksForAll/RemoveUserServlet",parameter)
-		.then(function(response) {
-			$rootScope.userPageView="";
-			$scope.$parent.$parent.$parent.changeUserPage=false;
-			$scope.$parent.$parent.$parent.changeViewUsers=true;
-		},function(){});
-	}
 });
 app.controller('viewPurchasesController', function($rootScope,$scope,$http,$window) {
 	$(document).ready(function(){
