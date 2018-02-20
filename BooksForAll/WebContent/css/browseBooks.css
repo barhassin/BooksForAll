@@ -81,10 +81,11 @@ html {
 .button:hover {
   background-color: #555;
 }
+
 #fantasy {
 	font-family: fantasy;
 	font-size: 16px;
-	font-style: normal;
+	font-style: italic;
 	font-variant: normal;
-	line-height: 16.5px;	
+	line-height: 16.5px;
 }

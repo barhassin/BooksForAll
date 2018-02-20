@@ -10,23 +10,28 @@
 <script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<div ng-app="login" ng-controller="browseBooksAdminController">
+	<div ng-app="login" ng-controller="browseBooksAdminController" id="backgroundPage">
 	<div ng-model="changeBrowseAd" ng-init="changeBrowseAd = true">
 	<div ng-if="changeBrowseAd">
-		<div ng-repeat="x in bookslist">
-		<div class="panel panel-default">
-  			<div class="panel-heading">{{x.name}}</div>
-  			<div class="row">
-  			<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-  			<div class="panel-body">	
-  			<img ng-src="books/{{x.name}}_files/{{x.image}}" alt="" class="img-responsive center-block" /> 
-  			<p>Description: {{x.description}}</p>
-  			<p>Price: {{x.price}}$</p>
-  			<button ng-click="toBook(x.name)" class="btn btn-primary pull-right">more</button>
-  			</div>
-  			</div>
-  			</div>
-		</div>
+			<div class="row">
+				<div ng-repeat="x in bookslist">
+						<div class="column">
+							<div class="card" id="cardBook">
+								<img ng-src="books/{{x.name}}_files/{{x.image}}" alt="" id="imageBook">
+								<div class="container" id="containerBook">
+									<br>
+									<p id="fantasy">{{x.name}}<p>
+									<p><b>Description:</b></p>
+									<p>{{x.description}}</p>
+									<p><b>Price:</b> {{x.price}}$</p>
+									<p>
+										<button ng-click="toBook(x.name)" class="button">Book Page</button>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 		</div>
 		</div>
 		</div>
