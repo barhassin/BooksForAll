@@ -12,7 +12,7 @@
 </head>
 <body>
 	<div ng-app="login" ng-controller="viewReviewsController">
-		<div ng-repeat="x in reviewList">
+		<div ng-repeat="x in reviewList" id="{{x.review}}">
 		<br>
 		<p id="fantasy">{{x.bookname}}</p>
 		<div class="row">

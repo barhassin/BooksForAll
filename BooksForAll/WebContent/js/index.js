@@ -370,7 +370,7 @@ app.controller('viewUsersController', function($rootScope,$scope,$http,$window) 
 			var parameter = JSON.stringify({username:param, password:"", type:"user"});
 			$http.post("http://localhost:8080/BooksForAll/RemoveUserServlet",parameter)
 			.then(function(response) {
-				$rootScope.userPageView="";
+				 $("#" + param).remove();
 			},function(){});
 		}
 	}
@@ -406,6 +406,7 @@ app.controller('viewReviewsController', function($rootScope,$scope,$http,$window
 		var parameter = JSON.stringify({bookname:bname, nickname:nname, review:rev, approved:"no"});
 		$http.post("http://localhost:8080/BooksForAll/ApproveReviewServlet", parameter)
 		.then(function(response) {	
+			$("#" + rev).remove();
 		},function(){});
 	}
 });
