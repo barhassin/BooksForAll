@@ -1,1 +1,2 @@
-[{ "username" : "user", "bookname" : "Peter Poodle, by William Henry Bradley, A Project Gutenberg eBook", "price" : "30.00" }]
+[{ "username" : "user", "bookname" : "Peter Poodle, by William Henry Bradley, A Project Gutenberg eBook", "price" : "30.00" },
+ { "username" : "bar", "bookname" : "Peter Poodle, by William Henry Bradley, A Project Gutenberg eBook", "price" : "30.00" }]

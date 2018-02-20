@@ -76,7 +76,6 @@ public class myBooksServlet extends HttpServlet {
     			try {
     				stmt = conn.prepareStatement(AppConstants.SELECT_PURCHASES_BY_USERNAME_STMT);
     				stmt.setString(1, user.getUsername());
-    	    	    System.out.println(user.getUsername());
     				ResultSet rs = stmt.executeQuery();
     				while(rs.next()) {
     					purchasesList.add(new Purchase(rs.getString(1), rs.getString(2), rs.getString(3)));
@@ -91,7 +90,6 @@ public class myBooksServlet extends HttpServlet {
     				try {
         				stmt = conn.prepareStatement(AppConstants.SELECT_BOOKS_BY_NAME_STMT);
         				stmt.setString(1, purchase.getBookname());
-        				System.out.println(purchase.getBookname());
         				ResultSet rs = stmt.executeQuery();
         				if(rs.next()) {
         					bookList.add(new Book(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4)));

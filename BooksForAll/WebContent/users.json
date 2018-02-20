@@ -1,2 +1,3 @@
 [ { "username" : "user", "password" : "pass", "type" : "user" },
+  { "username" : "bar", "password" : "pass", "type" : "user" },
   { "username" : "admin", "password" : "Passw0rd", "type" : "admin" } ]

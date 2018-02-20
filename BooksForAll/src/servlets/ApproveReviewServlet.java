@@ -75,9 +75,9 @@ public class ApproveReviewServlet extends HttpServlet {
 	    			try {
 	    				stmt = conn.prepareStatement(AppConstants.UPDATE_REVIEWS_STMT);
 	    				stmt.setString(1,"yes");
-	    				stmt.setString(2,review.getBookname());
+	    				stmt.setString(2, review.getBookname());
 	    				stmt.setString(3, review.getNickname());
-	    				stmt.setString(3, review.getReview());
+	    				stmt.setString(4, review.getReview());
 	    				stmt.executeUpdate();
 	    				stmt.close();
 	    			} catch (SQLException e) {
