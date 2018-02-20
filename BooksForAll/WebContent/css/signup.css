@@ -1,7 +1,16 @@
-@charset "utf-8";
-body {
-    background-color: #d5c1b3;
+
+#signupback {
+    background-image: url("background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;  
 }
-img {
-	height: 50px
+#signupborder {
+	 width: 55%;
+	    border: 10px solid #f3e4d0;
+	border-style: ridge;
+}
+
+#signupWell {
+	background-color: transparent;
+	margin-bottom: 0px; 
 }

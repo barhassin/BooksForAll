@@ -17,8 +17,8 @@
 				<div class="container">
 					<input class="form-control" id="myInput" type="text"
 						placeholder="Search.."> <br>
-					<ul class="list-group" id="myList">
-						<li ng-repeat="x in userlist" class="list-group-item"><button
+					<ul id="myList">
+						<li ng-repeat="x in userlist"><button
 								ng-click="viewUser(x.username)" class="btn btn-link">{{x.username}}</button></li>
 					</ul>
 				</div>
