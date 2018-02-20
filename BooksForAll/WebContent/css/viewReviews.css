@@ -1,1 +1,22 @@
-@charset "windows-1255";
+body {
+	background-image: url("backgroundpage.jpg") !important;
+    background-repeat: repeat;
+    background-size: cover; 
+}
+
+#fantasy {
+	font-family: fantasy;
+	font-size: 16px;
+	font-style: italic;
+	font-variant: normal;
+	line-height: 16.5px;
+	text-decoration: underline;	
+}
+
+hr {
+	border-top: 3px solid #eee;
+}
+.row {
+	margin: 0;
+	
+}
