@@ -4,17 +4,8 @@
 <meta charset="utf-8" name="viewport"
 	content="width=device-width, initial-scale=1">
 <title>Book page</title>
-<style>
-#myModal .modal-content
-{
-  height: 700px;
-}
-#myModal .modal-body
-{
-  overflow:auto;
-}
-</style>
-<link rel="stylesheet" type="text/css" href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/bookPage.css">
 <script src="lib/jquery-3.2.1.js"></script>
 <script src="lib/angular.min.js"></script>
@@ -22,76 +13,97 @@
 </head>
 <body>
 	<div ng-app="login" ng-controller="book">
-	<div ng-model="changeBookPage" ng-init="changeBookPage = true">
-	<div ng-if="changeBookPage">
-		<div class="container">
-			<div class="row">
-			<img ng-src="books/{{bookDetails.name}}_files/{{bookDetails.image}}" alt="image">
-				<h2>{{bookDetails.name}}</h2>
-				<br>
-				<h4>Description: {{bookDetails.description}}</h4>
-				<h4>Price: {{bookDetails.price}}$</h4>	
-				<div ng-model="$parent.changeNotBought" ng-init="$parent.changeNotBought = false">
-				<div ng-if="$parent.changeNotBought">
-				<div ng-model="$parent.$parent.changeLike" ng-init="$parent.$parent.changeLike = false">
-				<div ng-if="$parent.$parent.changeLike">			
-				<button id="like" data-toggle="tooltip" data-placement="right" title="{{nicknames}}" ng-click="like()" class="btn btn-default" tooltip>
-					<i style="color: blue"> {{numberOfLIKes}} </i> 
-					<img ng-src="{{likeimg}}" width="70">
-				</button>
-				</div>
-				</div>
-				<div ng-model="$parent.$parent.changeDislike" ng-init="$parent.$parent.changeDislike = false">
-				<div ng-if="$parent.$parent.changeDislike">
-				<button id="dislike" data-toggle="tooltip" data-placement="right" title="{{nicknames}}" ng-click="dislike()" class="btn btn-default" tooltip>
-					<i style="color: blue"> {{numberOfLIKes}} </i> 
-					<img ng-src="{{dislikeimg}}" width="70">
-				</button>
-				</div>
-				</div>
-				<button class="btn btn-default" ng-click="readBook()">Read Book</button>
-				<div class="form-group">
- 				<input type="text" class="form-control" ng-model="$parent.$parent.reviewText" placeholder="Enter your review"></input>
-				</div>
-				<button class="btn btn-default" ng-click="addReview()">Add Review</button>
-				</div>
-				</div>
-				<button ng-click="buy()" class="btn btn-success">Buy</button>
+		<div ng-model="changeBookPage" ng-init="changeBookPage = true">
+			<div ng-if="changeBookPage">
 				<div class="container">
-					<button id="sho" type="button" class="btn btn-info" ng-click="showRev()" >Show Reviews</button>
-  						<div id="rev" class="collapse">
-  						<div class="panel panel-default">
-  							<div ng-repeat="x in reviewsList" class="panel-body">Nickname: {{x.nickname}}<br>Review: "{{x.review}}"</div>
+					<div class="row">
+						<img
+							ng-src="books/{{bookDetails.name}}_files/{{bookDetails.image}}"
+							alt="image">
+						<h2>{{bookDetails.name}}</h2>
+						<br>
+						<h4>Description: {{bookDetails.description}}</h4>
+						<h4>Price: {{bookDetails.price}}$</h4>
+						<div ng-model="$parent.changeNotBought"
+							ng-init="$parent.changeNotBought = true">
+							<div ng-if="$parent.changeNotBought">
+								<div ng-model="$parent.$parent.changeLike"
+									ng-init="$parent.$parent.changeLike = false">
+									<div ng-if="$parent.$parent.changeLike">
+										<button id="like" data-toggle="tooltip" data-placement="right"
+											title="{{nicknames}}" ng-click="like()"
+											class="btn btn-default" tooltip>
+											<i style="color: blue"> {{numberOfLIKes}} </i> <img
+												ng-src="{{likeimg}}" width="70">
+										</button>
+									</div>
+								</div>
+								<div ng-model="$parent.$parent.changeDislike"
+									ng-init="$parent.$parent.changeDislike = false">
+									<div ng-if="$parent.$parent.changeDislike">
+										<button id="dislike" data-toggle="tooltip"
+											data-placement="right" title="{{nicknames}}"
+											ng-click="dislike()" class="btn btn-default" tooltip>
+											<i style="color: blue"> {{numberOfLIKes}} </i> <img
+												ng-src="{{dislikeimg}}" width="70">
+										</button>
+									</div>
+								</div>
+								<button class="btn btn-default" ng-click="readBook()">Read
+									Book</button>
+								<div class="form-group">
+									<input type="text" class="form-control"
+										ng-model="$parent.$parent.reviewText"
+										placeholder="Enter your review"></input>
+								</div>
+								<button class="btn btn-default" ng-click="addReview()">Add
+									Review</button>
+							</div>
 						</div>
-  						</div>
+						<div ng-model="$parent.changeBought"
+							ng-init="$parent.changeBought = false">
+							<div ng-if="$parent.changeBought">
+								<button ng-click="buy()" class="btn btn-success">Buy</button>
+							</div>
+						</div>
+						<div class="container">
+							<button id="sho" type="button" class="btn btn-info"
+								ng-click="showRev()">Show Reviews</button>
+							<div id="rev" class="collapse">
+								<div class="panel panel-default">
+									<div ng-repeat="x in reviewsList" class="panel-body">
+										Nickname: {{x.nickname}}<br>Review: "{{x.review}}"
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="myModal" role="dialog">
+				<div class="modal-dialog">
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
+						<div class="modal-body">
+							<p>{{content}}</p>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		</div>
-		</div>
-		<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">{{content}}</h4>
-            </div>
-            <div class="modal-body">
-            </div>
-        </div>
-    </div>
-</div>
 		<div ng-model="changeBuyBook" ng-init="changeBuyBook = false">
-		<div ng-if="changeBuyBook">
-		<div ng-include="'html/buyBook.html'"></div>
-	</div>
-	</div>	
-	<div ng-model="changeReadBook" ng-init="changeReadBook = false">
-		<div ng-if="changeReadBook">
-		<div ng-include="'books/' + bookname + '.html'"></div>
-	</div>
+			<div ng-if="changeBuyBook">
+				<div ng-include="'html/buyBook.html'"></div>
+			</div>
+		</div>
+		<div ng-model="changeReadBook" ng-init="changeReadBook = false">
+			<div ng-if="changeReadBook">
+				<div ng-include="'books/' + bookDetails.name + '.html'"></div>
+			</div>
+		</div>
 	</div>
 	<script src="js/index.js"></script>
 </body>

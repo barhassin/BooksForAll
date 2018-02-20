@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+<title>Browse Books</title>
+<link rel="stylesheet" type="text/css" href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/browseBooks.css">
+<script src="lib/jquery-3.2.1.js"></script>
+<script src="lib/angular.min.js"></script>
+<script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div ng-app="login" ng-controller="browseBooksAdminController">
+	<div ng-model="changeBrowseAd" ng-init="changeBrowseAd = true">
+	<div ng-if="changeBrowseAd">
+		<div ng-repeat="x in bookslist">
+		<div class="panel panel-default">
+  			<div class="panel-heading">{{x.name}}</div>
+  			<div class="row">
+  			<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+  			<div class="panel-body">	
+  			<img ng-src="books/{{x.name}}_files/{{x.image}}" alt="" class="img-responsive center-block" /> 
+  			<p>Description: {{x.description}}</p>
+  			<p>Price: {{x.price}}$</p>
+  			<button ng-click="toBook(x.name)" class="btn btn-primary pull-right">more</button>
+  			</div>
+  			</div>
+  			</div>
+		</div>
+		</div>
+		</div>
+		</div>
+	<div ng-model="changeBookAd" ng-init="changeBookAd = false">
+	<div ng-if="changeBookAd">
+	<div ng-include="'html/bookPageAdmin.html'"></div>
+	</div>
+	</div>
+	</div>
+<script src="js/index.js"></script>
+</body>
+</html>

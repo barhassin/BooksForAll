@@ -267,8 +267,10 @@ app.controller('book', function($rootScope,$scope,$http,$window){
 	$http.post("http://localhost:8080/BooksForAll/FindPurchasesByNameAndBookServlet",purchaseParameter)
 	.then(function(response) {
 		$scope.changeNotBought=true;	
+		$scope.changeBought=false;
 	},function(response){
 		$scope.changeNotBought=false;
+		$scope.changeBought=true;
 	});
 	
 	$scope.buy = function(){
@@ -334,11 +336,10 @@ app.controller('book', function($rootScope,$scope,$http,$window){
 		var reviewJson = JSON.stringify({bookname:bookName, nickname:nick, review:userReview, approved:"no"});
 		$http.post("http://localhost:8080/BooksForAll/AddReviewsServlet",reviewJson)
 		.then(function(response) {
-			$scope.content = "Thanks for your response, your response is awaiting approval";
+			$scope.content = "Thank you for your review, your review is now awaiting approval";
 			$('#myModal').modal({show:true})
 			},function(){});
 	}
-//-----------------Read book-------------------------
 	$scope.readBook = function(){
 		$scope.changeBookPage=false
 		$scope.changeReadBook=true;
@@ -370,14 +371,17 @@ app.controller('userPageController', function($rootScope,$scope,$http,$window) {
 	.then(function(response) {
 		$scope.userDetails=response.data;	
 	},function(){});
+	$scope.sure=function(){
+		$('#myModalUser').modal({show:true})
+	}
 	$scope.removeUser = function(){
 		var usr = $rootScope.userPageView;
 		var parameter = JSON.stringify({username:usr, password:"", type:"user"});
 		$http.post("http://localhost:8080/BooksForAll/RemoveUserServlet",parameter)
 		.then(function(response) {
 			$rootScope.userPageView="";
-			$scope.$parent.changeUserPage=false;
-			$scope.$parent.changeViewUsers=true;
+			$scope.$parent.$parent.$parent.changeUserPage=false;
+			$scope.$parent.$parent.$parent.changeViewUsers=true;
 		},function(){});
 	}
 });
@@ -429,6 +433,66 @@ app.controller('payment', function($rootScope,$scope,$http,$window) {
 		.then(function(response) {
 			$("#myModaltwo").modal('show');
 			$scope.content="Thank you for your purchase, have a good day";
+			$scope.moveBrowse=function(){
+				$scope.$parent.$parent.$parent.$parent.$parent.$parent.changeBrowse=true;
+				$scope.$parent.$parent.$parent.$parent.$parent.$parent.changeBook=false;
+				}
 		},function(){});				
 	}
+});
+
+app.controller('browseBooksAdminController', function($rootScope,$scope,$http,$window) {
+	$scope.toBook = function(param){
+		$rootScope.chosenBook=param;
+		$scope.changeBrowseAd=false;
+		$scope.changeBookAd=true;
+	};
+	$http.post("http://localhost:8080/BooksForAll/browseBooksServlet")
+	.then(function(response) {
+		$scope.bookslist = response.data;
+	}, function(){});
+});
+
+app.controller('bookAdmin', function($rootScope,$scope,$http,$window) {
+	$scope.likeimg="images/like.png";
+	var bookName = $rootScope.chosenBook;
+	var bookParameter = JSON.stringify({name:bookName,image:"",description:"",price:""});
+	$http.post("http://localhost:8080/BooksForAll/BookDetailsServlet",bookParameter)
+	.then(function(response) {
+		$scope.bookDetails=response.data;
+		$scope.price=response.data.price;
+	},function(response){});
+
+	$http.post("http://localhost:8080/BooksForAll/browseBooksLikesServlet",bookParameter)
+	.then(function(response) {
+		$scope.nicknames=""
+		$scope.userInfoList = response.data;
+		for(x in $scope.userInfoList){
+			$scope.nicknames= $scope.nicknames + $scope.userInfoList[x].nickname +"; ";
+		}
+		$scope.numberOfLIKes=$scope.userInfoList.length;
+	}, function(response){});
+	$http.post("http://localhost:8080/BooksForAll/BrowseReviewsByBookServlet",bookParameter)
+	.then(function(response) {
+		$scope.reviewsList = response.data;
+	}, function(){});
+	
+	$scope.showRev=function(){
+		$('#revAd').collapse('toggle');
+	}
+	 $(document).ready(function(){
+         $(".dropmenu").mouseover(function(){
+             $(".dropdown-content").show();
+         });
+         $(".dropmenu").mouseout(function(){
+             $(".dropdown-content").hide();
+         });
+     });
+	 
+	 $scope.moveUser=function(usr){
+		 $rootScope.userPageView=usr;
+		 $scope.changeBookPage=false;
+		 $scope.changeUserPage=true;
+		}
+	
 });
