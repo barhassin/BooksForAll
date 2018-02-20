@@ -14,8 +14,8 @@
 	<div ng-app="login" ng-controller="viewReviewsController">
 		<div ng-repeat="x in reviewList">
 		<h3>{{x.bookname}}</h3>
-		<h4>{{x.nickname}}: {{x.review}}</h4>
-		<button ng-click="approveReview(x.bookname, x.nickname, x.review)">Approve Review</button>
+		<h4>{{x.nickname}}: "{{x.review}}"</h4>
+		<button ng-click="approveReview(x.bookname, x.nickname, x.review)" class="btn btn-success">Approve Review</button>
 		</div>
 	</div>
 	<script src="js/index.js"></script>

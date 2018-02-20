@@ -55,8 +55,8 @@ public interface AppConstants {
 		public final String SELECT_ALL_LIKES_STMT = "SELECT * FROM LIKES";
 		public final String INSERT_LIKES_STMT = "INSERT INTO LIKES VALUES(?,?)";
 		public final String SELECT_LIKES_BY_BOOKNAME_STMT = "SELECT * FROM LIKES WHERE bookname=?";
-		public final String DELETE_LIKES_BY_BOOKNAME_AND_USERNAME_STMT = "DELETE * FROM LIKES "
-				+ "WHERE bookname=?" + "WHERE username=?";
+		public final String DELETE_LIKES_BY_BOOKNAME_AND_USERNAME_STMT = "DELETE FROM LIKES "
+				+ "WHERE bookname=? AND username=?";
 		public final String CREATE_REVIEWS_TABLE = "CREATE TABLE REVIEWS(bookname varchar(100),"
 				+ "nickname varchar(100), review varchar(5000), approved varchar(100))";
 		public final String SELECT_REVIEWS_BY_BOOKNAME_STMT = "SELECT * FROM REVIEWS WHERE bookname=? AND approved=?";
@@ -76,4 +76,5 @@ public interface AppConstants {
 		public final String UPDATE_REVIEWS_STMT = "UPDATE REVIEWS SET approved=? WHERE bookname=? AND nickname=? AND review=?";
 		public final String SELECT_USERINFO_BY_NICKNAME_STMT = "SELECT * FROM USERINFO "
 				+ "WHERE nickname=?";
+		public final String SELECT_LIKES_BY_BOOKNAME_AND_USERNAME_STMT = "SELECT * FROM LIKES WHERE bookname=? AND username=?";
 }

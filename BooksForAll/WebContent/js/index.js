@@ -225,93 +225,123 @@ app.directive('tooltip', function(){
 });
 app.controller('book', function($rootScope,$scope,$http,$window){
 	$scope.likeimg="images/like.png";
-	$scope.send=false;
-	$scope.bookname = $rootScope.chosenBook;
-	$scope.username = $rootScope.user;
-	var usr=$scope.username;
-	var bookname = $scope.bookname;
-	var parameter = JSON.stringify({username:usr,bookname:bookname});
-	var purchaseParameter = JSON.stringify({username:usr,bookname:bookname,price:""});
-	
-	$http.post("http://localhost:8080/BooksForAll/FindPurchasesByNameAndBookServlet",purchaseParameter)
+	$scope.dislikeimg="images/dislike.jpg";
+	var bookName = $rootScope.chosenBook;
+	var usr = $rootScope.user;
+	var likeParameter = JSON.stringify({username:usr,bookname:bookName});
+	var userParameter = JSON.stringify({username:usr,password:"",type:""});
+	$http.post("http://localhost:8080/BooksForAll/UserPageServlet",userParameter)
 	.then(function(response) {
-		$scope.PurchasedOrNot=true;	
+		$scope.userNickname=response.data.nickname;
+	},function(response){});
+	
+	$http.post("http://localhost:8080/BooksForAll/IsLikedServlet",likeParameter)
+	.then(function(response) {
+		$scope.changeLike=false;
+		$scope.changeDislike=true;
 	},function(response){
 		var status = response.status;
-		if(status=="420")
-			$scope.PurchasedOrNot=false;
+		if(status="499")
+			$scope.changeLike=true;
+			$scope.changeDislike=false;
 	});
-	var bookparameter = JSON.stringify({name:bookname, image:"", description:"",price:""});
-	$http.post("http://localhost:8080/BooksForAll/browseBooksLikesServlet",bookparameter)
+	
+	var bookParameter = JSON.stringify({name:bookName,image:"",description:"",price:""});
+	$http.post("http://localhost:8080/BooksForAll/BookDetailsServlet",bookParameter)
 	.then(function(response) {
-		$scope.userInfolist = response.data;
-		var nickNames="";
-		for(x in $scope.userInfolist){
-			if(x==$scope.userInfolist.length-1)
-			nickNames += $scope.userInfolist[x].nickname;
-			else{
-			nickNames += $scope.userInfolist[x].nickname + ", ";
-			}
+		$scope.bookDetails=response.data;
+		$scope.price=response.data.price;
+	},function(response){});
+
+	$http.post("http://localhost:8080/BooksForAll/browseBooksLikesServlet",bookParameter)
+	.then(function(response) {
+		$scope.nicknames=""
+		$scope.userInfoList = response.data;
+		for(x in $scope.userInfoList){
+			$scope.nicknames= $scope.nicknames + $scope.userInfoList[x].nickname +"; ";
 		}
-		$scope.likes=nickNames;
-		$scope.numberOfLIKes=$scope.userInfolist.length;
-	}, function(){});
-//-----------------Browse book details-----------------------
-	$http.post("http://localhost:8080/BooksForAll/BrowseBookByNameServlet",bookparameter)
+		$scope.numberOfLIKes=$scope.userInfoList.length;
+	}, function(response){});
+	
+	var purchaseParameter = JSON.stringify({username:usr,bookname:bookName,price:""});
+	$http.post("http://localhost:8080/BooksForAll/FindPurchasesByNameAndBookServlet",purchaseParameter)
 	.then(function(response) {
-		$scope.price = response.data.price;
-		$scope.description = response.data.description;
-		$scope.image= "books/" + response.data.name + "_files/" + response.data.image + "";
-	}, function(){});
-	//-----------------Browse reviews -----------------------
-	$http.post("http://localhost:8080/BooksForAll/BrowseReviewsByBookServlet",bookparameter)
-	.then(function(response) {
-		$scope.reviewsList = response.data;
-	}, function(){});
+		$scope.changeNotBought=true;	
+	},function(response){
+		$scope.changeNotBought=false;
+	});
 	
 	$scope.buy = function(){
 		$rootScope.bookPrice = $scope.price;
 		$scope.changeBookPage=false
 		$scope.changeBuyBook=true
 	}
-	//-----------------Add like-----------------------
+	
+	
 	$scope.like = function(){
-			$http.post("http://localhost:8080/BooksForAll/addLikeServlet",parameter)
+			$http.post("http://localhost:8080/BooksForAll/addLikeServlet",likeParameter)
 			.then(function(response) {
-				$scope.userInfolist = response.data;
-				var nickNames="";
-				for(x in $scope.userInfolist){
-					if(x==$scope.userInfolist.length-1)
-					nickNames += $scope.userInfolist[x].nickname;
-					else{
-					nickNames += $scope.userInfolist[x].nickname + ", ";
+				var num = $scope.numberOfLIKes;
+				$scope.numberOfLIKes=parseInt(num)+1;
+				$http.post("http://localhost:8080/BooksForAll/browseBooksLikesServlet",bookParameter)
+				.then(function(response) {
+					$scope.nicknames="";
+					$scope.userInfoList = response.data;
+					for(x in $scope.userInfoList){
+						$scope.nicknames= $scope.nicknames + $scope.userInfoList[x].nickname +"; ";
 					}
-				}
-				$scope.likes=nickNames;
-				$scope.numberOfLIKes=$scope.userInfolist.length;
-			},function(){});
+				$('#like').tooltip('hide').attr('title', $scope.nicknames).tooltip('fixTitle');
+				$('#dislike').tooltip('hide').attr('title', $scope.nicknames).tooltip('fixTitle');
+				$scope.changeLike=false;
+				$scope.changeDislike=true;
+				},function(response){});
+			},function(response){});
 	}
-//-------------------Add review----------------------
-	$scope.ifButtonClicked = function(){
-		$scope.send=!$scope.send;
+	$scope.dislike = function(){
+		$http.post("http://localhost:8080/BooksForAll/removeLikeServlet",likeParameter)
+		.then(function(response) {
+			var num = $scope.numberOfLIKes;
+			$scope.numberOfLIKes=parseInt(num)-1;
+			$http.post("http://localhost:8080/BooksForAll/browseBooksLikesServlet",bookParameter)
+			.then(function(response) {
+				$scope.nicknames="";
+				$scope.userInfoList = response.data;
+				for(x in $scope.userInfoList){
+					$scope.nicknames= $scope.nicknames + $scope.userInfoList[x].nickname +"; ";
+				}	
+			$('#like').tooltip('hide').attr('title', $scope.nicknames)
+	          .tooltip('fixTitle');
+			$('#dislike').tooltip('hide').attr('title', $scope.nicknames)
+	          .tooltip('fixTitle');
+			$scope.changeLike=true;
+			$scope.changeDislike=false;
+			},function(response){});
+		},function(response){});
 	}
+
+	$http.post("http://localhost:8080/BooksForAll/BrowseReviewsByBookServlet",bookParameter)
+	.then(function(response) {
+		$scope.reviewsList = response.data;
+	}, function(){});
+	
+	$scope.showRev=function(){
+		$('#rev').collapse('toggle');
+	}
+	
 	$scope.addReview = function(){
-		var userReview=$scope.$userEnterReview;
-		var reviewJson = JSON.stringify({bookname:bookname, nickname:"", review:userReview, approved:"no"});
+		var userReview=$scope.reviewText;
+		var nick= $scope.userNickname;
+		var reviewJson = JSON.stringify({bookname:bookName, nickname:nick, review:userReview, approved:"no"});
 		$http.post("http://localhost:8080/BooksForAll/AddReviewsServlet",reviewJson)
 		.then(function(response) {
-			$scope.responseWait = "Thanks for your response, your response is awaiting for approval";},
-			function(){});
+			$scope.content = "Thanks for your response, your response is awaiting approval";
+			$('#myModal').modal({show:true})
+			},function(){});
 	}
 //-----------------Read book-------------------------
 	$scope.readBook = function(){
-		var path= "books/" + $scope.bookname + ".html";
-		var res = encodeURI(path);
-		$('.modal-body').load(res,function(){
-	        $('#myModal').modal({show:true});
-	    });
-		//$scope.changeBookPage=false
-		//$scope.changeReadBook=true;
+		$scope.changeBookPage=false
+		$scope.changeReadBook=true;
 	}
 });
 app.controller('viewUsersController', function($rootScope,$scope,$http,$window) {

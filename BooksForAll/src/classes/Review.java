@@ -16,7 +16,8 @@ public class Review {
 	}
 	public String getReview() {
 		return review;
-	}public String getApproved() {
+	}
+	public String getApproved() {
 		return approved;
 	}
 
