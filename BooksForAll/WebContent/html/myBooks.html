@@ -14,15 +14,15 @@
 	<div ng-model="changeMyBooks" ng-init="changeMyBooks = true">
 	<div ng-if="changeMyBooks">
 		<div ng-repeat="x in mybookslist">
-		<div class="panel panel-default">
-  			<div class="panel-heading">{{x.name}}</div>
+		<div class="panel panel-default" id="panelTransparent">
+  			<div class="panel-heading" id="panelTransparent"><b>{{x.name}}</b></div>
   			<div class="row">
   			<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
   			<div class="panel-body">	
   			<img ng-src="books/{{x.name}}_files/{{x.image}}" alt="" class="img-responsive center-block" /> 
-  			<p>Description: {{x.description}}</p>
-  			<p>Price: {{x.price}}$</p>
-  			<button ng-click="toMyBook(x.name)" class="btn btn-primary pull-right">more</button>
+  			<p><b>Description:</b>{{x.description}}</p>
+  			<p><b>Price:</b> {{x.price}}$</p>
+  			<button ng-click="toMyBook(x.name)" class="button">more</button>
   			</div>
   			</div>
   			</div>

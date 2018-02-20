@@ -1,41 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8" name="viewport"
+	content="width=device-width, initial-scale=1">
 <title>Browse Books</title>
-<link rel="stylesheet" type="text/css" href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/browseBooks.css">
 <script src="lib/jquery-3.2.1.js"></script>
 <script src="lib/angular.min.js"></script>
 <script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<div ng-app="login" ng-controller="browseBooksController">
-	<div ng-model="changeBrowse" ng-init="changeBrowse = true">
-	<div ng-if="changeBrowse">
-		<div ng-repeat="x in bookslist">
-		<div class="panel panel-default">
-  			<div class="panel-heading">{{x.name}}</div>
-  			<div class="row">
-  			<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-  			<div class="panel-body">	
-  			<img ng-src="books/{{x.name}}_files/{{x.image}}" alt="" class="img-responsive center-block" /> 
-  			<p>Description: {{x.description}}</p>
-  			<p>Price: {{x.price}}$</p>
-  			<button ng-click="toBook(x.name)" class="btn btn-primary pull-right">more</button>
-  			</div>
-  			</div>
-  			</div>
+	<div ng-app="login" ng-controller="browseBooksController"
+		id="backgroundPage">
+		<div ng-model="changeBrowse" ng-init="changeBrowse = true">
+			<div ng-if="changeBrowse">
+				<div class="row">
+				<div ng-repeat="x in bookslist">
+					
+						<div class="column">
+							<div class="card" id="cardBook">
+								<img ng-src="books/{{x.name}}_files/{{x.image}}" alt="" id="imageBook">
+								<div class="container" id="containerBook">
+									<br>
+									<p id="fantasy">{{x.name}}<p>
+									<p><b>Description:</b></p>
+									<p>{{x.description}}</p>
+									<p><b>Price:</b> {{x.price}}$</p>
+									<p>
+										<button ng-click="toBook(x.name)" class="button">more</button>
+									</p>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
 		</div>
+		<div ng-model="changeBook" ng-init="changeBook = false">
+			<div ng-if="changeBook">
+				<div ng-include="'html/bookPage.html'"></div>
+			</div>
 		</div>
-		</div>
-		</div>
-	<div ng-model="changeBook" ng-init="changeBook = false">
-	<div ng-if="changeBook">
-	<div ng-include="'html/bookPage.html'"></div>
 	</div>
-	</div>
-	</div>
-<script src="js/index.js"></script>
+	<script src="js/index.js"></script>
 </body>
 </html>
