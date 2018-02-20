@@ -9,13 +9,16 @@
 <script src="lib/angular.min.js"></script>
 <script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </head>
-<body>
-	<div ng-app="login" ng-controller="loginController">
+<body id="backgroundlogin">
+	<div ng-app="login" ng-controller="loginController" id="backgroundlogin">
 	<div ng-model="changeLogin" ng-init="changeLogin = true">
 	<div ng-if="changeLogin">
+	<br>
+	<img src="logologin.gif" class="center-block" id="logologin">
+	
 	<div class="form-group form-row col-md-4 col-md-offset-4">
-	<div class="card">
-	<img src="logo.gif" class="center-block">
+	<div class="card" id="cardLogin">
+	
 	<br><br>
     <input type="text" class="form-control" placeholder="Enter Username" ng-model="$parent.username" required>
     <br>
@@ -41,6 +44,7 @@
         </div>
     </div>
     </div>
+    
     </div>
     </div>
     <div ng-model="changeSignup" ng-init="changeSignup = false">

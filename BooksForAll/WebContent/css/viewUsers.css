@@ -1,1 +1,38 @@
-@charset "windows-1255";
+body {
+	background-image: url("backgroundpage.jpg") !important;
+    background-repeat: repeat;
+    background-size: cover; 
+}
+
+
+
+#myInput {
+    width: 130px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+#myInput:focus {
+    width: 100%;
+}
+#myList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#myList li button {
+    border: 1px solid #ddd;
+    margin-top: -1px; 
+    background-color: #f6f6f6; 
+    padding: 12px; 
+    text-decoration: none; 
+    font-size: 18px; 
+    color: black; 
+    display: block;
+    width: 100%; 
+}
+
+#myList li button:hover:not(.header) {
+    background-color: #eee; 
+}
