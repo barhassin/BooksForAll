@@ -18,7 +18,7 @@
 					<input class="form-control" id="myInput" type="text"
 						placeholder="Search.."> <br>
 					<ul id="myList">
-						<li ng-repeat="x in userlist">
+						<li ng-repeat="x in userlist" id="{{x.username}}">
 						<img ng-src="images/{{x.photo}}">
 						{{x.username}}
 						<button ng-click="viewUser(x.username)" class="btn btn-success">User Page</button>
