@@ -13,6 +13,7 @@ body {
 #myInput:focus {
     width: 100%;
 }
+/*
 #myList {
     list-style-type: none;
     padding: 0;
@@ -34,3 +35,4 @@ body {
 #myList li button:hover:not(.header) {
     background-color: #eee; 
 }
+*/
