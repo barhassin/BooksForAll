@@ -12,13 +12,15 @@ public interface AppConstants {
 		public final String LIKES = "likes";
 		public final String REVIEWS = "reviews";
 		public final String PURCHASES = "purchases";
+		public final String LOCATIONS = "locations";
 		
-		public final String USERS_FILE = USERS + ".json";
-		public final String USERINFO_FILE = USERINFO + ".json";
-		public final String BOOKS_FILE = BOOKS + ".json";
-		public final String LIKES_FILE = LIKES + ".json";
-		public final String REVIEWS_FILE = REVIEWS + ".json";
-		public final String PURCHASES_FILE = PURCHASES + ".json";
+		public final String USERS_FILE = "json/" + USERS + ".json";
+		public final String USERINFO_FILE = "json/" + USERINFO + ".json";
+		public final String BOOKS_FILE = "json/" + BOOKS + ".json";
+		public final String LIKES_FILE = "json/" + LIKES + ".json";
+		public final String REVIEWS_FILE = "json/" + REVIEWS + ".json";
+		public final String PURCHASES_FILE = "json/" + PURCHASES + ".json";
+		public final String LOCATIONS_FILE = "json/" + LOCATIONS + ".json";
 		
 		public final String USERNAME = "username";
 		public final Type BOOK_COLLECTION = new TypeToken<Collection<Book>>() {}.getType();
@@ -77,4 +79,9 @@ public interface AppConstants {
 		public final String SELECT_USERINFO_BY_NICKNAME_STMT = "SELECT * FROM USERINFO "
 				+ "WHERE nickname=?";
 		public final String SELECT_LIKES_BY_BOOKNAME_AND_USERNAME_STMT = "SELECT * FROM LIKES WHERE bookname=? AND username=?";
+		public final String CREATE_LOCATIONS_TABLE = "CREATE TABLE LOCATIONS(username varchar(100),"
+				+ "bookname varchar(100)," + "location varchar(200))";
+		public final String INSERT_LOCATIONS_STMT = "INSERT INTO LOCATIONS VALUES(?,?,?)";
+		public final String UPDATE_LOCATIONS_STMT = "UPDATE LOCATIONS SET location=? WHERE username=? AND bookname=?";
+		public final String UPDATE_LOCATIONS_BY_USERNAME_AND_BOOKNAME_STMT = "SELECT * FROM LOCATIONS WHERE username=? AND bookname=?";
 }
