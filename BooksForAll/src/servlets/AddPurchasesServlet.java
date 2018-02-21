@@ -69,6 +69,7 @@ public class AddPurchasesServlet extends HttpServlet {
     	    reader.close();
     	    String params = sb.toString();//book name,user name,price
     		PreparedStatement stmt;
+    		PreparedStatement pstmt;
     		Gson gson = new Gson();
     		Purchase purchase = gson.fromJson(params, Purchase.class);
     			try {
@@ -78,6 +79,17 @@ public class AddPurchasesServlet extends HttpServlet {
     				stmt.setString(3,purchase.getPrice());
     				stmt.executeUpdate();
     				stmt.close();
+    			} catch (SQLException e) {
+    				getServletContext().log("Error while aading purchase", e);
+    	    		response.sendError(500);//internal server error
+    			}
+    			try {
+    				pstmt = conn.prepareStatement(AppConstants.INSERT_LOCATIONS_STMT);
+    				pstmt.setString(1, purchase.getUsername());
+    				pstmt.setString(2,purchase.getBookname());
+    				pstmt.setString(3,"0");
+    				pstmt.executeUpdate();
+    				pstmt.close();
     			} catch (SQLException e) {
     				getServletContext().log("Error while aading purchase", e);
     	    		response.sendError(500);//internal server error

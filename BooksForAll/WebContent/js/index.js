@@ -519,9 +519,12 @@ app.controller('readBookController', function($rootScope,$scope,$http,$window) {
 		});
 	}
 	$window.onbeforeunload = function(event) {
-		scroll($window.pageYOffset)
+		saveScrollLocation($window.pageYOffset)
 	}
 	$scope.$on("$destroy", function() {
-		scroll($window.pageYOffset)
+		saveScrollLocation($window.pageYOffset)
 	})
+	saveScrollLocation= function(param){
+		
+	}
 });
