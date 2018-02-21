@@ -11,8 +11,10 @@
 </head>
 <body>
 <div ng-app="login" ng-controller="welcomeController">
-<h1>welcome {{content}}</h1>
-<div class="container"> 
+<h1 id="headline">welcome {{content}}</h1>
+<br>
+<div class="container">
+<p id="font">My Books</p> 
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -22,7 +24,7 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
       <div ng-repeat="x in myBooksList" class="item" ng-class="{active:!$index}">
-        <img ng-src="books/{{x.name}}_files/{{x.image}}" style="width:100%;">
+        <img ng-src="books/{{x.name}}_files/{{x.image}}" id="imageCarousel">
       </div>
 
     </div>

@@ -27,8 +27,8 @@
 							<br>
 						<p id="serif">{{bookDetails.name}}</p>
 						<br>
-						<p id="cursive">Description: {{bookDetails.description}}</p>
-						<p id="cursive">Price: {{bookDetails.price}}$</p>
+						<p><b>Description: </b> {{bookDetails.description}}</p>
+						<p><b>Price: </b> {{bookDetails.price}}$</p>
 						
 						<div ng-model="$parent.changeNotBought"
 							ng-init="$parent.changeNotBought = true">
@@ -40,8 +40,8 @@
 										<button id="like" data-toggle="tooltip" data-placement="right"
 											title="{{nicknames}}" ng-click="like()"
 											class="btn btn-default" tooltip>
-											<i style="color: blue"> {{numberOfLIKes}} </i> <img
-												ng-src="{{likeimg}}" width="70">
+											 <img ng-src="{{likeimg}}" width="70">
+											 <span class="badge">{{numberOfLIKes}}</span>
 										</button>
 										</div>
 									</div>
@@ -53,9 +53,9 @@
 									<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
 										<button id="dislike" data-toggle="tooltip"
 											data-placement="right" title="{{nicknames}}"
-											ng-click="dislike()" class="btn btn-default" tooltip>
-											<i style="color: blue"> {{numberOfLIKes}} </i> <img
+											ng-click="dislike()" class="btn btn-default" tooltip> <img
 												ng-src="{{dislikeimg}}" width="70">
+												<span class="badge">{{numberOfLIKes}}</span>
 										</button>
 										</div>
 									</div>
@@ -89,7 +89,7 @@
 						<br>
 						<br>
 						<div class="container">
-						<div class="row">
+						<div class="pre-scrollable" id="reviewScroll">
 							<button id="sho" type="button" class="btn btn-info"
 								ng-click="showRev()">Show Reviews</button>
 							<div id="rev" class="collapse">

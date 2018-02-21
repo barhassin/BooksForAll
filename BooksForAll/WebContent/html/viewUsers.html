@@ -14,17 +14,25 @@
 	<div ng-app="login" ng-controller="viewUsersController">
 		<div ng-model="changeViewUsers" ng-init="changeViewUsers = true">
 			<div ng-if="changeViewUsers">
+			<div class="row">
 				<div class="container">
 					<input class="form-control" id="myInput" type="text"
 						placeholder="Search.."> <br>
 					<ul id="myList">
 						<li ng-repeat="x in userlist" id="{{x.username}}">
-						<img ng-src="images/{{x.photo}}">
+						<img ng-src="images/{{x.photo}}" id="userPhoto">
 						{{x.username}}
+						<div class="column">
+						<br>
 						<button ng-click="viewUser(x.username)" class="btn btn-success">User Page</button>
-						<button ng-click="sure(x.username)" class="btn btn-danger pull-right">Delete User</button>
+						<button ng-click="sure(x.username)" class="btn btn-danger">Delete User</button>
+						</div>
+						<br>
+						<br>
 						</li>
+							
 					</ul>
+				</div>
 				</div>
       <div class="modal fade" id="myModalUser" role="dialog">
     <div class="modal-dialog">

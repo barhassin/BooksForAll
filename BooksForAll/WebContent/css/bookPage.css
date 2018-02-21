@@ -44,3 +44,22 @@
 	background-color: transparent;
 	border: transparent
 }
+#like {
+	background-color: #eceff8;
+}
+#like .badge {
+    color: #46629d;
+    background-color: #fff;
+    top: 2px;
+}
+#dislike {
+	background-color: #eceff8;
+}
+#dislike .badge {
+    color: #46629d;
+    background-color: #fff;
+    top: 2px;
+}
+#reviewScroll {
+	overflow-y: auto;
+}

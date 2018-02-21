@@ -11,15 +11,21 @@
 </head>
 <body>
 <div ng-app="login" ng-controller="userPageController">
-
-      <img ng-src="images/{{userDetails.photo}}">
-	<h2>{{userDetails.username}}</h2>
+	<div class="row">
+	<div class="col-sm-4">
+	<br>
+      <img ng-src="images/{{userDetails.photo}}" id="userpagePhoto">
+      </div>
+       <div class="col-sm-4">
+	  <h2>{{userDetails.username}}</h2>
       <h4>Nickname: {{userDetails.nickname}}</h4>
       <h4>Address: {{userDetails.street}} {{userDetails.streetnumber}}, {{userDetails.city}}</h4>
       <h4>Zipcode: {{userDetails.zipcode}}</h4>
       <h4>Telephone: {{userDetails.telephone}}</h4>
       <h4>Email: {{userDetails.email}}</h4>
       <h4>Description: {{userDetails.description}}</h4>
+      </div>
+    </div>
     </div>
 
 <script src="js/index.js"></script>
