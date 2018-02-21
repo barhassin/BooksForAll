@@ -83,5 +83,5 @@ public interface AppConstants {
 				+ "bookname varchar(100)," + "location varchar(200))";
 		public final String INSERT_LOCATIONS_STMT = "INSERT INTO LOCATIONS VALUES(?,?,?)";
 		public final String UPDATE_LOCATIONS_STMT = "UPDATE LOCATIONS SET location=? WHERE username=? AND bookname=?";
-		public final String UPDATE_LOCATIONS_BY_USERNAME_AND_BOOKNAME_STMT = "SELECT * FROM LOCATIONS WHERE username=? AND bookname=?";
+		public final String SELECT_LOCATIONS_BY_USERNAME_AND_BOOKNAME_STMT = "SELECT * FROM LOCATIONS WHERE username=? AND bookname=?";
 }

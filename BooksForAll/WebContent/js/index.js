@@ -47,6 +47,10 @@ app.controller('welcomeController', function($rootScope,$scope,$http,$window) {
 		$scope.myBooksList = response.data;
 	}, function(){});
 });
+app.controller('welcomeAdminController', function($rootScope,$scope,$http,$window) {
+	var usr = $rootScope.user;
+	$scope.content=usr;
+});
 app.controller('navbarController', function($rootScope,$scope,$http,$window) {
 	$scope.content=$rootScope.user;
 	$scope.welcome = function(){
@@ -509,14 +513,13 @@ app.controller('bookAdmin', function($rootScope,$scope,$http,$window) {
 app.controller('readBookController', function($rootScope,$scope,$http,$window) {
 	var bookName = $rootScope.chosenBook;
 	var usr = $rootScope.user;
+	$scope.content=bookName;
+	var parameter = JSON.stringify({username:usr, bookname:bookName, location:"" });
 	$scope.startScroll = function() {
-		var pairList = $rootScope.rootLogedUser.bookScroll;
-
-		angular.forEach(pairList, function(pair) {
-			if (pair.key == $scope.book.bookName) {
-				$window.scrollTo(0, pair.value);
-			}
-		});
+		$http.post("http://localhost:8080/BooksForAll/LoadLocationServlet",parameter)
+		.then(function(response) {
+			$window.scrollTo(0, response.data.location);
+		}, function(){});
 	}
 	$window.onbeforeunload = function(event) {
 		saveScrollLocation($window.pageYOffset)
@@ -525,6 +528,14 @@ app.controller('readBookController', function($rootScope,$scope,$http,$window) {
 		saveScrollLocation($window.pageYOffset)
 	})
 	saveScrollLocation= function(param){
-		
+		var saveParameter = JSON.stringify({username:usr, bookname:bookName, location:param });
+		$http.post("http://localhost:8080/BooksForAll/SaveLocationServlet",saveParameter)
+		.then(function(response) {
+		}, function(){});
+	}
+	$scope.returnToBook= function()
+	{
+		$scope.$parent.$parent.$parent.changeReadBook=false;
+		$scope.$parent.$parent.$parent.changeBookPage=true;
 	}
 });

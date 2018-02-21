@@ -4,14 +4,18 @@
 <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
 <title>Read Book</title>
 <link rel="stylesheet" type="text/css" href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="css/login.css">
+<link rel="stylesheet" type="text/css" href="css/readBook.css">
 <script src="lib/jquery-3.2.1.js"></script>
 <script src="lib/angular.min.js"></script>
 <script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<div ng-app="login" ng-controller="readBookController">
-	<div ng-include="'books/' + bookDetails.name + '.html'"></div>
+	<div class="sidenav">
+  <a href="#" ng-click="returnToBook()">book</a>
+  <a href="#" ng-click="startScroll()">scroll</a>
+</div>  
+	<div ng-include="'books/' + content + '.html'"></div>
   	</div>
   	<script src="js/index.js"></script>
 </body>
