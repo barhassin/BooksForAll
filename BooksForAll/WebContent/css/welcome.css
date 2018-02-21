@@ -1,1 +1,25 @@
-@charset "windows-1255";
+
+#headline {
+	text-align: center;
+    font-family: fantasy;
+    font-size: 60px;	
+}    
+
+#imageCarousel {
+	 width:50%;
+}
+.carousel-control.right {
+    right: 50%;
+}
+
+
+
+#font {
+	font-family: fantasy;
+    font-size: 18px
+}
+
+.carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
+    display: block;
+    max-height: 500px;
+}
