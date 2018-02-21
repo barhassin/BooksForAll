@@ -81,32 +81,17 @@
 											<div class="form-group">
 												<label for="date"> EXPIRY DATE</label>
 												<div name="date">
-													<div class="col-xs-6 col-lg-6 pl-ziro">
-														<input type="number" class="form-control" ng-model="Month"
-															min="{{currentMonth}}" max="12" name="Month"
-															placeholder="MM" required>
+													
+														<input type="month" name="month" class="form-control" min="{{currentYear}}-{{currentMonth}}" required>
 													</div>
-													<div class="col-xs-6 col-lg-6 pl-ziro">
-														<input type="number" class="form-control" ng-model="Year"
-															min="{{currentYear}}" max="{{maxYear}}" name="Year"
-															placeholder="YY" required>
-													</div>
+													{{currentYear}}-{{currentMonth}}
 													<span style="color: red"
-														ng-show="myForm.Month.$invalid && myForm.Month.$touched">non
-														valid month.<br>
-													</span> <span style="color: red"
-														ng-show="myForm.Month.$error.required && myForm.Month.$touched">
-														month is required.<br>
-													</span> <span style="color: red"
-														ng-show="myForm.Year.$invalid && myForm.Year.$touched">
-														year is required.<br>
-													</span> <span style="color: red"
-														ng-show="myForm.Year.$error.required && myForm.Year.$touched">
-														year is required.<br>
-													</span>
+													ng-show="myForm.Month.$error.required && myForm.Month.$touched">
+													Expiry date is required.<br>
+													</span>			
 												</div>
 											</div>
-										</div>
+										
 										<div class="col-xs-5 col-md-5 pull-right">
 											<div class="form-group">
 												<label for="cvc"> CVV</label> <input type="text"
@@ -121,8 +106,10 @@
 												</span>
 											</div>
 										</div>
+										</div>
 									</div>
 									<br> <label> PRICE: {{price}}$</label>
+									</div>
 							</form>
 						</div>
 					</div>

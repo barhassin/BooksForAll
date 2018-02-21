@@ -1,1 +1,46 @@
-@charset "utf-8";
+
+#imagebookpage {
+	width: 200px;
+}
+
+#cardBookPage {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	width: fit-content;
+    margin: auto 25px;
+    margin-top: 50px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+	border-style: ridge;
+}
+
+#serif {
+	margin: 30px;
+	font-weight: 1000;
+	font-family: serif;
+	font-size: 22px;
+	font-style: italic;
+	font-variant: normal;
+	line-height: 16.5px;
+}
+
+#cursive {
+	font-weight: 400;
+	font-family: cursive;
+	font-size: 16px;
+	font-style: normal;
+	font-variant: normal;
+	line-height: 16.5px;
+}
+
+#panelReview {
+	border: 0;
+	background-color: transparent;
+}
+#bodyReview {
+	background-color: transparent;
+	border: transparent
+}

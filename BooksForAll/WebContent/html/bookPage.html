@@ -17,47 +17,67 @@
 			<div ng-if="changeBookPage">
 				<div class="container">
 					<div class="row">
-						<img
-							ng-src="books/{{bookDetails.name}}_files/{{bookDetails.image}}"
-							alt="image">
-						<h2>{{bookDetails.name}}</h2>
+					<div class="column">
+						<div class="card" id="cardBookPage">
+						<img ng-src="books/{{bookDetails.name}}_files/{{bookDetails.image}}"
+							alt="image" id="imagebookpage">
+							</div>
+							</div>
+							<br>
+							<br>
+						<p id="serif">{{bookDetails.name}}</p>
 						<br>
-						<h4>Description: {{bookDetails.description}}</h4>
-						<h4>Price: {{bookDetails.price}}$</h4>
+						<p id="cursive">Description: {{bookDetails.description}}</p>
+						<p id="cursive">Price: {{bookDetails.price}}$</p>
+						
 						<div ng-model="$parent.changeNotBought"
 							ng-init="$parent.changeNotBought = true">
 							<div ng-if="$parent.changeNotBought">
 								<div ng-model="$parent.$parent.changeLike"
 									ng-init="$parent.$parent.changeLike = false">
 									<div ng-if="$parent.$parent.changeLike">
+										<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
 										<button id="like" data-toggle="tooltip" data-placement="right"
 											title="{{nicknames}}" ng-click="like()"
 											class="btn btn-default" tooltip>
 											<i style="color: blue"> {{numberOfLIKes}} </i> <img
 												ng-src="{{likeimg}}" width="70">
 										</button>
+										</div>
 									</div>
 								</div>
+								
 								<div ng-model="$parent.$parent.changeDislike"
 									ng-init="$parent.$parent.changeDislike = false">
 									<div ng-if="$parent.$parent.changeDislike">
+									<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
 										<button id="dislike" data-toggle="tooltip"
 											data-placement="right" title="{{nicknames}}"
 											ng-click="dislike()" class="btn btn-default" tooltip>
 											<i style="color: blue"> {{numberOfLIKes}} </i> <img
 												ng-src="{{dislikeimg}}" width="70">
 										</button>
+										</div>
 									</div>
 								</div>
+								<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
 								<button class="btn btn-default" ng-click="readBook()">Read
-									Book</button>
+									Me</button>
+								</div>
+								<br>
+								<br>
 								<div class="form-group">
+								<div class="input-group">
 									<input type="text" class="form-control"
 										ng-model="$parent.$parent.reviewText"
 										placeholder="Enter your review"></input>
-								</div>
-								<button class="btn btn-default" ng-click="addReview()">Add
+										<span class="input-group-btn">
+										<button class="btn btn-default" ng-click="addReview()">Add
 									Review</button>
+									</span>
+									</div>
+								</div>
+								
 							</div>
 						</div>
 						<div ng-model="$parent.changeBought"
@@ -66,15 +86,19 @@
 								<button ng-click="buy()" class="btn btn-success">Buy</button>
 							</div>
 						</div>
+						<br>
+						<br>
 						<div class="container">
+						<div class="row">
 							<button id="sho" type="button" class="btn btn-info"
 								ng-click="showRev()">Show Reviews</button>
 							<div id="rev" class="collapse">
-								<div class="panel panel-default">
-									<div ng-repeat="x in reviewsList" class="panel-body">
-										Nickname: {{x.nickname}}<br>Review: "{{x.review}}"
+								<div class="panel panel-default" id="panelReview">
+									<div ng-repeat="x in reviewsList" class="panel-body" id="bodyReview">
+										 <b>{{x.nickname}}</b><br> "{{x.review}}"
 									</div>
 								</div>
+							</div>
 							</div>
 						</div>
 					</div>
