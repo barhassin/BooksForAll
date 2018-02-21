@@ -39,7 +39,13 @@ var app = angular.module('login', []);
 	}
 });
 app.controller('welcomeController', function($rootScope,$scope,$http,$window) {
-	$scope.content=$rootScope.user;
+	var usr = $rootScope.user;
+	$scope.content=usr;
+	var parameter = JSON.stringify({username:usr, password:"", type:""});
+	$http.post("http://localhost:8080/BooksForAll/myBooksServlet", parameter)
+	.then(function(response) {
+		$scope.myBooksList = response.data;
+	}, function(){});
 });
 app.controller('navbarController', function($rootScope,$scope,$http,$window) {
 	$scope.content=$rootScope.user;
@@ -499,4 +505,23 @@ app.controller('bookAdmin', function($rootScope,$scope,$http,$window) {
 		 $scope.changeUserPage=true;
 		}
 	
+});
+app.controller('readBookController', function($rootScope,$scope,$http,$window) {
+	var bookName = $rootScope.chosenBook;
+	var usr = $rootScope.user;
+	$scope.startScroll = function() {
+		var pairList = $rootScope.rootLogedUser.bookScroll;
+
+		angular.forEach(pairList, function(pair) {
+			if (pair.key == $scope.book.bookName) {
+				$window.scrollTo(0, pair.value);
+			}
+		});
+	}
+	$window.onbeforeunload = function(event) {
+		scroll($window.pageYOffset)
+	}
+	$scope.$on("$destroy", function() {
+		scroll($window.pageYOffset)
+	})
 });

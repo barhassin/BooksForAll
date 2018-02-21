@@ -276,6 +276,42 @@ public class ManageUserDBFromJsonFile implements ServletContextListener {
     			//close statements
     			pstmt.close();
     		}
+    		
+    		boolean created7 = false;
+    		try{
+    			//create Users table
+    			Statement stmt = conn.createStatement();
+    			stmt.executeUpdate(AppConstants.CREATE_LOCATIONS_TABLE);
+    			//commit update
+        		conn.commit();
+        		stmt.close();
+    		}catch (SQLException e){
+    			//check if exception thrown since table was already created (so we created the database already 
+    			//in the past
+    			created7 = tableAlreadyExists(e);
+    			if (!created7){
+    				throw e;//re-throw the exception so it will be caught in the
+    				//external try..catch and recorded as error in the log
+    			}
+    		}
+    		//if no database exist in the past - further populate its records in the table
+    		if (!created7){
+    			//populate customers table with customer data from json file
+    			Collection<Location> locations = loadlocation(cntx.getResourceAsStream(File.separator +
+    														   AppConstants.LOCATIONS_FILE));
+    			PreparedStatement pstmt = conn.prepareStatement(AppConstants.INSERT_LOCATIONS_STMT);
+    			for (Location location : locations){
+    				pstmt.setString(1,location.getUsername());
+    				pstmt.setString(2,location.getBookname());
+    				pstmt.setString(3,location.getLocation());
+    				pstmt.executeUpdate();
+    			}
+
+    			//commit update
+    			conn.commit();
+    			//close statements
+    			pstmt.close();
+    		}
 
     		//close connection
     		conn.close();
@@ -444,4 +480,26 @@ private Collection<Purchase> loadpurchase(InputStream is) throws IOException{
 		return purchases;
 
 	}
+private Collection<Location> loadlocation(InputStream is) throws IOException{
+	
+	//wrap input stream with a buffered reader to allow reading the file line by line
+	BufferedReader br = new BufferedReader(new InputStreamReader(is));
+	StringBuilder jsonFileContent = new StringBuilder();
+	//read line by line from file
+	String nextLine = null;
+	while ((nextLine = br.readLine()) != null){
+		jsonFileContent.append(nextLine);
+	}
+
+
+	Gson gson = new Gson();
+	//this is a require type definition by the Gson utility so Gson will 
+	//understand what kind of object representation should the json file match
+	Type type = new TypeToken<Collection<Location>>(){}.getType();
+	Collection<Location> locations = gson.fromJson(jsonFileContent.toString(), type);
+	//close
+	br.close();	
+	return locations;
+
+}
 }
