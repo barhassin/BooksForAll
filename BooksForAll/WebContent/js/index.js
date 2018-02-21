@@ -425,10 +425,15 @@ app.controller('payment', function($rootScope,$scope,$http,$window) {
 	$scope.visaValidation = /^[4][0-9]{15}$/;
 	var date = new Date();
     var month = date.getMonth()+1;
-	var year =date.getYear()-100;
+	var year =date.getYear()+1900;
 	$scope.currentYear=year;
 	$scope.maxYear=year+6;
+	if(month<10){
+	$scope.currentMonth="0" + month;
+	}
+	else{
 	$scope.currentMonth=month;
+	}
 	$scope.submitPayment=function(){
 		var price = $scope.price;
 		var bookname = $rootScope.chosenBook;
