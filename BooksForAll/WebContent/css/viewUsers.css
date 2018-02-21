@@ -13,26 +13,9 @@ body {
 #myInput:focus {
     width: 100%;
 }
-/*
-#myList {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+#userPhoto {
+    vertical-align: middle;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
 }
-
-#myList li button {
-    border: 1px solid #ddd;
-    margin-top: -1px; 
-    background-color: #f6f6f6; 
-    padding: 12px; 
-    text-decoration: none; 
-    font-size: 18px; 
-    color: black; 
-    display: block;
-    width: 100%; 
-}
-
-#myList li button:hover:not(.header) {
-    background-color: #eee; 
-}
-*/
