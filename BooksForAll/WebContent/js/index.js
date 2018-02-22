@@ -160,6 +160,10 @@ app.controller('signUpController', function($rootScope,$scope,$http,$window) {
 			}
 		});
 	};
+	$scope.toLogin= function(){
+		$scope.$parent.$parent.$parent.changeSignup=false;
+		$scope.$parent.$parent.$parent.changeLogin=true;
+	}
 });
 app.controller('navbarAdminController', function($rootScope,$scope,$http,$window) {
 	$scope.content=$rootScope.user;
