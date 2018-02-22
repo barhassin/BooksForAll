@@ -84,6 +84,12 @@
 							ng-init="$parent.changeBought = false">
 							<div ng-if="$parent.changeBought">
 								<button ng-click="buy()" class="btn btn-success">Buy</button>
+								<button id="like" data-toggle="tooltip" data-placement="right"
+											title="{{nicknames}}"
+											class="btn btn-default" tooltip>
+											 <img ng-src="{{likeimg}}" width="70">
+											 <span class="badge">{{numberOfLIKes}}</span>
+										</button>
 							</div>
 						</div>
 						<br>
