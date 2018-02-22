@@ -63,6 +63,12 @@
 								<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
 								<button class="btn btn-default" ng-click="readBook()">Read
 									Me</button>
+									<button id="like" data-toggle="tooltip" data-placement="right"
+											title="{{nicknames}}" ng-click="like()"
+											class="btn btn-default" tooltip>
+											 <img ng-src="{{likeimg}}" width="70">
+											 <span class="badge">{{numberOfLIKes}}</span>
+										</button>
 								</div>
 								<br>
 								<br>
