@@ -11,11 +11,18 @@
 </head>
 <body>
 	<div ng-app="login" ng-controller="readBookController">
+	<div class="row">
+	<div class="col-md-2">
 	<div class="sidenav">
-  <a href="#" ng-click="returnToBook()">book</a>
-  <a href="#" ng-click="startScroll()">scroll</a>
+  <a href="#" ng-click="returnToBook()">Book page</a>
+  
+  <a href="#" ng-click="startScroll()">Return to last spot</a>
+</div>
 </div>  
+	<div class="col-md-10">
 	<div ng-include="'books/' + content + '.html'"></div>
+	</div>
+  	</div>
   	</div>
   	<script src="js/index.js"></script>
 </body>

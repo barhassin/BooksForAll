@@ -1,1 +1,47 @@
-@charset "windows-1255";
+#cardPayment {
+	 background-color: transparent;
+   
+    margin: 0 auto 25px;
+    margin-top: 50px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    border: 10px solid #f3e4d0;
+    border-style: ridge;
+    width: fit-content;
+}
+.panel-body {
+    padding: 30px;
+}
+.panel-default>.panel-heading {
+    color: #333;
+    margin-left: 10px;
+    background-color: transparent;
+    border-color: transparent;
+}
+.panel-default {
+     border-color: transparent; 
+}
+#btnpay {
+    width: 433px;
+    margin-left: 15px;
+}
+#title {
+	
+	font-size: 20px;
+    color: inherit;
+    font-family: cursive;
+    font-weight: 600;
+    text-align: center;
+}
+.panel {
+    margin-bottom: 20px;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}

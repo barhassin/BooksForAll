@@ -1,1 +1,4 @@
-@charset "windows-1255";
+.navbar-default .navbar-nav>li>a {
+    font-family: cursive; 
+    font-weight: bold;
+}

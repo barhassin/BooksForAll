@@ -438,6 +438,7 @@ app.controller('payment', function($rootScope,$scope,$http,$window) {
 	else{
 	$scope.currentMonth=month;
 	}
+	$scope.creditcard="amex";
 	$scope.submitPayment=function(){
 		var price = $scope.price;
 		var bookname = $rootScope.chosenBook;

@@ -13,11 +13,12 @@
 <body>
 	<div ng-app="login" ng-controller="payment">
 		<div class="container">
+		<div class="card" id="cardPayment">
 			<div class="row">
-				<div class="col-xs-12 col-md-4">
+				
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h3 class="panel-title">Payment Details</h3>
+							<h3 class="panel-title" id="title">Payment Details</h3>
 						</div>
 						<div class="panel-body">
 							<form name="myForm">
@@ -79,16 +80,12 @@
 									<div class="row">
 										<div class="col-xs-7 col-md-7">
 											<div class="form-group">
-												<label for="date"> EXPIRY DATE</label>
-												<div name="date">
-													
-														<input type="month" name="month" class="form-control" min="{{currentYear}}-{{currentMonth}}" required>
-													</div>
-													{{currentYear}}-{{currentMonth}}
+												<label for="date"> EXPIRY DATE</label>									
+														<input type="month" name="month" ng-model="month" class="form-control" min="{{currentYear}}-{{currentMonth}}" required>													
 													<span style="color: red"
-													ng-show="myForm.Month.$error.required && myForm.Month.$touched">
-													Expiry date is required.<br>
-													</span>			
+													ng-show="myForm.month.$error.required && myForm.month.$touched">Expiry date is required.<br>
+													</span>
+															
 												</div>
 											</div>
 										
@@ -109,14 +106,14 @@
 										</div>
 									</div>
 									<br> <label> PRICE: {{price}}$</label>
-									</div>
 							</form>
 						</div>
 					</div>
 					<button class="btn btn-success btn-lg btn-block"
-						ng-click="submitPayment()" ng-disabled="myForm.$invalid">Pay</button>
+						ng-click="submitPayment()" ng-disabled="myForm.$invalid" id="btnpay">Pay</button>
 
-				</div>
+			
+			</div>
 			</div>
 		</div>
 		<div id="myModaltwo" class="modal fade">
