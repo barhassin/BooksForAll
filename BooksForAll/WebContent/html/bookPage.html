@@ -17,7 +17,7 @@
 			<div ng-if="changeBookPage">
 				<div class="container">
 					<div class="row">
-					<div class="column">
+					<div class="col-md-3">
 						<div class="card" id="cardBookPage">
 						<img ng-src="books/{{bookDetails.name}}_files/{{bookDetails.image}}"
 							alt="image" id="imagebookpage">
@@ -25,53 +25,56 @@
 							</div>
 							<br>
 							<br>
+							<div class="col-md-3" id="coltop">
 						<p id="serif">{{bookDetails.name}}</p>
 						<br>
 						<p><b>Description: </b> {{bookDetails.description}}</p>
 						<p><b>Price: </b> {{bookDetails.price}}$</p>
+						</div>
+						
 						
 						<div ng-model="$parent.changeNotBought"
 							ng-init="$parent.changeNotBought = true">
 							<div ng-if="$parent.changeNotBought">
+								<div class="row">
+								<div class="col-md-2">
 								<div ng-model="$parent.$parent.changeLike"
 									ng-init="$parent.$parent.changeLike = false">
 									<div ng-if="$parent.$parent.changeLike">
-										<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+									
+										
 										<button id="like" data-toggle="tooltip" data-placement="right"
 											title="{{nicknames}}" ng-click="like()"
 											class="btn btn-default" tooltip>
 											 <img ng-src="{{likeimg}}" width="70">
 											 <span class="badge">{{numberOfLIKes}}</span>
 										</button>
-										</div>
+										
 									</div>
 								</div>
 								
 								<div ng-model="$parent.$parent.changeDislike"
 									ng-init="$parent.$parent.changeDislike = false">
 									<div ng-if="$parent.$parent.changeDislike">
-									<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+									
 										<button id="dislike" data-toggle="tooltip"
 											data-placement="right" title="{{nicknames}}"
 											ng-click="dislike()" class="btn btn-default" tooltip> <img
 												ng-src="{{dislikeimg}}" width="70">
 												<span class="badge">{{numberOfLIKes}}</span>
 										</button>
-										</div>
+										
 									</div>
 								</div>
-								<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-								<button class="btn btn-default" ng-click="readBook()">Read
-									Me</button>
-									<button id="like" data-toggle="tooltip" data-placement="right"
-											title="{{nicknames}}" ng-click="like()"
-											class="btn btn-default" tooltip>
-											 <img ng-src="{{likeimg}}" width="70">
-											 <span class="badge">{{numberOfLIKes}}</span>
-										</button>
+								<button id="read" ng-click="readBook()">
+									</button>	
 								</div>
-								<br>
-								<br>
+								</div>
+								
+															
+								
+								<div class="row">
+								<div class="col-md-8" id="colReveiw">
 								<div class="form-group">
 								<div class="input-group">
 									<input type="text" class="form-control"
@@ -83,19 +86,14 @@
 									</span>
 									</div>
 								</div>
-								
+								</div>
+								</div>
 							</div>
 						</div>
 						<div ng-model="$parent.changeBought"
 							ng-init="$parent.changeBought = false">
 							<div ng-if="$parent.changeBought">
 								<button ng-click="buy()" class="btn btn-success">Buy</button>
-								<button id="like" data-toggle="tooltip" data-placement="right"
-											title="{{nicknames}}"
-											class="btn btn-default" tooltip>
-											 <img ng-src="{{likeimg}}" width="70">
-											 <span class="badge">{{numberOfLIKes}}</span>
-										</button>
 							</div>
 						</div>
 						<br>
