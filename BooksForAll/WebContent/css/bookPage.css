@@ -18,13 +18,16 @@
 }
 
 #serif {
-	margin: 30px;
+	
 	font-weight: 1000;
 	font-family: serif;
 	font-size: 22px;
 	font-style: italic;
 	font-variant: normal;
-	line-height: 16.5px;
+	line-height: 22.5px;
+}
+#coltop {
+	    margin-top: 50px;
 }
 
 #cursive {
@@ -46,6 +49,7 @@
 }
 #like {
 	background-color: #eceff8;
+	margin-top: 80%;
 }
 #like .badge {
     color: #46629d;
@@ -62,4 +66,23 @@
 }
 #reviewScroll {
 	overflow-y: auto;
+}
+#read {
+	background-image: url("../images/readme.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 120px;
+    height: 40px;
+}
+#colReveiw {
+	margin-left: 40px;
+    margin-top: 30px
+}
+
+#sho {
+	margin-left: 28px;
+	
+}
+#rev {
+	margin-left: 28px;
 }
