@@ -49,7 +49,7 @@
 }
 #like {
 	background-color: #eceff8;
-	margin-top: 80%;
+	
 }
 #like .badge {
     color: #46629d;
@@ -58,6 +58,7 @@
 }
 #dislike {
 	background-color: #eceff8;
+	
 }
 #dislike .badge {
     color: #46629d;
@@ -85,4 +86,7 @@
 }
 #rev {
 	margin-left: 28px;
+}
+#buyme {
+	width: 120px;
 }
