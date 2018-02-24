@@ -41,3 +41,92 @@
 	border-style: solid;
 	border-color: transparent transparent white transparent;
 }
+
+#imagebookpage {
+	width: 200px;
+}
+
+#cardBookPage {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	width: fit-content;
+    margin: auto 25px;
+    margin-top: 50px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+	border-style: ridge;
+}
+
+#serif {
+	
+	font-weight: 1000;
+	font-family: serif;
+	font-size: 22px;
+	font-style: italic;
+	font-variant: normal;
+	line-height: 22.5px;
+}
+#coltop {
+	    margin-top: 50px;
+}
+
+#cursive {
+	font-weight: 400;
+	font-family: cursive;
+	font-size: 16px;
+	font-style: normal;
+	font-variant: normal;
+	line-height: 16.5px;
+}
+
+#panelReview {
+	border: 0;
+	background-color: transparent;
+}
+#bodyReview {
+	background-color: transparent;
+	border: transparent
+}
+#like {
+	background-color: #eceff8;
+	
+}
+#like .badge {
+    color: #46629d;
+    background-color: #fff;
+    top: 2px;
+}
+#dislike {
+	background-color: #eceff8;
+	
+}
+#dislike .badge {
+    color: #46629d;
+    background-color: #fff;
+    top: 2px;
+}
+#reviewScroll {
+	overflow-y: auto;
+}
+#read {
+	background-image: url("../images/readme.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 120px;
+    height: 40px;
+}
+#colReveiw {
+	margin-left: 40px;
+    margin-top: 30px
+}
+
+#sho {
+	margin-left: 28px;
+	
+}
+#rev {
+	margin-left: 28px;
+}

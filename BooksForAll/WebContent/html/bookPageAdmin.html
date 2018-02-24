@@ -17,28 +17,49 @@
 			<div ng-if="changeBookPage">
 				<div class="container">
 					<div class="row">
-						<img
-							ng-src="books/{{bookDetails.name}}_files/{{bookDetails.image}}"
-							alt="image">
-						<h2>{{bookDetails.name}}</h2>
-						<br>
-						<h4>Description: {{bookDetails.description}}</h4>
-						<h4>Price: {{bookDetails.price}}$</h4>
-						<button class="btn btn-default dropdown dropmenu">
-							<div class="dropdown-content" id="drop-list">
-								<a href="#" ng-repeat="x in userInfoList" ng-click="moveUser(x.username)">{{x.nickname}}</a>
+						<div class="col-md-3">
+							<div class="card" id="cardBookPage">
+								<img
+									ng-src="books/{{bookDetails.name}}_files/{{bookDetails.image}}"
+									alt="image" id="imagebookpage">
 							</div>
-							<i style="color: blue"> {{numberOfLIKes}} </i> <img
-								ng-src="{{likeimg}}" width="70">
-						</button>
-						
+						</div>
+
+						<br> <br>
+						<div class="col-md-3" id="coltop">
+							<p id="serif">{{bookDetails.name}}</p>
+							<br>
+							<p>
+								<b>Description: </b> {{bookDetails.description}}
+							</p>
+							<p>
+								<b>Price: </b> {{bookDetails.price}}$
+							</p>
+						</div>
+						<div class="row">
+							<div class="col-md-2">
+								<br> <br> <br>
+
+								<button id="like" class="btn btn-default dropdown dropmenu">
+									<div class="dropdown-content" id="drop-list">
+										<a href="#" ng-repeat="x in userInfoList" ng-click="moveUser(x.username)">{{x.nickname}}</a>
+									</div>
+									<img ng-src="{{likeimg}}" width="70"> <span class="badge">{{numberOfLIKes}}</span>
+								</button>
+							</div>
+						</div>
+
+						<br> <br>
 						<div class="container">
-							<button id="sho" type="button" class="btn btn-info"
-								ng-click="showRev()">Show Reviews</button>
-							<div id="revAd" class="collapse">
-								<div class="panel panel-default">
-									<div ng-repeat="x in reviewsList" class="panel-body">
-										Nickname: {{x.nickname}}<br>Review: "{{x.review}}"
+							<div class="pre-scrollable" id="reviewScroll">
+								<button id="sho" type="button" class="btn btn-info"
+									ng-click="showRev()">Show Reviews</button>
+								<div id="revAd" class="collapse">
+									<div class="panel panel-default" id="panelReview">
+										<div ng-repeat="x in reviewsList" class="panel-body"
+											id="bodyReview">
+											<b>{{x.nickname}}</b><br> "{{x.review}}"
+										</div>
 									</div>
 								</div>
 							</div>
