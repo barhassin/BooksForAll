@@ -43,9 +43,8 @@
 								<div class="row">
 									<div class="col-md-2">
 										<br> <br> <br>
-										<div ng-model="$parent.$parent.changeLike"
-											ng-init="$parent.$parent.changeLike = false">
-											<div ng-if="$parent.$parent.changeLike">
+										
+											<div ng-show="$parent.$parent.changeLike">
 
 
 												<button id="like" data-toggle="tooltip"
@@ -56,11 +55,10 @@
 												</button>
 
 											</div>
-										</div>
+										
 
-										<div ng-model="$parent.$parent.changeDislike"
-											ng-init="$parent.$parent.changeDislike = false">
-											<div ng-if="$parent.$parent.changeDislike">
+										
+											<div ng-show="$parent.$parent.changeDislike">
 
 												<button id="dislike" data-toggle="tooltip"
 													data-placement="right" title="{{nicknames}}"
@@ -70,7 +68,7 @@
 												</button>
 
 											</div>
-										</div>
+										
 
 										<button id="read" class="btn btn-default"
 											ng-click="readBook()"></button>
