@@ -28,11 +28,14 @@ import classes.Book;
 import classes.Purchase;
 import classes.Review;
 
+// TODO: Auto-generated Javadoc
 /**
  * Servlet implementation class ViewPurchasesServlet
  */
 @WebServlet("/FindPurchasesByNameAndBookServlet")
 public class FindPurchasesByNameAndBookServlet extends HttpServlet {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/**

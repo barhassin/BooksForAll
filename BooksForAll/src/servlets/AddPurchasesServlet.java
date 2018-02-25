@@ -27,11 +27,14 @@ import classes.AppConstants;
 import classes.Like;
 import classes.Purchase;
 
+// TODO: Auto-generated Javadoc
 /**
  * Servlet implementation class ViewPurchasesServlet
  */
 @WebServlet("/AddPurchasesServlet")
 public class AddPurchasesServlet extends HttpServlet {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/**

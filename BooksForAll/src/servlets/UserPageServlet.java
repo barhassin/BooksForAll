@@ -25,11 +25,14 @@ import classes.AppConstants;
 import classes.User;
 import classes.UserInfo;
 
+// TODO: Auto-generated Javadoc
 /**
  * Servlet implementation class UserPageServlet
  */
 @WebServlet("/UserPageServlet")
 public class UserPageServlet extends HttpServlet {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/**

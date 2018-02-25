@@ -24,11 +24,25 @@ import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ManageUserDBFromJsonFile.
+ */
 public class ManageUserDBFromJsonFile implements ServletContextListener {
+	
+	/**
+	 * Instantiates a new manage user DB from json file.
+	 */
 	public ManageUserDBFromJsonFile() {
         // TODO Auto-generated constructor stub
     }
 	
+	/**
+	 * Table already exists.
+	 *
+	 * @param e the e
+	 * @return true, if successful
+	 */
 	//utility that checks whether the customer tables already exists
     private boolean tableAlreadyExists(SQLException e) {
         boolean exists;
@@ -40,6 +54,9 @@ public class ManageUserDBFromJsonFile implements ServletContextListener {
         return exists;
     }
 
+    /* (non-Javadoc)
+     * @see javax.servlet.ServletContextListener#contextInitialized(javax.servlet.ServletContextEvent)
+     */
     public void contextInitialized(ServletContextEvent event)  { 
     	ServletContext cntx = event.getServletContext();
     	
@@ -372,6 +389,14 @@ public class ManageUserDBFromJsonFile implements ServletContextListener {
 		return users;
 
 	}
+	
+	/**
+	 * Load user info.
+	 *
+	 * @param is the is
+	 * @return the collection
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private Collection<UserInfo> loadUserInfo(InputStream is) throws IOException{
 		
 		//wrap input stream with a buffered reader to allow reading the file line by line
@@ -392,6 +417,14 @@ public class ManageUserDBFromJsonFile implements ServletContextListener {
 		return users;
 	
 	}
+	
+	/**
+	 * Load book.
+	 *
+	 * @param is the is
+	 * @return the collection
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private Collection<Book> loadBook(InputStream is) throws IOException{
 		
 		//wrap input stream with a buffered reader to allow reading the file line by line
@@ -414,6 +447,14 @@ public class ManageUserDBFromJsonFile implements ServletContextListener {
 		return books;
 
 	}
+	
+	/**
+	 * Load like.
+	 *
+	 * @param is the is
+	 * @return the collection
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private Collection<Like> loadLike(InputStream is) throws IOException{
 		
 		//wrap input stream with a buffered reader to allow reading the file line by line
@@ -436,6 +477,14 @@ public class ManageUserDBFromJsonFile implements ServletContextListener {
 		return likes;
 
 	}
+	
+	/**
+	 * Loadreview.
+	 *
+	 * @param is the is
+	 * @return the collection
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private Collection<Review> loadreview(InputStream is) throws IOException{
 		
 		//wrap input stream with a buffered reader to allow reading the file line by line
@@ -458,6 +507,14 @@ public class ManageUserDBFromJsonFile implements ServletContextListener {
 		return reviews;
 
 	}
+
+/**
+ * Loadpurchase.
+ *
+ * @param is the is
+ * @return the collection
+ * @throws IOException Signals that an I/O exception has occurred.
+ */
 private Collection<Purchase> loadpurchase(InputStream is) throws IOException{
 		
 		//wrap input stream with a buffered reader to allow reading the file line by line
@@ -480,6 +537,14 @@ private Collection<Purchase> loadpurchase(InputStream is) throws IOException{
 		return purchases;
 
 	}
+
+/**
+ * Loadlocation.
+ *
+ * @param is the is
+ * @return the collection
+ * @throws IOException Signals that an I/O exception has occurred.
+ */
 private Collection<Location> loadlocation(InputStream is) throws IOException{
 	
 	//wrap input stream with a buffered reader to allow reading the file line by line

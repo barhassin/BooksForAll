@@ -27,11 +27,14 @@ import classes.AppConstants;
 import classes.Book;
 import classes.Review;
 
+// TODO: Auto-generated Javadoc
 /**
  * Servlet implementation class browseBooksServlet
  */
 @WebServlet("/BrowseReviewsByBookServlet")
 public class BrowseReviewsByBookServlet extends HttpServlet {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/**

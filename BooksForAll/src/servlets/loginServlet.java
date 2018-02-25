@@ -28,11 +28,14 @@ import com.google.gson.Gson;
 import classes.AppConstants;
 import classes.User;
 
+// TODO: Auto-generated Javadoc
 /**
  * Servlet implementation class loginServlet
  */
 @WebServlet(urlPatterns = { "/login" })
 public class loginServlet extends HttpServlet {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/**
