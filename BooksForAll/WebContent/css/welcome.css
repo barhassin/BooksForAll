@@ -1,9 +1,6 @@
-/*
-#headline {
-	text-align: center;
-    font-family: gigi;
-    font-size: 60px;	
-} */   
+/* welcome page css */
+
+
 #headline {  
 text-align: center;
   font-weight: normal;
@@ -14,7 +11,7 @@ text-align: center;
   text-shadow: 5px 5px 0 rgba(0, 0, 0, 0.7); 
   margin-top: 50px
   }
-  
+  /* carousel style*/
 #imageCarousel {
 	 width:50%;
 }
@@ -22,13 +19,11 @@ text-align: center;
     right: 50%;
 }
 
-
-/*
-#font {
-	font-family: fantasy;
-    font-size: 18px
-}*/
-
+.carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
+    display: block;
+    max-height: 500px;
+}
+/*my books font*/
 #font {
 	font-family: gigi;
     color: black;
@@ -36,7 +31,3 @@ text-align: center;
     font-weight: bold;
 }
 
-.carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
-    display: block;
-    max-height: 500px;
-}

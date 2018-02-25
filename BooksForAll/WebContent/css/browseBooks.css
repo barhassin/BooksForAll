@@ -1,6 +1,6 @@
+/*browse book page css */
 
-
-
+/*background image*/
 body {
 	background-image: url("backgroundpage.jpg") !important;
     background-repeat: repeat;
@@ -31,6 +31,8 @@ html {
     display: block;
   }
 }
+
+/* books images and positions*/
 #imageBook{
     width: 100%;
     height: 350px;
@@ -80,7 +82,7 @@ html {
 .button:hover {
   background-color: #555;
 }
-
+/*book name font*/
 #fantasy {
 	font-family: fantasy;
 	font-size: 16px;

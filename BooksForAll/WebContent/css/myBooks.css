@@ -1,3 +1,6 @@
+/*my books page css */
+
+/*background image*/
 body {
 	background-image: url("backgroundpage.jpg") !important;
     background-repeat: repeat;
@@ -20,7 +23,7 @@ body {
   cursor: pointer;
   width: 60%;
 }
-
+/*book name font*/
 #fantasy {
 	font-family: fantasy;
 	font-size: 16px;

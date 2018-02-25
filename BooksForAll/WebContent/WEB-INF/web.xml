@@ -5,19 +5,7 @@
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
   
-  <servlet>
-    <servlet-name>addLikeServlet</servlet-name>
-    <servlet-class>servlets.addLikeServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>addLikeServlet</servlet-name>
-    <url-pattern>/addLikeServlet</url-pattern>
-  </servlet-mapping>
-  
-  
-  
-  
-  
+    
   <context-param>
     <param-name>DB_DATASOURCE</param-name>
     <param-value>java:comp/env/jdbc/ExampleDatasource</param-value>

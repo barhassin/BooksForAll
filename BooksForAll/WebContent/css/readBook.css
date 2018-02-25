@@ -1,7 +1,10 @@
+/* read book page css */
+
 body {
     font-family: "Lato", sans-serif;
 }
 
+/* side bar nav styles and positions*/
 .sidenav {
     width: 130px;
     position: fixed;
