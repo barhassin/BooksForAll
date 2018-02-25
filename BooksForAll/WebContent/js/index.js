@@ -352,6 +352,7 @@ app.controller('book', function($rootScope,$scope,$http,$window){
 		.then(function(response) {
 			$scope.content = "Thank you for your review, your review is now awaiting approval";
 			$('#myModal').modal({show:true})
+			$scope.reviewText="";
 			},function(){});
 	}
 	$scope.readBook = function(){
