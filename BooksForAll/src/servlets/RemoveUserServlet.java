@@ -50,7 +50,6 @@ public class RemoveUserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -59,7 +58,6 @@ public class RemoveUserServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		try {
 			Context context = new InitialContext();
 			BasicDataSource ds = (BasicDataSource) context
@@ -76,14 +74,16 @@ public class RemoveUserServlet extends HttpServlet {
 			String params = sb.toString();
 			Gson gson = new Gson();
 			User user = gson.fromJson(params, User.class);
-			UserInfo userinfo=new UserInfo("", "", "", "", "", "", "", "", "", "", "", "");
+			UserInfo userinfo = new UserInfo("", "", "", "", "", "", "", "", "", "", "", "");
 			PreparedStatement stmt;
 			try {
 				stmt = conn.prepareStatement(AppConstants.SELECT_USERINFO_BY_USERNAME_STMT);
 				stmt.setString(1, user.getUsername());
 				ResultSet rs = stmt.executeQuery();
-				while(rs.next()) {
-					userinfo = new UserInfo(rs.getString(1), "", "user", rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10));
+				while (rs.next()) {
+					userinfo = new UserInfo(rs.getString(1), "", "user", rs.getString(2), rs.getString(3),
+							rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8),
+							rs.getString(9), rs.getString(10));
 				}
 				rs.close();
 				stmt.close();

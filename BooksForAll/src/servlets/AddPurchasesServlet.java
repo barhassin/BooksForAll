@@ -33,72 +33,75 @@ import classes.Purchase;
 @WebServlet("/AddPurchasesServlet")
 public class AddPurchasesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AddPurchasesServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public AddPurchasesServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		try {
 			Context context = new InitialContext();
-    		BasicDataSource ds = (BasicDataSource)context.lookup(
-    			getServletContext().getInitParameter(AppConstants.DB_DATASOURCE) + AppConstants.OPEN);
-    		Connection conn = ds.getConnection();
-    		BufferedReader reader = request.getReader();
-    	    StringBuilder sb = new StringBuilder();
-    	    String line = reader.readLine();
-    	    while (line != null) {
-    	      sb.append(line + "\n");
-    	      line = reader.readLine();
-    	    }
-    	    reader.close();
-    	    String params = sb.toString();//book name,user name,price
-    		PreparedStatement stmt;
-    		PreparedStatement pstmt;
-    		Gson gson = new Gson();
-    		Purchase purchase = gson.fromJson(params, Purchase.class);
-    			try {
-    				stmt = conn.prepareStatement(AppConstants.INSERT_PURCHASES_STMT);
-    				stmt.setString(1, purchase.getUsername());
-    				stmt.setString(2,purchase.getBookname());
-    				stmt.setString(3,purchase.getPrice());
-    				stmt.executeUpdate();
-    				stmt.close();
-    			} catch (SQLException e) {
-    				getServletContext().log("Error while aading purchase", e);
-    	    		response.sendError(500);//internal server error
-    			}
-    			try {
-    				pstmt = conn.prepareStatement(AppConstants.INSERT_LOCATIONS_STMT);
-    				pstmt.setString(1, purchase.getUsername());
-    				pstmt.setString(2,purchase.getBookname());
-    				pstmt.setString(3,"0");
-    				pstmt.executeUpdate();
-    				pstmt.close();
-    			} catch (SQLException e) {
-    				getServletContext().log("Error while aading purchase", e);
-    	    		response.sendError(500);//internal server error
-    			}
-    		conn.close();
+			BasicDataSource ds = (BasicDataSource) context
+					.lookup(getServletContext().getInitParameter(AppConstants.DB_DATASOURCE) + AppConstants.OPEN);
+			Connection conn = ds.getConnection();
+			BufferedReader reader = request.getReader();
+			StringBuilder sb = new StringBuilder();
+			String line = reader.readLine();
+			while (line != null) {
+				sb.append(line + "\n");
+				line = reader.readLine();
+			}
+			reader.close();
+			String params = sb.toString();// book name,user name,price
+			PreparedStatement stmt;
+			PreparedStatement pstmt;
+			Gson gson = new Gson();
+			Purchase purchase = gson.fromJson(params, Purchase.class);
+			try {
+				stmt = conn.prepareStatement(AppConstants.INSERT_PURCHASES_STMT);
+				stmt.setString(1, purchase.getUsername());
+				stmt.setString(2, purchase.getBookname());
+				stmt.setString(3, purchase.getPrice());
+				stmt.executeUpdate();
+				stmt.close();
+			} catch (SQLException e) {
+				getServletContext().log("Error while aading purchase", e);
+				response.sendError(500);// internal server error
+			}
+			try {
+				pstmt = conn.prepareStatement(AppConstants.INSERT_LOCATIONS_STMT);
+				pstmt.setString(1, purchase.getUsername());
+				pstmt.setString(2, purchase.getBookname());
+				pstmt.setString(3, "0");
+				pstmt.executeUpdate();
+				pstmt.close();
+			} catch (SQLException e) {
+				getServletContext().log("Error while aading purchase", e);
+				response.sendError(500);// internal server error
+			}
+			conn.close();
 		} catch (SQLException | NamingException e) {
-    		getServletContext().log("Error while closing connection", e);
-    		response.sendError(500);//internal server error
-    	}
+			getServletContext().log("Error while closing connection", e);
+			response.sendError(500);// internal server error
+		}
 	}
 
 }
