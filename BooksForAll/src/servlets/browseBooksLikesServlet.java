@@ -37,96 +37,102 @@ import classes.UserInfo;
 @WebServlet("/browseBooksLikesServlet")
 public class browseBooksLikesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public browseBooksLikesServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public browseBooksLikesServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		try {
-			
 			Context context = new InitialContext();
-    		BasicDataSource ds = (BasicDataSource)context.lookup(
-    			getServletContext().getInitParameter(AppConstants.DB_DATASOURCE) + AppConstants.OPEN);
-    		Connection conn = ds.getConnection();
-    		BufferedReader reader = request.getReader();
-    	    StringBuilder sb = new StringBuilder();
-    	    String line = reader.readLine();
-    	    while (line != null) {
-    	      sb.append(line + "\n");
-    	      line = reader.readLine();
-    	    }
-    	    reader.close();
-    	    String params = sb.toString();//obj book 
-    		PreparedStatement stmt;
-    		PreparedStatement ptmt;
-    		ResultSet rs = null;
-    		Gson gson2 = new Gson();
-    		Book book = gson2.fromJson(params,Book.class);
-    		Collection<User> userList = new ArrayList<User>();
-    		Collection<UserInfo> userInfoList = new ArrayList<UserInfo>();
-    			try {
-    				stmt = conn.prepareStatement(AppConstants.SELECT_LIKES_BY_BOOKNAME_STMT);
-    				stmt.setString(1, book.getName());
-    				 rs = stmt.executeQuery();
-    				
-    				while(rs.next()) {
-    					
-    					userList.add(new User(rs.getString(2),"",""));// user name
-    				}	
-    				
-    				stmt.close();
-    				
-    			} catch (SQLException e) {
-    				getServletContext().log("Error while querying for books", e);
-    	    		response.sendError(500);//internal server error
-    			}
-    			try {
-    				ptmt = conn.prepareStatement(AppConstants.SELECT_USERINFO_BY_USERNAME_STMT);
-    				for(User user: userList) {
-    					ptmt.setString(1,user.getUsername());
-    					
-    				rs = ptmt.executeQuery();
-    				if(rs.next()) {
-    					userInfoList.add(new UserInfo(rs.getString(1),"","","","","","","","", rs.getString(8), "", ""));//user name and nickname
-    					
-    				}
-    				}
-    				rs.close();
-    				ptmt.close();
-    				
-    			} catch (SQLException e) {
-    				getServletContext().log("Error while querying for books", e);
-    	    		response.sendError(500);//internal server error
-    			}
-    			
-    		conn.close();
-    		Gson gson = new Gson();
-    		String LikesJsonResult = gson.toJson(userInfoList,new TypeToken<Collection<UserInfo>>() {}.getType());
-        	response.addHeader("Content-Type", "application/json");
-        	PrintWriter writer = response.getWriter();
-        	writer.println(LikesJsonResult);
-        	writer.close();
+			BasicDataSource ds = (BasicDataSource) context
+					.lookup(getServletContext().getInitParameter(AppConstants.DB_DATASOURCE) + AppConstants.OPEN);
+			Connection conn = ds.getConnection();
+			BufferedReader reader = request.getReader();
+			StringBuilder sb = new StringBuilder();
+			String line = reader.readLine();
+			while (line != null) {
+				sb.append(line + "\n");
+				line = reader.readLine();
+			}
+			reader.close();
+			String params = sb.toString();// obj book
+			PreparedStatement stmt;
+			PreparedStatement ptmt;
+			ResultSet rs = null;
+			Gson gson2 = new Gson();
+			Book book = gson2.fromJson(params, Book.class);
+			Collection<User> userList = new ArrayList<User>();
+			Collection<UserInfo> userInfoList = new ArrayList<UserInfo>();
+			try {
+				stmt = conn.prepareStatement(AppConstants.SELECT_LIKES_BY_BOOKNAME_STMT);
+				stmt.setString(1, book.getName());
+				rs = stmt.executeQuery();
+
+				while (rs.next()) {
+
+					userList.add(new User(rs.getString(2), "", ""));// user name
+				}
+
+				stmt.close();
+
+			} catch (SQLException e) {
+				getServletContext().log("Error while querying for books", e);
+				response.sendError(500);// internal server error
+			}
+			try {
+				ptmt = conn.prepareStatement(AppConstants.SELECT_USERINFO_BY_USERNAME_STMT);
+				for (User user : userList) {
+					ptmt.setString(1, user.getUsername());
+
+					rs = ptmt.executeQuery();
+					if (rs.next()) {
+						userInfoList.add(
+								new UserInfo(rs.getString(1), "", "", "", "", "", "", "", "", rs.getString(8), "", ""));// user
+																														// name
+																														// and
+																														// nickname
+
+					}
+				}
+				rs.close();
+				ptmt.close();
+
+			} catch (SQLException e) {
+				getServletContext().log("Error while querying for books", e);
+				response.sendError(500);// internal server error
+			}
+
+			conn.close();
+			Gson gson = new Gson();
+			String LikesJsonResult = gson.toJson(userInfoList, new TypeToken<Collection<UserInfo>>() {
+			}.getType());
+			response.addHeader("Content-Type", "application/json");
+			PrintWriter writer = response.getWriter();
+			writer.println(LikesJsonResult);
+			writer.close();
 		} catch (SQLException | NamingException e) {
-    		getServletContext().log("Error while closing connection", e);
-    		response.sendError(500);//internal server error
-    	}
+			getServletContext().log("Error while closing connection", e);
+			response.sendError(500);// internal server error
+		}
 	}
-	
 
 }

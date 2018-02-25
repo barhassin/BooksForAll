@@ -29,61 +29,63 @@ import classes.Review;
 @WebServlet("/SaveLocationServlet")
 public class SaveLocationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public SaveLocationServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	public SaveLocationServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		try {
 			Context context = new InitialContext();
-    		BasicDataSource ds = (BasicDataSource)context.lookup(
-    			getServletContext().getInitParameter(AppConstants.DB_DATASOURCE) + AppConstants.OPEN);
-    		Connection conn = ds.getConnection();
-    		BufferedReader reader = request.getReader();
-    	    StringBuilder sb = new StringBuilder();
-    	    String line = reader.readLine();
-    	    while (line != null) {
-    	      sb.append(line + "\n");
-    	      line = reader.readLine();
-    	    }
-    	    reader.close();
-    	    String params = sb.toString();// review obj
-    		PreparedStatement stmt;
-    		Gson gson = new Gson();
-    		Location location = gson.fromJson(params, Location.class);
-    			try {
-    				stmt = conn.prepareStatement(AppConstants.UPDATE_LOCATIONS_STMT);
-    				stmt.setString(1, location.getLocation());
-    				stmt.setString(2, location.getUsername());
-    				stmt.setString(3, location.getBookname());
-    				stmt.executeUpdate();
-    				stmt.close();
-    			} catch (SQLException e) {
-    				getServletContext().log("Error while querying for insert review", e);
-    	    		response.sendError(500);//internal server error
-    			}	
-    		conn.close();
+			BasicDataSource ds = (BasicDataSource) context
+					.lookup(getServletContext().getInitParameter(AppConstants.DB_DATASOURCE) + AppConstants.OPEN);
+			Connection conn = ds.getConnection();
+			BufferedReader reader = request.getReader();
+			StringBuilder sb = new StringBuilder();
+			String line = reader.readLine();
+			while (line != null) {
+				sb.append(line + "\n");
+				line = reader.readLine();
+			}
+			reader.close();
+			String params = sb.toString();
+			PreparedStatement stmt;
+			Gson gson = new Gson();
+			Location location = gson.fromJson(params, Location.class);
+			try {
+				stmt = conn.prepareStatement(AppConstants.UPDATE_LOCATIONS_STMT);
+				stmt.setString(1, location.getLocation());
+				stmt.setString(2, location.getUsername());
+				stmt.setString(3, location.getBookname());
+				stmt.executeUpdate();
+				stmt.close();
+			} catch (SQLException e) {
+				getServletContext().log("Error while querying for insert review", e);
+				response.sendError(500);// internal server error
+			}
+			conn.close();
 		} catch (SQLException | NamingException e) {
-    		getServletContext().log("Error while closing connection", e);
-    		response.sendError(500);//internal server error
-    	}
+			getServletContext().log("Error while closing connection", e);
+			response.sendError(500);// internal server error
+		}
 
 	}
 
