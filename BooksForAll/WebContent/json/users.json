@@ -1,4 +1,4 @@
-[ { "username" : "t'challa", "password" : "t'challa", "type" : "user" },
+[ { "username" : "tchalla", "password" : "tchalla", "type" : "user" },
   { "username" : "dwayne", "password" : "dwayne", "type" : "user" },
   { "username" : "hulk", "password" : "hulk", "type" : "user" },
   { "username" : "tony", "password" : "tony", "type" : "user" },
