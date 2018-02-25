@@ -1,9 +1,12 @@
+/* sign up css */
 
+/* backgrond*/
 #signupback {
     background-image: url("background.jpg");
     background-repeat: no-repeat;
     background-size: cover;  
 }
+/* sign up styles */
 #signupborder {
 	 width: 55%;
 	    border: 10px solid #f3e4d0;

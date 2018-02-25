@@ -1,9 +1,12 @@
+/* view users for admin page css */
+
+/*background image*/
 body {
 	background-image: url("backgroundpage.jpg") !important;
     background-repeat: repeat;
     background-size: cover; 
 }
-
+/* search users style*/
 #myInput {
     width: 130px;
     -webkit-transition: width 0.4s ease-in-out;
@@ -13,6 +16,7 @@ body {
 #myInput:focus {
     width: 100%;
 }
+/* user photo style*/
 #userPhoto {
     vertical-align: middle;
     width: 100px;

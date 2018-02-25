@@ -24,7 +24,7 @@ import classes.Like;
 /**
  * Servlet implementation class browseBooksServlet
  */
-// @WebServlet("/addLikeServlet")//remove this
+@WebServlet("/addLikeServlet")
 public class addLikeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

@@ -1,4 +1,8 @@
 
+/* book page css */
+
+
+/* book image */
 #imagebookpage {
 	width: 200px;
 }
@@ -16,7 +20,7 @@
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
 	border-style: ridge;
 }
-
+/* Headline font*/
 #serif {
 	
 	font-weight: 1000;
@@ -68,6 +72,7 @@
 #reviewScroll {
 	overflow-y: auto;
 }
+/* read me button*/
 #read {
 	background-image: url("../images/readme.gif");
     background-repeat: no-repeat;
