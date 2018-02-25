@@ -31,11 +31,14 @@ import classes.Like;
 import classes.User;
 import classes.UserInfo;
 
+// TODO: Auto-generated Javadoc
 /**
  * Servlet implementation class browseBooksServlet
  */
 @WebServlet("/browseBooksLikesServlet")
 public class browseBooksLikesServlet extends HttpServlet {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/**

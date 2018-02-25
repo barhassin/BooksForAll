@@ -23,11 +23,14 @@ import classes.AppConstants;
 import classes.Location;
 import classes.Review;
 
+// TODO: Auto-generated Javadoc
 /**
  * Servlet implementation class SaveLocationServlet
  */
 @WebServlet("/SaveLocationServlet")
 public class SaveLocationServlet extends HttpServlet {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/**

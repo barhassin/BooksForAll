@@ -28,11 +28,14 @@ import classes.Book;
 import classes.User;
 import classes.UserInfo;
 
+// TODO: Auto-generated Javadoc
 /**
  * Servlet implementation class RemoveUserServlet
  */
 @WebServlet("/RemoveUserServlet")
 public class RemoveUserServlet extends HttpServlet {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/**
