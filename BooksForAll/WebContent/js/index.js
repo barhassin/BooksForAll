@@ -112,6 +112,7 @@ app.controller('signUpController', function($rootScope,$scope,$http,$window) {
 		$scope.sevenNumbers = /^[0-9]{7}$/;
 		$scope.lettersOnly =/^[a-zA-Z ]{1,100}$/;
 		$scope.onlyNumbers = /^[1-9][0-9]*$/;
+		$scope.emailValid =/^.+@.+\\..+$/;
 		$scope.signUpApp = function(){
 		var usernamed = $scope.userName;
 		var passwordd = $scope.Pass;
@@ -157,6 +158,10 @@ app.controller('signUpController', function($rootScope,$scope,$http,$window) {
 			else if(status=="411"){
 				$("#myModalSignUp").modal('show');
 				$scope.content="There is already a user with that nickname in our system. please try again with a different nickname";
+			}
+			else if(status=="433"){
+				$("#myModalSignUp").modal('show');
+				$scope.content="Sign up failed. please try again";	
 			}
 		});
 	};

@@ -28,11 +28,14 @@ import classes.Book;
 import classes.Purchase;
 import classes.User;
 
+// TODO: Auto-generated Javadoc
 /**
  * Servlet implementation class myBooksServlet
  */
 @WebServlet("/myBooksServlet")
 public class myBooksServlet extends HttpServlet {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/**

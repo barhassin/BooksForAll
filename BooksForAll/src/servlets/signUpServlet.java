@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.regex.Pattern;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -31,11 +32,14 @@ import classes.AppConstants;
 import classes.User;
 import classes.UserInfo;
 
+// TODO: Auto-generated Javadoc
 /**
  * Servlet implementation class signUpServlet
  */
 @WebServlet(urlPatterns = { "/signUp" })
 public class signUpServlet extends HttpServlet {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -77,6 +81,12 @@ public class signUpServlet extends HttpServlet {
 			String params = sb.toString();
 			Gson gson = new Gson();
 			UserInfo user_info = gson.fromJson(params, UserInfo.class);
+			
+			if (!ValidateUser(user_info))
+			{
+			    response.sendError(433);
+			    return;
+			}
 			PreparedStatement stmt;
 			try {
 				stmt = conn.prepareStatement(AppConstants.SELECT_USERINFO_BY_USERNAME_STMT);
@@ -141,4 +151,29 @@ public class signUpServlet extends HttpServlet {
 			response.sendError(500);// internal server error
 		}
 	}
+	
+	 /**
+ 	 * Validate user.
+ 	 *
+ 	 * @param user the user
+ 	 * @return true, if successful
+ 	 */
+ 	private boolean ValidateUser(UserInfo user)
+	    {
+		if (user == null || user.getUsername() == null || user.getEmail() == null
+			|| user.getStreet() == null || user.getStreetNumber() == null || user.getCity() == null
+			|| user.getZipcode() == null || user.getNickname() == null || user.getTelephone() == null
+			|| user.getPassword() == null || !Pattern.matches("^[a-zA-Z1-9]{1,10}$", user.getUsername())
+			|| !Pattern.matches("^[a-zA-Z_ ]{3,100}$", user.getStreet())
+			|| !Pattern.matches("^[1-9][0-9]*$", user.getStreetNumber())
+			|| !Pattern.matches("^[a-zA-Z_ ]{3,100}$", user.getCity())
+			|| !Pattern.matches("^[0-9]{7}$", user.getZipcode())
+			|| !Pattern.matches("^([0][5]\\d{1}[- ]?\\d{3}[- ]?\\d{4}|[0][2,3,4,8,9][- ]?\\d{7})$",
+				user.getTelephone())
+			|| user.getPassword().length() > 8 || user.getNickname().length() == 0)
+		{  
+		    return false;
+		}
+			return true;
+	    }
 }

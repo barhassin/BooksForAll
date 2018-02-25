@@ -25,11 +25,14 @@ import com.google.gson.Gson;
 import classes.AppConstants;
 import classes.Purchase;
 
+// TODO: Auto-generated Javadoc
 /**
  * Servlet implementation class ViewPurchasesServlet
  */
 @WebServlet("/ViewPurchasesServlet")
 public class ViewPurchasesServlet extends HttpServlet {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/**
