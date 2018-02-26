@@ -1,204 +1,254 @@
+<!-- The sign up page -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8" name="viewport"
+	content="width=device-width, initial-scale=1">
 <title>Sign Up</title>
-<link rel="stylesheet" type="text/css"href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/signup.css">
-<script src="lib/jquery-3.2.1.js"></script>
-<script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-<script src="lib/angular.min.js"></script>
 </head>
-<body >
-<div ng-app="login" ng-controller="signUpController" id="signupback">
-<br>
-<img src="logologin.gif" class="center-block">
-	<br>
-	<div class="container">
-		<form name="myForm">
-		<div class="row">
-			<div class="main-responsive" id="signupborder">
-				<div class="well" id="signupWell">
-					<div class="form-group">
-						<label for="name" class="cols-sm-2 control-label">Your User Name</label>
-						<div class="cols-sm-10">
-							<div class="input-group">
-								<span class="input-group-addon">
-								<i class="glyphicon glyphicon-user"></i></span> 
-									<input type="text" class="form-control" ng-model="$parent.userName" name="userName" ng-maxlength="10" placeholder="Enter your User Name" required>
+<body>
+	<div ng-app="login" ng-controller="signUpController" id="signupback">
+		<br> <img src="logologin.gif" class="center-block"> <br>
+		<div class="container">
+			<form name="myForm">
+				<div class="row">
+					<div class="main-responsive" id="signupborder">
+						<div class="well" id="signupWell">
+							<div class="form-group">
+								<label for="name" class="cols-sm-2 control-label">Your
+									User Name</label>
+								<div class="cols-sm-10">
+									<div class="input-group">
+										<span class="input-group-addon"> <i
+											class="glyphicon glyphicon-user"></i></span> <input type="text"
+											class="form-control" ng-model="$parent.userName"
+											name="userName" ng-maxlength="10"
+											placeholder="Enter your User Name" required>
+									</div>
+									<span style="color: red"
+										ng-show="myForm.userName.$touched && myForm.userName.$invalid">The
+										name is required.</span> <span style="color: red"
+										ng-show="myForm.userName.$error.maxlength">Sorry, your
+										username length should be up to 10 characters</span>
+								</div>
 							</div>
-							<span style="color:red" ng-show="myForm.userName.$touched && myForm.userName.$invalid">The name is required.</span>
-							 <span style="color:red" ng-show="myForm.userName.$error.maxlength">Sorry, your username length should be up to 10 characters</span>
+							<div class="form-group">
+								<label for="email" class="cols-sm-2 control-label">Your
+									Email</label>
+								<div class="cols-sm-10">
+									<div class="input-group">
+										<span class="input-group-addon"> <i
+											class="glyphicon glyphicon-envelope"></i></span> <input type="email"
+											class="form-control" ng-model="$parent.email" name="email"
+											placeholder="Enter your Email" required>
+									</div>
+									<span style="color: red"
+										ng-show="myForm.email.$dirty && myForm.email.$invalid">
+										<span ng-show="myForm.email.$error.email">Invalid email
+											address.</span> <span ng-show="myForm.email.$error.required">Email
+											is required.</span>
+									</span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="password" class="cols-sm-2 control-label">Password</label>
+								<div class="cols-sm-10">
+									<div class="input-group">
+										<span class="input-group-addon"> <i
+											class="glyphicon glyphicon-lock"></i></span> <input type="password"
+											class="form-control" ng-model="$parent.Pass" ng-maxlength="8"
+											name="password" placeholder="Enter your Password" required>
+									</div>
+									<span style="color: red"
+										ng-show="myForm.password.$error.maxlength">Sorry, your
+										password length should be up to 8 characters</span> <span
+										style="color: red"
+										ng-show="myForm.password.$touched && myForm.password.$invalid">
+										password is required.</span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="Address" class="cols-sm-2 control-label">Address:</label>
+								<div class="input-group">
+									<span class="input-group-addon"> <i
+										class="glyphicon glyphicon-home"></i></span>
+									<div class="col-sm-4">
+										<input type="text" class="form-control"
+											ng-model="$parent.Street" name="Street" ng-minlength="3"
+											ng-pattern="lettersOnly" placeholder="Street" required>
+									</div>
+									<div class="col-sm-4">
+										<input type="text" class="form-control"
+											ng-model="$parent.StreetNumber" name="StreetNumber"
+											ng-pattern="onlyNumbers" placeholder="Number" required>
+									</div>
+									<div class="col-sm-4">
+										<input type="name" class="form-control"
+											ng-model="$parent.City" name="City" ng-minlength="3"
+											ng-pattern="lettersOnly" placeholder="City" required>
+									</div>
+									<div class="col-sm-4">
+										<input type="text" class="form-control"
+											ng-model="$parent.Zipcode" name="Zipcode"
+											ng-pattern="sevenNumbers" placeholder="zipcode" required>
+									</div>
+								</div>
+								<!-- Street validation  -->
+								<span style="color: red"
+									ng-show="myForm.Street.$error.pattern && myForm.Street.$touched">Street
+									name contain only letters.<br>
+								</span> <span style="color: red"
+									ng-show="myForm.Street.$error.minlength && myForm.Street.$touched">Street
+									name must have at least 3 letters.<br>
+								</span> <span style="color: red"
+									ng-show="myForm.Street.$error.required && myForm.Street.$touched">
+									Street is required.<br>
+								</span>
+								<!-- StreetNumber validation  -->
+								<span style="color: red"
+									ng-show="myForm.StreetNumber.$error.pattern && myForm.StreetNumber.$touched">
+									Street Number contain only digits.<br>
+								</span> <span style="color: red"
+									ng-show="myForm.StreetNumber.$error.required && myForm.StreetNumber.$touched">
+									Street Number is required.<br>
+								</span>
+								<!-- City validation  -->
+								<span style="color: red"
+									ng-show="myForm.City.$error.pattern && myForm.City.$touched">City
+									name contain only letters.<br>
+								</span> <span style="color: red"
+									ng-show="myForm.City.$error.required && myForm.City.$touched">
+									City name is required.<br>
+								</span> <span style="color: red"
+									ng-show="myForm.City.$error.minlength && myForm.City.$touched">City
+									name must have at least 3 letters.<br>
+								</span>
+								<!-- Zipcode validation  -->
+								<span style="color: red" ng-show="myForm.Zipcode.$error.pattern">Zipcode
+									contain 7 digits<br>
+								</span> <span style="color: red"
+									ng-show="myForm.Zipcode.$error.required && myForm.Zipcode.$touched">
+									Zipcode is required.<br>
+								</span>
+							</div>
+							<div class="form-inline">
+								<label for="text" class="cols-sm-2 control-label">Telephone
+									number</label>
+								<div class="cols-sm-4">
+									<label class="sr-only" for="inlineFormInput">Prefix</label>
+									<div class="input-group">
+										<span class="input-group-addon"> <i
+											class="glyphicon glyphicon-phone-alt"></i></span> <label
+											class="sr-only" for="inlineFormInputGroup">telephone</label>
+										<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+											<select class="form-control" ng-model="$parent.selected"
+												id="sel1">
+												<option>02</option>
+												<option>03</option>
+												<option>04</option>
+												<option>08</option>
+												<option>09</option>
+												<option>050</option>
+												<option>051</option>
+												<option>052</option>
+												<option>053</option>
+												<option>054</option>
+												<option>055</option>
+												<option>056</option>
+												<option>057</option>
+												<option>058</option>
+												<option>059</option>
+											</select> <br>
+										</div>
+										<label class="sr-only" for="inlineFormInputGroup">telephone</label>
+										<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+											<input type="text" class="form-control"
+												ng-model="$parent.Telephone" name="Telephone"
+												ng-pattern="sevenNumbers"
+												placeholder="Enter your Telephone number" required>
+										</div>
+									</div>
+								</div>
+								<span style="color: red"
+									ng-show="myForm.Telephone.$touched && myForm.Telephone.$error.pattern ">
+									Sorry,Invaild telephone number</span>
+							</div>
+							<div class="form-group">
+								<label for="text" class="cols-sm-2 control-label">Nickname</label>
+								<div class="cols-sm-10">
+									<div class="input-group">
+										<span class="input-group-addon"> <i
+											class="glyphicon glyphicon-user"></i></span> <input type="text"
+											class="form-control" ng-model="$parent.Nickname"
+											name="Nickname" ng-maxlength="20"
+											placeholder="Enter your Nickname" required>
+									</div>
+									<span style="color: red"
+										ng-show="myForm.Nickname.$dirty && myForm.Nickname.$error.maxlength">
+										Sorry, your nickname length should be up to 20 characters</span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="text" class="cols-sm-2 control-label">Description</label>
+								<div class="cols-sm-10">
+									<div class="input-group">
+										<span class="input-group-addon"> <i
+											class="glyphicon glyphicon-comment"></i></span> <input type="text"
+											class="form-control" ng-model="$parent.Description"
+											name="Description" ng-maxlength="50"
+											placeholder="Enter short description about yourself " />
+									</div>
+									<span style="color: red"
+										ng-show="myForm.Description.$dirty && myForm.Description.$error.maxlength">
+										Sorry, your Description length should be up to 50 characters</span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="text" class="cols-sm-2 control-label">Photo</label>
+								<div class="cols-sm-10">
+									<div class="input-group">
+										<span class="input-group-addon"> <i
+											class="glyphicon glyphicon-picture"></i></span> <input type="text"
+											class="form-control" ng-model="$parent.photo" name="photo"
+											placeholder="Upload your photo" />
+									</div>
+								</div>
+							</div>
+							<div class="form-group ">
+								<div class="row">
+									<button ng-click="signUpApp()"
+										class="btn btn-primary btn-lg btn-block "
+										ng-disabled="myForm.$invalid"">Sign Up</button>
+									<button ng-click="toLogin()"
+										class="btn btn-info btn-lg btn-block">Back</button>
+								</div>
+							</div>
 						</div>
 					</div>
-
-					<div class="form-group">
-						<label for="email" class="cols-sm-2 control-label">Your Email</label>
-						<div class="cols-sm-10">
-							<div class="input-group">
-								<span class="input-group-addon">
-									<i class="glyphicon glyphicon-envelope"></i></span> 
-									<input type="email" class="form-control" ng-model="$parent.email"  name="email" placeholder="Enter your Email" required>
-							</div>
-							<span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
-							<span ng-show="myForm.email.$error.email">Invalid email address.</span>
-							<span ng-show="myForm.email.$error.required">Email is required.</span>
-							</span>
-						</div>
+				</div>
+			</form>
+		</div>
+		<!--Modal -->
+		<div id="myModalSignUp" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Error!</h4>
 					</div>
-
-					<div class="form-group">
-						<label for="password" class="cols-sm-2 control-label">Password</label>
-						<div class="cols-sm-10">
-							<div class="input-group">
-								<span class="input-group-addon">
-									<i class="glyphicon glyphicon-lock"></i></span> 
-									<input type="password" class="form-control" ng-model="$parent.Pass" ng-maxlength="8" name="password" placeholder="Enter your Password"  required>
-							</div>
-							<span style="color:red" ng-show="myForm.password.$error.maxlength">Sorry, your password length should be up to 8 characters</span>
-							      <span style="color:red" ng-show="myForm.password.$touched && myForm.password.$invalid"> password is required.</span> 
-							     
-						
-						</div>
+					<div class="modal-body">
+						<p>{{content}}</p>
 					</div>
-
-					<div class="form-group">
-						<label for="Address" class="cols-sm-2 control-label">Address:</label>
-						<div class="input-group">
-							<span class="input-group-addon">
-								<i class="glyphicon glyphicon-home"></i></span>
-							<div class="col-sm-4">
-								<input type="text" class="form-control" ng-model="$parent.Street" name="Street" ng-minlength="3" ng-pattern="lettersOnly" placeholder="Street" required>
-							 </div>
-							<div class="col-sm-4">
-								<input type="text" class="form-control" ng-model="$parent.StreetNumber" name="StreetNumber" ng-pattern="onlyNumbers" placeholder="Number" required>
-							</div>
-							<div class="col-sm-4">
-								<input type="name" class="form-control" ng-model="$parent.City" name="City" ng-minlength="3" ng-pattern="lettersOnly" placeholder="City"required>
-								
-							</div>
-							<div class="col-sm-4">
-								<input type="text" class="form-control" ng-model="$parent.Zipcode" name="Zipcode" ng-pattern="sevenNumbers" placeholder="zipcode"required>
-								
-							</div>
-						</div>
-						<!-- Street validation  -->
-						<span style="color:red" ng-show="myForm.Street.$error.pattern && myForm.Street.$touched">Street name contain only letters.<br></span>
-						<span style="color:red" ng-show="myForm.Street.$error.minlength && myForm.Street.$touched">Street name must have at least 3 letters.<br></span>
-						<span style="color:red" ng-show="myForm.Street.$error.required && myForm.Street.$touched">  Street is required.<br></span>
-						<!-- StreetNumber validation  -->
-						<span style="color:red" ng-show="myForm.StreetNumber.$error.pattern && myForm.StreetNumber.$touched">  Street Number contain only digits.<br></span>
-						<span style="color:red" ng-show="myForm.StreetNumber.$error.required && myForm.StreetNumber.$touched">  Street Number is required.<br></span>
-						<!-- City validation  -->
-						<span style="color:red" ng-show="myForm.City.$error.pattern && myForm.City.$touched">City name contain only letters.<br></span>
-						<span style="color:red" ng-show="myForm.City.$error.required && myForm.City.$touched">  City name is required.<br></span>
-						<span style="color:red" ng-show="myForm.City.$error.minlength && myForm.City.$touched">City name must have at least 3 letters.<br></span>
-						<!-- Zipcode validation  -->
-						<span style="color:red" ng-show="myForm.Zipcode.$error.pattern">Zipcode contain 7 digits<br></span>
-						<span style="color:red" ng-show="myForm.Zipcode.$error.required && myForm.Zipcode.$touched">  Zipcode is required.<br></span>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					</div>
-					<div class="form-inline">
-						<label for="text" class="cols-sm-2 control-label">Telephone number</label>
-						<div class="cols-sm-4">	
-						<label class="sr-only" for="inlineFormInput">Prefix</label>
-							<div class="input-group">
-								<span class="input-group-addon">
-									<i class="glyphicon glyphicon-phone-alt"></i></span>
-									 <label class="sr-only" for="inlineFormInputGroup">telephone</label>
- 												 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-									        <select class="form-control" ng-model="$parent.selected" id="sel1">
-        									<option>02</option>
-       									    <option>03</option>
-   									        <option>04</option>
-      							 			<option>08</option>
-      							 			<option>09</option>
-       									    <option>050</option>
-   									        <option>051</option>
-      							 			<option>052</option>
-      							 			<option>053</option>
-       									    <option>054</option>
-   									        <option>055</option>
-      							 			<option>056</option>
-      							 			<option>057</option>
-   									        <option>058</option>
-      							 			<option>059</option>
-    									    </select>
-     										 <br> 
-     									
-     										 </div>
-     										   <label class="sr-only" for="inlineFormInputGroup">telephone</label>
- 												 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-									<input type="text" class="form-control" ng-model="$parent.Telephone" name="Telephone" ng-pattern="sevenNumbers" placeholder="Enter your Telephone number" required>
-									
-							</div>
-							</div>
-							</div>
-							<span style="color:red" ng-show="myForm.Telephone.$touched && myForm.Telephone.$error.pattern ">
-								Sorry,Invaild telephone number</span>
-						</div>
-					<div class="form-group">
-						<label for="text" class="cols-sm-2 control-label">Nickname</label>
-						<div class="cols-sm-10">
-							<div class="input-group">
-								<span class="input-group-addon">
-								<i class="glyphicon glyphicon-user"></i></span> 
-									<input type="text" class="form-control" ng-model="$parent.Nickname" name="Nickname" ng-maxlength="20" placeholder="Enter your Nickname" required>
-							</div>
-								<span style="color:red" ng-show="myForm.Nickname.$dirty && myForm.Nickname.$error.maxlength">
-								Sorry, your nickname length should be up to 20 characters</span>
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="text" class="cols-sm-2 control-label">Description</label>
-						<div class="cols-sm-10">
-							<div class="input-group">
-							<span class="input-group-addon">
-									<i class="glyphicon glyphicon-comment"></i></span>
-									<input type="text" class="form-control" ng-model="$parent.Description" name="Description" ng-maxlength="50" placeholder="Enter short description about yourself " />
-							</div>
-								<span style="color:red" ng-show="myForm.Description.$dirty && myForm.Description.$error.maxlength">
-								Sorry, your Description length should be up to 50 characters</span>
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="text" class="cols-sm-2 control-label">Photo</label>
-						<div class="cols-sm-10">
-							<div class="input-group">
-								<span class="input-group-addon">
-									<i class="glyphicon glyphicon-picture"></i></span>
-									 <input type="text" class="form-control" ng-model="$parent.photo" name="photo" placeholder="Upload your photo" />
-									
-							</div>
-						</div>
-					</div>
-
-					<div class="form-group ">
-					<div class="row">
-						<button ng-click="signUpApp()" class="btn btn-primary btn-lg btn-block "ng-disabled="myForm.$invalid"">Sign Up</button>
-						<button ng-click="toLogin()" class="btn btn-info btn-lg btn-block">Back</button>
-					</div>		
-					</div>					
 				</div>
 			</div>
 		</div>
-		</form>
-	</div>
-	<div id="myModalSignUp" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Error!</h4>
-                </div>
-                <div class="modal-body">
-                    <p>{{content}}</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
 	</div>
 	<script src="js/index.js"></script>
 </body>

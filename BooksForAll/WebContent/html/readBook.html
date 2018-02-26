@@ -1,30 +1,30 @@
+<!-- Displays the book for reading -->
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8" name="viewport"
+	content="width=device-width, initial-scale=1">
 <title>Read Book</title>
-<link rel="stylesheet" type="text/css" href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/readBook.css">
-<script src="lib/jquery-3.2.1.js"></script>
-<script src="lib/angular.min.js"></script>
-<script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<div ng-app="login" ng-controller="readBookController">
-	<div class="row">
-	<div class="col-md-2">
-	<div class="sidenav">
-  <a href="#" ng-click="returnToBook()">Back to book page</a>
-  
-  <a href="#" ng-click="startScroll()">Pick up where you left off</a>
-</div>
-</div>  
-	<div class="col-md-10">
-	<div ng-include="'books/' + content + '.html'"></div>
+		<div class="row">
+		<!-- A navigation bar that is located on the left side of the screen while the book is displayed -->
+			<div class="col-md-2">
+				<div class="sidenav">
+					<a href="#" ng-click="returnToBook()">Back to book page</a> 
+					<a href="#" ng-click="startScroll()">Pick up where you left off</a>
+				</div>
+			</div>
+			<div class="col-md-10">
+				<div ng-include="'books/' + content + '.html'"></div>
+			</div>
+		</div>
 	</div>
-  	</div>
-  	</div>
-  	<script src="js/index.js"></script>
+	<script src="js/index.js"></script>
 </body>
 </html>
 

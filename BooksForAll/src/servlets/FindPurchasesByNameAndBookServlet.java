@@ -47,18 +47,30 @@ public class FindPurchasesByNameAndBookServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+     * Do get.
+     *
+     * @param request the request
+     * @param response the response
+     * @throws ServletException Signals that a servlet exception has occurred.
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+     *      response)
+     */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+     * Do post.
+     *
+     * @param request the request
+     * @param response the response
+     * @throws ServletException Signals that a servlet exception has occurred.
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+     *      response)
+     */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
@@ -74,7 +86,7 @@ public class FindPurchasesByNameAndBookServlet extends HttpServlet {
 				line = reader.readLine();
 			}
 			reader.close();
-			String params = sb.toString();
+			String params = sb.toString(); // Purchase object in json form
 			PreparedStatement stmt;
 			Gson gson = new Gson();
 			Purchase purchase = gson.fromJson(params, Purchase.class);
@@ -83,10 +95,9 @@ public class FindPurchasesByNameAndBookServlet extends HttpServlet {
 				stmt.setString(1, purchase.getUsername());
 				stmt.setString(2, purchase.getBookname());
 				ResultSet rs = stmt.executeQuery();
-				if (rs.next()) {
-
+				if (rs.next()) { // if the condition is true, then the purchase exists in the database
 				} else {
-					response.sendError(420);
+					response.sendError(420); // The user did not buy this book
 				}
 				rs.close();
 				stmt.close();

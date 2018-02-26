@@ -6,8 +6,14 @@ package classes;
  */
 public class User {
 	
+	/** The username. */
+	private String username;
+	
+	/** The password. */
+	private String password;
+	
 	/** The type. */
-	private String username, password, type;
+	private String type;
 	
 	/**
 	 * Instantiates a new user.

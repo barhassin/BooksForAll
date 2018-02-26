@@ -7,7 +7,10 @@ package classes;
 public class Like {
 	
 	/** The bookname. */
-	private String username, bookname;
+	private String bookname;
+	
+	/** The username. */
+	private String username;
 	
 	/**
 	 * Instantiates a new like.
