@@ -5,9 +5,42 @@ package classes;
  * The Class UserInfo.
  */
 public class UserInfo {
-
+	
+	/** The username. */
+	private String username;
+	
+	/** The password. */
+	private String password;
+	
+	/** The type. */
+	private String type;
+	
+	/** The email. */
+	private String email;
+	
+	/** The street. */
+	private String street;
+	
+	/** The street number. */
+	private String streetnumber;
+	
+	/** The city. */
+	private String city;
+	
+	/** The zipcode. */
+	private String zipcode;
+	
+	/** The telephone. */
+	private String telephone;
+	
+	/** The nickname. */
+	private String nickname;
+	
+	/** The description. */
+	private String description;
+	
 	/** The photo. */
-	private String username, password, type, email, street, streetnumber, city, zipcode, telephone, nickname, description, photo;
+	private String photo;
 	
 	/**
 	 * Instantiates a new user info.

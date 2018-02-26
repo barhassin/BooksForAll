@@ -6,8 +6,14 @@ package classes;
  */
 public class Purchase {
 	
+	/** The username. */
+	private String username;
+	
+	/** The bookname. */
+	private String bookname;
+	
 	/** The price. */
-	private String username, bookname, price;
+	private String price;
 	
 	/**
 	 * Instantiates a new purchase.

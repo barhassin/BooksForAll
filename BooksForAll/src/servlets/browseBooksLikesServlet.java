@@ -50,18 +50,30 @@ public class browseBooksLikesServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+     * Do get.
+     *
+     * @param request the request
+     * @param response the response
+     * @throws ServletException Signals that a servlet exception has occurred.
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+     *      response)
+     */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+     * Do post.
+     *
+     * @param request the request
+     * @param response the response
+     * @throws ServletException Signals that a servlet exception has occurred.
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+     *      response)
+     */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
@@ -77,7 +89,7 @@ public class browseBooksLikesServlet extends HttpServlet {
 				line = reader.readLine();
 			}
 			reader.close();
-			String params = sb.toString();// obj book
+			String params = sb.toString(); // Book object in json form
 			PreparedStatement stmt;
 			PreparedStatement ptmt;
 			ResultSet rs = null;
@@ -89,14 +101,10 @@ public class browseBooksLikesServlet extends HttpServlet {
 				stmt = conn.prepareStatement(AppConstants.SELECT_LIKES_BY_BOOKNAME_STMT);
 				stmt.setString(1, book.getName());
 				rs = stmt.executeQuery();
-
 				while (rs.next()) {
-
 					userList.add(new User(rs.getString(2), "", ""));// user name
 				}
-
 				stmt.close();
-
 			} catch (SQLException e) {
 				getServletContext().log("Error while querying for books", e);
 				response.sendError(500);// internal server error
@@ -105,25 +113,18 @@ public class browseBooksLikesServlet extends HttpServlet {
 				ptmt = conn.prepareStatement(AppConstants.SELECT_USERINFO_BY_USERNAME_STMT);
 				for (User user : userList) {
 					ptmt.setString(1, user.getUsername());
-
 					rs = ptmt.executeQuery();
 					if (rs.next()) {
 						userInfoList.add(
-								new UserInfo(rs.getString(1), "", "", "", "", "", "", "", "", rs.getString(8), "", ""));// user
-																														// name
-																														// and
-																														// nickname
-
+								new UserInfo(rs.getString(1), "", "", "", "", "", "", "", "", rs.getString(8), "", "")); // username and nickname																													
 					}
 				}
 				rs.close();
 				ptmt.close();
-
 			} catch (SQLException e) {
 				getServletContext().log("Error while querying for books", e);
 				response.sendError(500);// internal server error
 			}
-
 			conn.close();
 			Gson gson = new Gson();
 			String LikesJsonResult = gson.toJson(userInfoList, new TypeToken<Collection<UserInfo>>() {
@@ -137,5 +138,4 @@ public class browseBooksLikesServlet extends HttpServlet {
 			response.sendError(500);// internal server error
 		}
 	}
-
 }

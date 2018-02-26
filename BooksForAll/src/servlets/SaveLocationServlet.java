@@ -42,18 +42,30 @@ public class SaveLocationServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+     * Do get.
+     *
+     * @param request the request
+     * @param response the response
+     * @throws ServletException Signals that a servlet exception has occurred.
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+     *      response)
+     */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+     * Do post.
+     *
+     * @param request the request
+     * @param response the response
+     * @throws ServletException Signals that a servlet exception has occurred.
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+     *      response)
+     */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
@@ -69,7 +81,7 @@ public class SaveLocationServlet extends HttpServlet {
 				line = reader.readLine();
 			}
 			reader.close();
-			String params = sb.toString();
+			String params = sb.toString(); // Location object in json form
 			PreparedStatement stmt;
 			Gson gson = new Gson();
 			Location location = gson.fromJson(params, Location.class);

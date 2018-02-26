@@ -1,60 +1,66 @@
+<!-- A navigation bar that is displayed as long as the admin is logged in -->
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8" name="viewport"
+	content="width=device-width, initial-scale=1">
 <title>NavBar</title>
-<link rel="stylesheet" type="text/css" href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/navbarAdmin.css">
-<script src="lib/jquery-3.2.1.js"></script>
-<script src="lib/angular.min.js"></script>
-<script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div ng-app="login" ng-controller="navbarAdminController">
-<nav class="navbar navbar-default" id="navbaruser">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand"><img alt="logo" class="img-responsive" src="navbarlogo.gif"></a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#" ng-click="welcome()">Home</a></li>
-      <li><a href="#" ng-click="viewUsers()">View Users</a></li>
-      <li><a href="#" ng-click="browseBooks()">Browse Books</a></li>
-      <li><a href="#" ng-click="viewPurchases()">View Purchases</a></li>
-      <li><a href="#" ng-click="viewReviews()">View Reviews</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a><span class="glyphicon glyphicon-fire"></span> {{content}}</a></li>
-      <li><a href="#" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-    </ul>
-  </div>
-</nav>
-<div ng-model="changeWelcomeAd" ng-init="changeWelcomeAd = true">
-	<div ng-if="changeWelcomeAd">
-	<div ng-include="'html/welcomeAdmin.html'"></div>
+	<div ng-app="login" ng-controller="navbarAdminController">
+		<nav class="navbar navbar-default" id="navbaruser">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand"><img alt="logo" class="img-responsive"
+						src="navbarlogo.gif"></a>
+				</div>
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#" ng-click="welcome()">Home</a></li>
+					<li><a href="#" ng-click="viewUsers()">View Users</a></li>
+					<li><a href="#" ng-click="browseBooks()">Browse Books</a></li>
+					<li><a href="#" ng-click="viewPurchases()">View Purchases</a></li>
+					<li><a href="#" ng-click="viewReviews()">View Reviews</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a><span class="glyphicon glyphicon-fire"></span>
+							{{content}}</a></li>
+					<li><a href="#" ng-click="logout()"><span
+							class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+				</ul>
+			</div>
+		</nav>
+		<div ng-model="changeWelcomeAd" ng-init="changeWelcomeAd = true">
+			<div ng-if="changeWelcomeAd">
+				<div ng-include="'html/welcomeAdmin.html'"></div>
+			</div>
+		</div>
+		<div ng-model="changeViewUsersAd" ng-init="changeViewUsersAd = false">
+			<div ng-if="changeViewUsersAd">
+				<div ng-include="'html/viewUsers.html'"></div>
+			</div>
+		</div>
+		<div ng-model="changeBrowseBooksAd"
+			ng-init="changeBrowseBooksAd = false">
+			<div ng-if="changeBrowseBooksAd">
+				<div ng-include="'html/browseBooksAdmin.html'"></div>
+			</div>
+		</div>
+		<div ng-model="changeViewPurchasesAd"
+			ng-init="changeViewPurchasesAd = false">
+			<div ng-if="changeViewPurchasesAd">
+				<div ng-include="'html/viewPurchases.html'"></div>
+			</div>
+		</div>
+		<div ng-model="changeViewReviewsAd"
+			ng-init="changeViewReviewsAd = false">
+			<div ng-if="changeViewReviewsAd">
+				<div ng-include="'html/viewReviews.html'"></div>
+			</div>
+		</div>
 	</div>
-</div>
-<div ng-model="changeViewUsersAd" ng-init="changeViewUsersAd = false">
-	<div ng-if="changeViewUsersAd">
-	<div ng-include="'html/viewUsers.html'"></div>
-	</div>
-</div>
-<div ng-model="changeBrowseBooksAd" ng-init="changeBrowseBooksAd = false">
-	<div ng-if="changeBrowseBooksAd">
-	<div ng-include="'html/browseBooksAdmin.html'"></div>
-	</div>
-</div>
-<div ng-model="changeViewPurchasesAd" ng-init="changeViewPurchasesAd = false">
-	<div ng-if="changeViewPurchasesAd">
-	<div ng-include="'html/viewPurchases.html'"></div>
-	</div>
-</div>
-<div ng-model="changeViewReviewsAd" ng-init="changeViewReviewsAd = false">
-	<div ng-if="changeViewReviewsAd">
-	<div ng-include="'html/viewReviews.html'"></div>
-	</div>
-</div>
-</div>
-<script src="js/index.js"></script>
+	<script src="js/index.js"></script>
 </body>
 </html>

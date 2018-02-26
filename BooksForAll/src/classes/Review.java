@@ -6,8 +6,17 @@ package classes;
  */
 public class Review {
 	
+	/** The bookname. */
+	private String bookname;
+	
+	/** The nickname. */
+	private String nickname;
+	
+	/** The review. */
+	private String review;
+	
 	/** The approved. */
-	private String bookname,nickname,review,approved;
+	private String approved;
 	
 	/**
 	 * Instantiates a new review.

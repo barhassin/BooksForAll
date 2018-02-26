@@ -1,39 +1,39 @@
+<!-- Displays all the book transactions -->
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8" name="viewport"
 	content="width=device-width, initial-scale=1">
 <title>Browse Books</title>
-<link rel="stylesheet" type="text/css" href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/viewPurchases.css">
-<script src="lib/jquery-3.2.1.js"></script>
-<script src="lib/angular.min.js"></script>
-<script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<div ng-app="login" ng-controller="viewPurchasesController">
-		<div class="container">  
-  <input class="form-control" id="myInput" type="text" placeholder="Search..">
-  <br>
-<div class="pre-scrollable">
-  <table class="table table-bordered table-striped" id="PurchaseTable">
-    <thead>
-      <tr>
-        <th>Username</th>
-        <th>Book Name</th>
-        <th>Price</th>
-      </tr>
-    </thead>
-    <tbody id="myTable">
-      <tr ng-repeat="x in purchaseList">
-        <td>{{x.username}}</td>
-        <td>{{x.bookname}}</td>
-        <td>{{x.price}}</td>
-      </tr>
-    </tbody>
-  </table>
-  </div>
-</div>
+	<!-- A table of all the transactions that can be filtered -->
+		<div class="container">
+			<input class="form-control" id="myInput" type="text"
+				placeholder="Search.."> <br>
+			<div class="pre-scrollable">
+				<table class="table table-bordered table-striped" id="PurchaseTable">
+					<thead>
+						<tr>
+							<th>Username</th>
+							<th>Book Name</th>
+							<th>Price</th>
+						</tr>
+					</thead>
+					<tbody id="myTable">
+						<tr ng-repeat="x in purchaseList">
+							<td>{{x.username}}</td>
+							<td>{{x.bookname}}</td>
+							<td>{{x.price}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
 	</div>
 	<script src="js/index.js"></script>
 </body>

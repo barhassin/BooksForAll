@@ -7,7 +7,7 @@ import com.google.gson.reflect.TypeToken;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Interface AppConstants.
+ * The Interface AppConstants. Used to hold the app's constants and DB commands.
  */
 public interface AppConstants {
 		

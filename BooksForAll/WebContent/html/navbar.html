@@ -1,48 +1,51 @@
+<!-- A navigation bar that is displayed as long as the user is logged in -->
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8" name="viewport"
+	content="width=device-width, initial-scale=1">
 <title>NavBar</title>
-<link rel="stylesheet" type="text/css" href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/navbar.css">
-<script src="lib/jquery-3.2.1.js"></script>
-<script src="lib/angular.min.js"></script>
-<script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div ng-app="login" ng-controller="navbarController" >
-<nav class="navbar navbar-default" id="navbaruser">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand"><img alt="logo" class="img-responsive" src="navbarlogo.gif"></a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#" ng-click="welcome()">Home</a></li>
-      <li><a href="#" ng-click="myBooks()">My Books</a></li>
-      <li><a href="#" ng-click="browseBooks()">Browse Books</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a><span class="glyphicon glyphicon-user"></span> {{content}}</a></li>
-      <li><a href="#" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-    </ul>
-  </div>
-</nav>
-<div ng-model="changeWelcome" ng-init="changeWelcome = true">
-	<div ng-if="changeWelcome">
-	<div ng-include="'html/welcome.html'"></div>
+	<div ng-app="login" ng-controller="navbarController">
+		<nav class="navbar navbar-default" id="navbaruser">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand"><img alt="logo" class="img-responsive"
+						src="navbarlogo.gif"></a>
+				</div>
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#" ng-click="welcome()">Home</a></li>
+					<li><a href="#" ng-click="myBooks()">My Books</a></li>
+					<li><a href="#" ng-click="browseBooks()">Browse Books</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a><span class="glyphicon glyphicon-user"></span>
+							{{content}}</a></li>
+					<li><a href="#" ng-click="logout()"><span
+							class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+				</ul>
+			</div>
+		</nav>
+		<div ng-model="changeWelcome" ng-init="changeWelcome = true">
+			<div ng-if="changeWelcome">
+				<div ng-include="'html/welcome.html'"></div>
+			</div>
+		</div>
+		<div ng-model="changeMyBooks" ng-init="changeMyBooks = false">
+			<div ng-if="changeMyBooks">
+				<div ng-include="'html/myBooks.html'"></div>
+			</div>
+		</div>
+		<div ng-model="changeBrowseBooks" ng-init="changeBrowseBooks = false">
+			<div ng-if="changeBrowseBooks">
+				<div ng-include="'html/browseBooks.html'"></div>
+			</div>
+		</div>
 	</div>
-</div>
-<div ng-model="changeMyBooks" ng-init="changeMyBooks = false">
-	<div ng-if="changeMyBooks">
-	<div ng-include="'html/myBooks.html'"></div>
-	</div>
-</div>
-<div ng-model="changeBrowseBooks" ng-init="changeBrowseBooks = false">
-	<div ng-if="changeBrowseBooks">
-	<div ng-include="'html/browseBooks.html'"></div>
-	</div>
-</div>
-</div>
-<script src="js/index.js"></script>
+	<script src="js/index.js"></script>
 </body>
 </html>

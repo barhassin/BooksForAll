@@ -6,8 +6,14 @@ package classes;
  */
 public class Location {
 
-/** The location. */
-private String username, bookname, location;
+	/** The location. */
+	private String location;
+
+	/** The bookname. */
+	private String bookname;
+
+	/** The username. */
+	private String username;
 	
 	/**
 	 * Instantiates a new location.

@@ -47,18 +47,30 @@ public class loginServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+     * Do get.
+     *
+     * @param request the request
+     * @param response the response
+     * @throws ServletException Signals that a servlet exception has occurred.
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+     *      response)
+     */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+     * Do post.
+     *
+     * @param request the request
+     * @param response the response
+     * @throws ServletException Signals that a servlet exception has occurred.
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+     *      response)
+     */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
@@ -74,7 +86,7 @@ public class loginServlet extends HttpServlet {
 				line = reader.readLine();
 			}
 			reader.close();
-			String params = sb.toString();
+			String params = sb.toString(); // User object in json form
 			Gson gson = new Gson();
 			User user = gson.fromJson(params, User.class);
 			PreparedStatement stmt;
@@ -86,10 +98,10 @@ public class loginServlet extends HttpServlet {
 				if (rs.next()) {
 					dbPassword = rs.getString(2);
 					if (!dbPassword.equals(user.getPassword()))
-						response.sendError(406);
+						response.sendError(406); // The password does not match the user's password in the database
 					user = new User(rs.getString(1), "", rs.getString(3));
 				} else {
-					response.sendError(405);
+					response.sendError(405); // This user does not exist in the database
 				}
 				rs.close();
 				stmt.close();

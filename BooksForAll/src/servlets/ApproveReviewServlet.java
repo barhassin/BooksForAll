@@ -26,6 +26,7 @@ import com.google.gson.Gson;
 import classes.AppConstants;
 import classes.Purchase;
 import classes.Review;
+import javafx.collections.ListChangeListener.Change;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -46,18 +47,30 @@ public class ApproveReviewServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+     * Do get.
+     *
+     * @param request the request
+     * @param response the response
+     * @throws ServletException Signals that a servlet exception has occurred.
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+     *      response)
+     */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+     * Do post.
+     *
+     * @param request the request
+     * @param response the response
+     * @throws ServletException Signals that a servlet exception has occurred.
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+     *      response)
+     */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
@@ -73,12 +86,12 @@ public class ApproveReviewServlet extends HttpServlet {
 				line = reader.readLine();
 			}
 			reader.close();
-			String params = sb.toString();// review obj
+			String params = sb.toString(); // Review object in json form
 			PreparedStatement stmt;
 			Gson gson = new Gson();
 			Review review = gson.fromJson(params, Review.class);
 			try {
-				stmt = conn.prepareStatement(AppConstants.UPDATE_REVIEWS_STMT);
+				stmt = conn.prepareStatement(AppConstants.UPDATE_REVIEWS_STMT); // Change review status to approved
 				stmt.setString(1, "yes");
 				stmt.setString(2, review.getBookname());
 				stmt.setString(3, review.getNickname());

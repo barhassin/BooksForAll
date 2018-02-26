@@ -1,3 +1,4 @@
+<!-- The admin book page, where all the details about the book are displayed -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,9 +8,6 @@
 <link rel="stylesheet" type="text/css"
 	href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/bookPageAdmin.css">
-<script src="lib/jquery-3.2.1.js"></script>
-<script src="lib/angular.min.js"></script>
-<script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<div ng-app="login" ng-controller="bookAdmin">
@@ -24,7 +22,6 @@
 									alt="image" id="imagebookpage">
 							</div>
 						</div>
-
 						<br> <br>
 						<div class="col-md-3" id="coltop">
 							<p id="serif">{{bookDetails.name}}</p>
@@ -39,16 +36,16 @@
 						<div class="row">
 							<div class="col-md-2">
 								<br> <br> <br>
-
+								<!-- Tooltip that displays the users that liked the book. -->
 								<button id="like" class="btn btn-default dropdown dropmenu">
 									<div class="dropdown-content" id="drop-list">
-										<a href="#" ng-repeat="x in userInfoList" ng-click="moveUser(x.username)">{{x.nickname}}</a>
+										<a href="#" ng-repeat="x in userInfoList"
+											ng-click="moveUser(x.username)">{{x.nickname}}</a>
 									</div>
 									<img ng-src="{{likeimg}}" width="70"> <span class="badge">{{numberOfLIKes}}</span>
 								</button>
 							</div>
 						</div>
-
 						<br> <br>
 						<div class="container">
 							<div class="pre-scrollable" id="reviewScroll">
